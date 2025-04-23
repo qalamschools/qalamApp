@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qalam_app/firebase_options.dart';
 import 'package:qalam_app/presentation/dashboard/dashboard_screen.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
   print('🔙 [Background] Message: ${message.notification?.title}');
 }
 
@@ -26,79 +26,60 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String? _fcmToken;
-  String? _lastMessage;
   @override
   void initState() {
-    _initFirebaseMessaging();
     super.initState();
+    _initFirebaseMessaging();
   }
 
+  // Initialize Firebase Messaging and request permissions
   Future<void> _initFirebaseMessaging() async {
-    await Firebase.initializeApp();
+    await _subscribeToTopic();
+    await _requestNotificationPermissions();
 
+    // Handle background messages
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    // Request permission
+    // Handle foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('📩 [Foreground] ${message.notification?.title}');
+    });
+
+    // When the app is opened from a background state
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('📲 [Opened App] ${message.notification?.title}');
+    });
+  }
+
+  // Subscribe to the topic 'general'
+  Future<void> _subscribeToTopic() async {
+    await FirebaseMessaging.instance.subscribeToTopic('general');
+    print('Subscribed to topic: general');
+  }
+
+  // Request notification permissions for iOS
+  Future<void> _requestNotificationPermissions() async {
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
-
     print('🔐 Permission: ${settings.authorizationStatus}');
-
-    // Get token
-    String? token = await FirebaseMessaging.instance.getToken();
-    print('📱 FCM Token: $token');
-
-    setState(() {
-      _fcmToken = token;
-    });
-
-    // Handle foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('📩 [Foreground] ${message.notification?.title}');
-      setState(() {
-        _lastMessage = '[Foreground] ${message.notification?.title}';
-      });
-    });
-
-    // When app is opened from background
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('📲 [Opened App] ${message.notification?.title}');
-      setState(() {
-        _lastMessage = '[Opened App] ${message.notification?.title}';
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      //home: DashboardScreen(),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Push Notifications')),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const Text('📱 Device FCM Token:',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              SelectableText(_fcmToken ?? 'Fetching...',
-                  style: const TextStyle(fontSize: 14)),
-              const SizedBox(height: 24),
-              const Text('📨 Last Received Message:',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              Text(_lastMessage ?? 'No messages yet.'),
-            ],
-          ),
-        ),
-      ),
-    );
+    return ScreenUtilInit(
+        designSize: const Size(393, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        // Use builder only if you need to use library outside ScreenUtilInit context
+        builder: (_, child) {
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: DashboardScreen(),
+          );
+        });
   }
 }

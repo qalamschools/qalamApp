@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({super.key});
-
+  const CustomBottomNavigationBar(
+      {super.key, required this.currentIndex, this.onTap});
+  final void Function(int index, String name)? onTap;
+  final int currentIndex;
   @override
   State<CustomBottomNavigationBar> createState() =>
       _CustomBottomNavigationBarState();
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 80.h,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -27,16 +29,16 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.0.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildNavItem(0, "assets/icons/home.svg", 'Home'),
-            const SizedBox(width: 20),
+            SizedBox(width: 20.w),
             _buildNavItem(1, "assets/icons/calendar.svg", 'News & Media'),
-            const SizedBox(width: 50), // Space for the FAB
+            SizedBox(width: 50.w), // Space for the FAB
             _buildNavItem(3, "assets/icons/phone.svg", 'Contact us'),
-            const SizedBox(width: 20),
+            SizedBox(width: 20.w),
             _buildNavItem(4, "assets/icons/quick_pay.svg", 'Quick Pay'),
           ],
         ),
@@ -45,27 +47,23 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 
   Widget _buildNavItem(int index, String iconPath, String label) {
-    final isSelected = _selectedIndex == index;
+    final isSelected = widget.currentIndex == index;
 
     return InkWell(
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
+      onTap: widget.onTap != null ? () => widget.onTap!(index, label) : null,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
             iconPath,
-            height: 24,
+            height: 24.h,
             color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
+            style: GoogleFonts.nunito(
+              fontSize: 12.sp,
               color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
             ),
           ),
