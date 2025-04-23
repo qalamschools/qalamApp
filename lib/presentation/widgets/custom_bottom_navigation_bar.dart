@@ -17,7 +17,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
+      height: 56.h,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -56,14 +56,23 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: [
           SvgPicture.asset(
             iconPath,
-            height: 24.h,
-            color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
+            height: 20.h,
+            colorFilter: isSelected
+                ? const ColorFilter.mode(
+                    Color(0xFF1B5E20),
+                    BlendMode.srcIn,
+                  )
+                : const ColorFilter.mode(
+                    Colors.grey,
+                    BlendMode.srcIn,
+                  ),
+            //color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
           ),
           SizedBox(height: 4.h),
           Text(
             label,
             style: GoogleFonts.nunito(
-              fontSize: 12.sp,
+              fontSize: 10.sp,
               color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
             ),
           ),
