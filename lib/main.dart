@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qalam_app/firebase_options.dart';
 import 'package:qalam_app/presentation/dashboard/dashboard_screen.dart';
@@ -14,6 +15,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // makes status bar transparent
+      statusBarIconBrightness:
+          Brightness.light, // use Brightness.light for white icons
+      statusBarBrightness: Brightness.dark, // for iOS
+    ),
   );
   runApp(const MyApp());
 }
