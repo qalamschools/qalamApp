@@ -4,9 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({super.key, this.width = 100, required this.text});
+  const CustomButtonWidget(
+      {super.key, this.width = 100, required this.text, required this.onTap});
   final double width;
   final String text;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
@@ -33,7 +35,7 @@ class CustomButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(100.r),
         ),
       ),
-      onPressed: () {},
+      onPressed: onTap,
     );
   }
 }

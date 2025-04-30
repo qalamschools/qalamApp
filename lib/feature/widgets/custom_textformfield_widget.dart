@@ -10,12 +10,14 @@ class CustomTextFormWidget extends StatelessWidget {
       this.labelText,
       this.prefixPath,
       this.maxLines = 1,
+      required this.controller,
       this.isRequired = false});
   String? hintText = "";
   String? labelText = "";
   String? prefixPath;
   int maxLines;
   int maxLength = 156;
+  TextEditingController controller;
   bool isRequired; // New property to indicate if the field is required
 
   @override
@@ -28,6 +30,7 @@ class CustomTextFormWidget extends StatelessWidget {
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
       ),
+      controller: controller,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: hintText,

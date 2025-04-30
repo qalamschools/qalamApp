@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalam_app/presentation/widgets/curriculam_widget.dart';
-import 'package:qalam_app/presentation/widgets/custom_button_widget.dart';
-import 'package:qalam_app/presentation/widgets/social_icon_widget.dart';
+import 'package:qalam_app/feature/widgets/curriculam_widget.dart';
+import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
+import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -215,6 +215,7 @@ class Home extends StatelessWidget {
                               )),
                           SizedBox(height: 30.h),
                           CustomButtonWidget(
+                            onTap: () {},
                             width: 160.w,
                             text: "Constact Us",
                           )

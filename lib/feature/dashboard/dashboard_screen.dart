@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
-import 'package:qalam_app/presentation/admission_and_fee/admission_and_fee_screen.dart';
-import 'package:qalam_app/presentation/dashboard/home/home.dart';
-import 'package:qalam_app/presentation/widgets/custom_bottom_navigation_bar.dart';
+import 'package:qalam_app/feature/admission_and_fee/bloc/cubit/admission_and_fee_bloc_cubit.dart';
+import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
+import 'package:qalam_app/feature/dashboard/home/home.dart';
+import 'package:qalam_app/feature/widgets/custom_bottom_navigation_bar.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -48,10 +50,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   color: Colors.white,
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AdmissionAndFeeScreen(),
+                  BlocProvider<AdmissionAndFeeBlocCubit>(
+                    create: (context) => AdmissionAndFeeBlocCubit(),
+                    child: AdmissionAndFeeScreen(
+                      admissionAndFeeBlocCubit: AdmissionAndFeeBlocCubit(),
                     ),
                   );
                 },
@@ -70,7 +72,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AdmissionAndFeeScreen(),
+                      builder: (context) => AdmissionAndFeeScreen(
+                        admissionAndFeeBlocCubit: AdmissionAndFeeBlocCubit(),
+                      ),
                     ),
                   );
                 },
