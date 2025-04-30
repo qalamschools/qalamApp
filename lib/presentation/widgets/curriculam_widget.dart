@@ -21,59 +21,85 @@ class CurriculumSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
-      child: Column(
-        crossAxisAlignment:
-            isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: isLeft
-                ? [
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            imagePath,
-                            width: 267.w,
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.zero,
+          margin: EdgeInsets.zero,
+          width: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: 16, vertical: isLeft ? 20 : 20),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (isLeft) ...{
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
+                                width: 267.w,
+                              ),
+                            ),
                           ),
-                        ),
-                        Positioned(
-                          left: 320.w,
-                          top: 120.h,
-                          child: _buildNumberBadge(isLeft: isLeft),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20.h),
-                  ]
-                : [
-                    SizedBox(width: 20.w),
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.asset(
-                            imagePath,
-                            width: 267.w,
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 80.h, left: 40.w, right: 30.w),
+                            child: _buildNumberBadge(isLeft: isLeft),
                           ),
-                        ),
-                        Positioned(
-                          right: 320.w,
-                          top: 120.h,
-                          child: _buildNumberBadge(isLeft: isLeft),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      _buildTextContent()
+                    ],
+                  ))
+                } else ...{
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 27),
+                            // padding: EdgeInsets.only(
+                            //     top: 80.h, right: 20.w, left: 25.w),
+                            child: _buildNumberBadge(isLeft: isLeft),
+                          ),
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
+                                //width: 220.w,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      _buildTextContent()
+                    ],
+                  )),
+                },
+              ],
+            ),
           ),
-          _buildTextContent()
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -101,25 +127,31 @@ class CurriculumSection extends StatelessWidget {
 
   Widget _buildTextContent() {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const SizedBox(height: 10),
-        Text(
-          title,
-          style: GoogleFonts.nunitoSans(
-            fontSize: 16.sp,
-            fontStyle: FontStyle.italic,
-            color: const Color(0xFF1B5E20),
+        SizedBox(height: 15.h),
+        SizedBox(
+          width: 267.w,
+          child: Text(
+            title,
+            style: GoogleFonts.nunitoSans(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF1B5E20),
+            ),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 15.h),
         SizedBox(
-          width: 267,
+          width: 267.w,
           child: Text(
             description,
             style: GoogleFonts.nunitoSans(
               fontSize: 16.sp,
-              color: const Color(0xFF1B5E20),
+              fontWeight: FontWeight.w400,
+              color: const Color(0xFF333333),
             ),
           ),
         )

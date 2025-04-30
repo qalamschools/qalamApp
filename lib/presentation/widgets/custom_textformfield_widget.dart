@@ -9,12 +9,15 @@ class CustomTextFormWidget extends StatelessWidget {
       this.hintText,
       this.labelText,
       this.prefixPath,
-      this.maxLines = 1});
+      this.maxLines = 1,
+      this.isRequired = false});
   String? hintText = "";
   String? labelText = "";
   String? prefixPath;
   int maxLines;
   int maxLength = 156;
+  bool isRequired; // New property to indicate if the field is required
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -33,10 +36,28 @@ class CustomTextFormWidget extends StatelessWidget {
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
         ),
-        label: Text(
-          labelText ?? "",
-          style: GoogleFonts.questrial(
-              fontSize: 14.sp, fontWeight: FontWeight.w400),
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              labelText ?? "",
+              style: GoogleFonts.nunitoSans(
+                color: const Color(0xff6E727A),
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            if (isRequired)
+              Text(
+                "* ",
+                style: GoogleFonts.questrial(
+                  color: Colors.red,
+                  fontSize: 24.sp,
+                  letterSpacing: 0.25,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+          ],
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
         prefix: (prefixPath != null || (prefixPath?.isNotEmpty ?? false))

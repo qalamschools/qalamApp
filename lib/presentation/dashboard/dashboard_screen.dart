@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/presentation/admission_and_fee/admission_and_fee_screen.dart';
-import 'package:qalam_app/presentation/home/home.dart';
+import 'package:qalam_app/presentation/dashboard/home/home.dart';
 import 'package:qalam_app/presentation/widgets/custom_bottom_navigation_bar.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -24,78 +27,95 @@ class _DashboardScreenState extends State<DashboardScreen> {
           statusBarBrightness: Brightness.light,
         ),
         child: Scaffold(
+          floatingActionButton: SpeedDial(
+            childMargin: const EdgeInsets.all(10),
+            overlayOpacity: 0.5,
+            switchLabelPosition: false,
+            iconTheme: const IconThemeData(
+              color: Color(0xFFFFFFFF),
+            ),
+            activeIcon: Icons.close,
+            backgroundColor: const Color(0xff185B31),
+            children: [
+              SpeedDialChild(
+                labelBackgroundColor: const Color(0xff185B31),
+                backgroundColor: const Color(0xff185B31),
+                shape: const CircleBorder(),
+                label: "About Us",
+                labelStyle: GoogleFonts.playfairDisplay(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdmissionAndFeeScreen(),
+                    ),
+                  );
+                },
+              ),
+              SpeedDialChild(
+                labelBackgroundColor: const Color(0xff185B31),
+                backgroundColor: const Color(0xff185B31),
+                shape: const CircleBorder(),
+                label: 'Admissions & Fees',
+                labelStyle: GoogleFonts.playfairDisplay(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdmissionAndFeeScreen(),
+                    ),
+                  );
+                },
+              ),
+            ],
+            child: Center(
+              child: SvgPicture.asset("assets/icons/plus.svg",
+                  height: 16.h,
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xFFFFFFFF),
+                    BlendMode.srcIn,
+                  )),
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           backgroundColor: Colors.white,
-          bottomSheet: currentIndex == 2
-              ? ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(20)),
-                  child: Container(
-                    height: 170.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.white.withOpacity(0.5),
-                          Colors.white.withOpacity(0.4),
-                          Colors.white,
-                        ],
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'About Us',
-                            style: GoogleFonts.playfairDisplay(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 24.h),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              currentIndex = 0;
-                            });
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AdmissionAndFeeScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Admissions & Fees',
-                            style: GoogleFonts.playfairDisplay(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              : null,
           body: const Home(),
-          bottomNavigationBar: SafeArea(
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Color(0xffE3E3E3),
+                  width: 1,
+                ),
+              ),
+            ),
+            child: BottomAppBar(
+              surfaceTintColor: Colors.white,
+              color: Colors.white,
+              shadowColor: Colors.white,
+              shape: const CircularNotchedRectangle(),
               child: CustomBottomNavigationBar(
-            currentIndex: currentIndex,
-            onTap: (index, name) {
-              setState(() {
-                currentIndex = index;
-              });
-            },
-          )),
+                currentIndex: currentIndex,
+                onTap: (index, name) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                  if (index == 2) {
+                    CommonUtils.openDialer(number: "+91722126941");
+                  }
+                },
+              ), // Makes room for FAB
+            ),
+          ),
         ));
   }
 }
