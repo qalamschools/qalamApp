@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/feature/widgets/custom_checkbox_widget.dart';
 
 class CustomMultiSelectDropDown<T> extends StatefulWidget {
   final List<T> items;
@@ -111,29 +113,36 @@ class _CustomMultiSelectDropDownState<T>
     final isSelected = _selectedItems.contains(item);
     return InkWell(
       onTap: () => _toggleItemSelection(item),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Checkbox(
-            side: WidgetStateBorderSide.resolveWith((states) {
-              if (states.contains(WidgetState.selected)) {
-                return const BorderSide(color: Color(0xff1960FF));
-              } else {
-                return const BorderSide(color: Color(0xff1960FF));
-              }
-            }),
-            value: isSelected,
-            onChanged: (checked) => _toggleItemSelection(item),
-            fillColor: const WidgetStatePropertyAll(Color(0xffDAF1FF)),
-            shape: widget.checkboxShape,
-            checkColor: const Color(0xff1960FF),
-            activeColor: const Color(0xff1960FF),
+          SizedBox(height: 6.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomCheckbox(
+                  onChanged: (checked) => _toggleItemSelection(item),
+                  value: isSelected,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  widget.itemAsString(item),
+                  style: _getTextStyle(isSelected),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: Text(
-              widget.itemAsString(item),
-              style: _getTextStyle(isSelected),
-            ),
+          SizedBox(height: 6.h),
+          Divider(
+            color: const Color(0xffEBEBEB),
+            height: 1.h,
+            indent: 0,
           ),
         ],
       ),

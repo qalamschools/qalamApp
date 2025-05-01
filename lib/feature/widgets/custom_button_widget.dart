@@ -5,20 +5,27 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget(
-      {super.key, this.width = 100, required this.text, required this.onTap});
+      {super.key,
+      this.width = 100,
+      required this.text,
+      required this.onTap,
+      this.showIcon = true});
   final double width;
   final String text;
   final VoidCallback onTap;
+  final bool showIcon;
   @override
   Widget build(BuildContext context) {
     return TextButton.icon(
       iconAlignment: IconAlignment.end,
-      icon: SvgPicture.asset(
-        "assets/icons/forward_icon.svg",
-        width: 12.w,
-        fit: BoxFit.contain,
-        color: Colors.white,
-      ),
+      icon: showIcon
+          ? SvgPicture.asset(
+              "assets/icons/forward_icon.svg",
+              width: 12.w,
+              fit: BoxFit.contain,
+              color: Colors.white,
+            )
+          : null,
       label: Text(
         text,
         style: GoogleFonts.inter(

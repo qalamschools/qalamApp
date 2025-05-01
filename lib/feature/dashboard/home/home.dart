@@ -145,40 +145,50 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 50.h),
-                  const CurriculumSection(
-                    number: 1,
-                    title: "Lower Primary (P1-4)",
-                    description:
-                        "We deliver Scottish Curriculum for Excellence (CfE) experiences and outcomes using our experiences based Content Oriented Methodology (ecoLearn)",
-                    imagePath: "assets/images/playGirl.png",
-                    isLeft: false,
-                  ),
-                  const CurriculumSection(
-                    number: 2,
-                    title: "Upper Primary (P5-7)",
-                    description:
-                        "As pupils move to upper primary, Al-Qalam school offers them opportunities to explore more technical topics, deep dive into their experiences and express them through art. These are visible across the school on display boards.",
-                    imagePath: "assets/images/playGirl.png",
-                    isLeft: true,
-                  ),
-                  SizedBox(height: 0.h),
-                  const CurriculumSection(
-                    number: 3,
-                    title: "Secondary School (S1/S2)",
-                    description:
-                        "A Broad general education (BGE) curriculum provides the foundation our pupils need to enhance their learning experiences on English, Maths, Science, Social Subjects and Modern Languages. This is an important stage during which students develop their understanding of subjects of their choices.",
-                    imagePath: "assets/images/playGirl.png",
-                    isLeft: false,
-                  ),
-                  SizedBox(height: 50.h),
-                  const CurriculumSection(
-                    number: 4,
-                    title: "Flexible Learning(NAT5 Yr1/2, Highers)",
-                    description:
-                        "Following completion of Secondary school, students then focus on specific subjects of their choices. Qalam Academy offers a subject based learning that prepares students for Qualifications. For two years (Yr1/2) Nat5 units from each subject of their choice is delivered to build a sound foundation towards preparing for NAT5 and Highers exams. Students can opt to appear in 8 subjects in NAT5 and 6 Subjects in Highers. Counselling session and learning pathway event such as Road2Oxford gives students encouragement to excel in their exam and have high ambitions for their future.",
-                    imagePath: "assets/images/playGirl.png",
-                    isLeft: true,
+                  SizedBox(height: 20.h),
+                  const Stack(
+                    children: [
+                      // SvgPicture.asset(
+                      //     fit: BoxFit.cover,
+                      //     "assets/icons/curriculum_background_design.svg"),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CurriculumSection(
+                            number: 1,
+                            title: "Lower Primary (P1-4)",
+                            description:
+                                "We deliver Scottish Curriculum for Excellence (CfE) experiences and outcomes using our experiences based Content Oriented Methodology (ecoLearn)",
+                            imagePath: "assets/images/playGirl.png",
+                            isLeft: false,
+                          ),
+                          CurriculumSection(
+                            number: 2,
+                            title: "Upper Primary (P5-7)",
+                            description:
+                                "As pupils move to upper primary, Al-Qalam school offers them opportunities to explore more technical topics, deep dive into their experiences and express them through art. These are visible across the school on display boards.",
+                            imagePath: "assets/images/playGirl.png",
+                            isLeft: true,
+                          ),
+                          CurriculumSection(
+                            number: 3,
+                            title: "Secondary School (S1/S2)",
+                            description:
+                                "A Broad general education (BGE) curriculum provides the foundation our pupils need to enhance their learning experiences on English, Maths, Science, Social Subjects and Modern Languages. This is an important stage during which students develop their understanding of subjects of their choices.",
+                            imagePath: "assets/images/playGirl.png",
+                            isLeft: false,
+                          ),
+                          CurriculumSection(
+                            number: 4,
+                            title: "Flexible Learning(NAT5 Yr1/2, Highers)",
+                            description:
+                                "Following completion of Secondary school, students then focus on specific subjects of their choices. Qalam Academy offers a subject based learning that prepares students for Qualifications. For two years (Yr1/2) Nat5 units from each subject of their choice is delivered to build a sound foundation towards preparing for NAT5 and Highers exams. Students can opt to appear in 8 subjects in NAT5 and 6 Subjects in Highers. Counselling session and learning pathway event such as Road2Oxford gives students encouragement to excel in their exam and have high ambitions for their future.",
+                            imagePath: "assets/images/playGirl.png",
+                            isLeft: true,
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                   SizedBox(height: 50.h),
                   Padding(

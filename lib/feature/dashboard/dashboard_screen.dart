@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
+import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
+
 import 'package:qalam_app/feature/dashboard/home/home.dart';
 import 'package:qalam_app/feature/widgets/custom_bottom_navigation_bar.dart';
 
@@ -20,6 +25,21 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int currentIndex = 0;
+  bool _isQuickPayBottomSheetOpen = false;
+  bool _isMoreBottomSheetOpen = false;
+
+  void _toggleBottomSheet() {
+    setState(() {
+      _isQuickPayBottomSheetOpen = !_isQuickPayBottomSheetOpen;
+    });
+  }
+
+  void _toggleMoreBottomSheet() {
+    setState(() {
+      _isMoreBottomSheetOpen = !_isMoreBottomSheetOpen;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -29,70 +49,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           statusBarBrightness: Brightness.light,
         ),
         child: Scaffold(
-          floatingActionButton: SpeedDial(
-            childMargin: const EdgeInsets.all(10),
-            overlayOpacity: 0.5,
-            switchLabelPosition: false,
-            iconTheme: const IconThemeData(
-              color: Color(0xFFFFFFFF),
-            ),
-            activeIcon: Icons.close,
-            backgroundColor: const Color(0xff185B31),
-            children: [
-              SpeedDialChild(
-                labelBackgroundColor: const Color(0xff185B31),
-                backgroundColor: const Color(0xff185B31),
-                shape: const CircleBorder(),
-                label: "About Us",
-                labelStyle: GoogleFonts.playfairDisplay(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
-                onTap: () {
-                  BlocProvider<AdmissionAndFeeBlocCubit>(
-                    create: (context) => AdmissionAndFeeBlocCubit(),
-                    child: AdmissionAndFeeScreen(
-                      admissionAndFeeBlocCubit: AdmissionAndFeeBlocCubit(),
-                    ),
-                  );
-                },
-              ),
-              SpeedDialChild(
-                labelBackgroundColor: const Color(0xff185B31),
-                backgroundColor: const Color(0xff185B31),
-                shape: const CircleBorder(),
-                label: 'Admissions & Fees',
-                labelStyle: GoogleFonts.playfairDisplay(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AdmissionAndFeeScreen(
-                        admissionAndFeeBlocCubit: AdmissionAndFeeBlocCubit(),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ],
-            child: Center(
-              child: SvgPicture.asset("assets/icons/plus.svg",
-                  height: 16.h,
-                  colorFilter: const ColorFilter.mode(
-                    Color(0xFFFFFFFF),
-                    BlendMode.srcIn,
-                  )),
-            ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
           backgroundColor: Colors.white,
-          body: const Home(),
+          body: Stack(children: [
+            const Home(),
+            if (_isQuickPayBottomSheetOpen || _isMoreBottomSheetOpen)
+              Positioned.fill(
+                  child: Container(
+                color: Colors.black.withOpacity(0.8),
+              )),
+            if (_isQuickPayBottomSheetOpen) quickPayBottomSheet(),
+            if (_isMoreBottomSheetOpen) moreBottomSheet()
+          ]),
           bottomNavigationBar: Container(
             decoration: const BoxDecoration(
               border: Border(
@@ -113,13 +80,407 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   setState(() {
                     currentIndex = index;
                   });
-                  if (index == 2) {
+                  if (currentIndex != 3) {
+                    _isQuickPayBottomSheetOpen = false;
+                  }
+                  if (currentIndex != 4) {
+                    _isMoreBottomSheetOpen = false;
+                  }
+
+                  if (currentIndex == 2) {
                     CommonUtils.openDialer(number: "+91722126941");
+                  }
+                  if (currentIndex == 3) {
+                    _toggleBottomSheet();
+                  }
+                  if (currentIndex == 4) {
+                    _toggleMoreBottomSheet();
                   }
                 },
               ), // Makes room for FAB
             ),
           ),
         ));
+  }
+
+  Widget moreBottomSheet() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r))),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10.h,
+            ),
+            SvgPicture.asset("assets/icons/bottomsheet_divider.svg"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+              child: Column(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    height: 71,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child:
+                                SvgPicture.asset("assets/icons/coin-pound.svg"),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "About Us",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff000000),
+                                      fontSize: 16),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  "Get to know who we are and what we do.",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xff666666),
+                                      fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                BlocProvider<AdmissionAndFeeBlocCubit>(
+                              create: (context) => AdmissionAndFeeBlocCubit(),
+                              child: AdmissionAndFeeScreen(
+                                admissionAndFeeBlocCubit:
+                                    AdmissionAndFeeBlocCubit(),
+                              ),
+                            ),
+                          ));
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                              color: const Color(0xff185B1C).withOpacity(0.5)),
+                          gradient: const LinearGradient(
+                              colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                      height: 71,
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 52,
+                            width: 52,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff185B1C),
+                              border: Border.all(
+                                  color: const Color(0xffE3F8EB), width: 1),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                  "assets/icons/bank_note.svg"),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Admissions & Fees",
+                                    style: GoogleFonts.nunitoSans(
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xff000000),
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "Select courses and apply now.",
+                                    style: GoogleFonts.nunitoSans(
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xff666666),
+                                        fontSize: 14),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider<ContactUsCubit>(
+                              create: (context) => ContactUsCubit(),
+                              child: ContactUsScreen(
+                                contactUsCubit: ContactUsCubit(),
+                              ),
+                            ),
+                          ));
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                              color: const Color(0xff185B1C).withOpacity(0.5)),
+                          gradient: const LinearGradient(
+                              colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                      height: 71,
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 52,
+                            width: 52,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff185B1C),
+                              border: Border.all(
+                                  color: const Color(0xffE3F8EB), width: 1),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                  "assets/icons/phone_incoming.svg"),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Contact Us",
+                                    style: GoogleFonts.nunitoSans(
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xff000000),
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "Reach out to us for any inquiries",
+                                    style: GoogleFonts.nunitoSans(
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xff666666),
+                                        fontSize: 14),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget quickPayBottomSheet() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r))),
+        height: 180.h,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10.h,
+            ),
+            SvgPicture.asset("assets/icons/bottomsheet_divider.svg"),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+              child: Column(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    height: 71,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child:
+                                SvgPicture.asset("assets/icons/coin-pound.svg"),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Pay £90 Application Fees",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff000000),
+                                      fontSize: 16),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  "For New Admissions",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xff666666),
+                                      fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    height: 71,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset("assets/icons/bank1.svg"),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Other Payments",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff000000),
+                                      fontSize: 16),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  "Uniforms, trips, stationery and Ancillary",
+                                  style: GoogleFonts.nunitoSans(
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xff666666),
+                                      fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

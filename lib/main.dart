@@ -3,8 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qalam_app/feature/splash/presentation/splash_screen.dart';
 import 'package:qalam_app/firebase_options.dart';
-import 'package:qalam_app/feature/dashboard/dashboard_screen.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
         builder: (_, child) {
           return const MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: DashboardScreen(),
+            home: SplashScreen(),
           );
         });
   }

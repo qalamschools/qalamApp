@@ -25,10 +25,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           SizedBox(width: 20.w),
           _buildNavItem(1, "assets/icons/calendar.svg", 'News & Media'),
           SizedBox(width: 20.w),
-          SizedBox(width: 20.w), // Space for the FAB
           _buildNavItem(2, "assets/icons/phone.svg", 'Call Us'),
           SizedBox(width: 20.w),
           _buildNavItem(3, "assets/icons/quick_pay.svg", 'Quick Pay'),
+          SizedBox(width: 20.w), //
+          _buildNavItem(4, "assets/icons/more.svg", 'More'),
         ],
       ),
     );
@@ -44,7 +45,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: [
           SvgPicture.asset(
             iconPath,
-            height: 20.h,
+            height: 24.h,
             colorFilter: isSelected
                 ? const ColorFilter.mode(
                     Color(0xFF1B5E20),
@@ -54,14 +55,18 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     Colors.grey,
                     BlendMode.srcIn,
                   ),
-            color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
+            color:
+                isSelected ? const Color(0xFF1B5E20) : const Color(0xff6A6A6E),
           ),
           SizedBox(height: 4.h),
           Text(
             label,
             style: GoogleFonts.nunito(
-              fontSize: 10.sp,
-              color: isSelected ? const Color(0xFF1B5E20) : Colors.grey,
+              fontSize: 11.sp,
+              fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
+              color: isSelected
+                  ? const Color(0xFF1B5E20)
+                  : const Color(0xff6A6A6E),
             ),
           ),
         ],
