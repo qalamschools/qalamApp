@@ -217,39 +217,44 @@ class _CustomMultiSelectDropDownState<T>
                 TextStyle(fontSize: 16, color: widget.textColor),
           ),
         ),
-        if (widget.isExpanded) _buildDropdown(),
-        SizedBox(height: 15.h),
-        Wrap(
-          alignment: WrapAlignment.start,
-          runSpacing: 5,
-          children: _selectedItems.map((reason) {
-            return Chip(
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(
-                  color: Color(0xffF3F3F3),
+        if (widget.isExpanded) ...{
+          _buildDropdown(),
+          SizedBox(height: 15.h),
+        } else ...{
+          _selectedItems.isNotEmpty ? SizedBox(height: 15.h) : const SizedBox(),
+          Wrap(
+            alignment: WrapAlignment.start,
+            runSpacing: 5,
+            children: _selectedItems.map((reason) {
+              return Chip(
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(
+                    color: Color(0xffF3F3F3),
+                  ),
+                  borderRadius: BorderRadius.circular(59),
                 ),
-                borderRadius: BorderRadius.circular(59),
-              ),
-              backgroundColor: const Color(0xffF3F3F3),
-              surfaceTintColor: const Color(0xffF3F3F3),
-              label: Text(
-                reason as String,
-                style: GoogleFonts.nunitoSans(
-                  color: const Color(0xFF7D7D7D),
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
+                backgroundColor: const Color(0xffF3F3F3),
+                surfaceTintColor: const Color(0xffF3F3F3),
+                label: Text(
+                  reason as String,
+                  style: GoogleFonts.nunitoSans(
+                    color: const Color(0xFF7D7D7D),
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-              deleteIconColor: const Color(0xff4B4B4B),
-              deleteIcon: SvgPicture.asset("assets/icons/cross.svg"),
-              onDeleted: () {
-                setState(() {
-                  _selectedItems.remove(reason);
-                });
-              },
-            );
-          }).toList(),
-        )
+                deleteIconColor: const Color(0xff4B4B4B),
+                deleteIcon: SvgPicture.asset("assets/icons/cross.svg"),
+                onDeleted: () {
+                  setState(() {
+                    _selectedItems.remove(reason);
+                  });
+                },
+              );
+            }).toList(),
+          ),
+          SizedBox(height: 15.h),
+        },
       ],
     );
   }

@@ -3,47 +3,68 @@ part of 'contact_us_cubit.dart';
 sealed class ContactUsState extends Equatable {
   const ContactUsState();
 
+  const ContactUsState._();
+
   factory ContactUsState.initial() => const ContactUsDataState(
-        isExpanded: false,
-        reasons: [
-          'Admissions - Al-Qalam Primary School',
-          'Admissions - Al-Qalam Secondary School',
-          'Flexible Learning NAT5/Highers',
-          'After-School Club',
-          'Al-Qalam Summer Camp 2025 (wk1&2 £175)',
-          'Al-Qalam Summer Camp 2025 (wk1)',
-          'Al-Qalam Summer Camp 2025 (wk2)',
-        ],
-        selectedReason: [],
-      );
+      isExpanded: false,
+      reasons: [
+        'Admissions - Al-Qalam Primary School',
+        'Admissions - Al-Qalam Secondary School',
+        'Flexible Learning NAT5/Highers',
+        'After-School Club',
+        'Al-Qalam Summer Camp 2025 (wk1&2 £175)',
+        'Al-Qalam Summer Camp 2025 (wk1)',
+        'Al-Qalam Summer Camp 2025 (wk2)',
+      ],
+      selectedReason: [],
+      isChecked: false,
+      hasError: false);
+
+  factory ContactUsState.error(String message) =>
+      ContactUsErrorState._(message);
 
   @override
   List<Object?> get props => [];
 }
 
 class ContactUsDataState extends ContactUsState {
-  const ContactUsDataState({
-    required this.isExpanded,
-    required this.reasons,
-    required this.selectedReason,
-  });
+  const ContactUsDataState(
+      {required this.isExpanded,
+      required this.reasons,
+      required this.selectedReason,
+      required this.isChecked,
+      required this.hasError});
 
   final bool isExpanded;
   final List<String> reasons;
   final List<String> selectedReason;
+  final bool isChecked;
+  final bool hasError;
 
-  ContactUsDataState copyWith({
-    bool? isExpanded,
-    List<String>? reasons,
-    List<String>? selectedReason,
-  }) {
+  ContactUsDataState copyWith(
+      {bool? isExpanded,
+      List<String>? reasons,
+      List<String>? selectedReason,
+      bool? isChecked,
+      bool? hasError}) {
     return ContactUsDataState(
-      isExpanded: isExpanded ?? this.isExpanded,
-      reasons: reasons ?? this.reasons,
-      selectedReason: selectedReason ?? this.selectedReason,
-    );
+        isExpanded: isExpanded ?? this.isExpanded,
+        reasons: reasons ?? this.reasons,
+        selectedReason: selectedReason ?? this.selectedReason,
+        isChecked: isChecked ?? this.isChecked,
+        hasError: hasError ?? this.hasError);
   }
 
   @override
-  List<Object?> get props => [isExpanded, reasons, selectedReason];
+  List<Object?> get props =>
+      [isExpanded, reasons, selectedReason, isChecked, hasError];
+}
+
+class ContactUsErrorState extends ContactUsState {
+  final String message;
+
+  const ContactUsErrorState._(this.message) : super._();
+
+  @override
+  List<Object?> get props => [message];
 }

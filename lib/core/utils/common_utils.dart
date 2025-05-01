@@ -16,10 +16,14 @@ class CommonUtils {
     }
   }
 
-  static bool validateEmail(String email) {
+  static (bool, String) validateEmail(String email) {
+    if (email.isEmpty) {
+      return (false, "email is empty");
+    }
     final RegExp emailRegex = RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
     );
-    return emailRegex.hasMatch(email);
+
+    return (emailRegex.hasMatch(email), "");
   }
 }

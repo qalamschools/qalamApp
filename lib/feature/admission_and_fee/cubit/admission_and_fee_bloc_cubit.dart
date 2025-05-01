@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,12 +13,11 @@ class AdmissionAndFeeBlocCubit extends Cubit<AdmissionAndFeeState> {
   TextEditingController mobileNumber = TextEditingController();
   TextEditingController comments = TextEditingController();
   void submitButton() {
-    bool isValid = CommonUtils.validateEmail(email.text);
+    (bool, String) isValid = CommonUtils.validateEmail(email.text);
 
-    if (isValid) {
-      
+    if (isValid.$1) {
     } else {
-      emit(AdmissionAndFeeState.error("Please enter the valid email"));
+      emit(AdmissionAndFeeState.error(isValid.$2));
     }
   }
 

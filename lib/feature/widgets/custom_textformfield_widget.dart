@@ -4,21 +4,21 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormWidget extends StatelessWidget {
-  CustomTextFormWidget(
+  const CustomTextFormWidget(
       {super.key,
-      this.hintText,
-      this.labelText,
+      this.hintText = "",
+      this.labelText = "",
       this.prefixPath,
       this.maxLines = 1,
       required this.controller,
       this.isRequired = false});
-  String? hintText = "";
-  String? labelText = "";
-  String? prefixPath;
-  int maxLines;
-  int maxLength = 156;
-  TextEditingController controller;
-  bool isRequired; // New property to indicate if the field is required
+  final String? hintText;
+  final String? labelText;
+  final String? prefixPath;
+  final int maxLines;
+  final int maxLength = 156;
+  final TextEditingController controller;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
