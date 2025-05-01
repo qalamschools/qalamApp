@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalam_app/feature/admission_and_fee/bloc/cubit/admission_and_fee_bloc_cubit.dart';
+import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_phone_field.dart';
 import 'package:qalam_app/feature/widgets/custom_textformfield_widget.dart';

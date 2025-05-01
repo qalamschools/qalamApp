@@ -1,6 +1,6 @@
 part of 'admission_and_fee_bloc_cubit.dart';
 
-abstract class AdmissionAndFeeState extends Equatable {
+sealed class AdmissionAndFeeState extends Equatable {
   const AdmissionAndFeeState._();
 
   // Factory method to create different states

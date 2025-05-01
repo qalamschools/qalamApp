@@ -1,0 +1,261 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
+import 'package:qalam_app/feature/widgets/custom_drop_down_widget.dart';
+import 'package:qalam_app/feature/widgets/custom_phone_field.dart';
+import 'package:qalam_app/feature/widgets/custom_textformfield_widget.dart';
+
+class ContactUsScreen extends StatefulWidget {
+  const ContactUsScreen({super.key, required this.contactUsCubit});
+  final ContactUsCubit contactUsCubit;
+  @override
+  State<ContactUsScreen> createState() => _ContactUsScreenState();
+}
+
+class _ContactUsScreenState extends State<ContactUsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        title: Image.asset(
+          "assets/images/logo.png",
+          fit: BoxFit.contain,
+          height: 35,
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Image.asset(
+              "assets/images/image_background.png",
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 220),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/vertical_line.svg",
+                          ),
+                          SizedBox(height: 15.h),
+                          Text("Contact Us",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.playfairDisplay(
+                                fontSize: 40.sp,
+                                height: 1,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xFF185B31),
+                              )),
+                          SizedBox(height: 25.h),
+                          Text(
+                              "Fill in the form below to take the first step, and our team will reach out shortly to begin your journey.",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16.sp,
+                                  height: 1,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xFF333333))),
+                          SizedBox(height: 15.h),
+                          SvgPicture.asset(
+                            "assets/icons/Arrow_down.svg",
+                          ),
+                          SizedBox(height: 30.h),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomTextFormWidget(
+                                controller: TextEditingController(),
+                                isRequired: true,
+                                hintText: "Enter full name here",
+                                labelText: "Full Name",
+                                prefixPath: "assets/icons/person.svg",
+                              ),
+                              SizedBox(height: 16.h),
+                              CustomTextFormWidget(
+                                controller: TextEditingController(),
+                                isRequired: true,
+                                hintText: "Enter email here",
+                                labelText: "Email",
+                                prefixPath: "assets/icons/main.svg",
+                              ),
+                              SizedBox(height: 20.h),
+                              CustomPhoneField(
+                                isRequired: true,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(10)
+                                ],
+                              ),
+                              SizedBox(height: 15.h),
+                              BlocBuilder<ContactUsCubit, ContactUsState>(
+                                builder: (context, state) {
+                                  if (state is! ContactUsDataState) {
+                                    return const SizedBox();
+                                  }
+
+                                  final cubit = context.read<ContactUsCubit>();
+
+                                  return CustomMultiSelectDropDown<String>(
+                                    onTap: cubit.toggleDropdown,
+                                    isExpanded: state.isExpanded,
+                                    hintTextStyle: GoogleFonts.nunitoSans(
+                                      color: const Color(0xFF7D7D7D),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    items: state.reasons,
+                                    itemAsString: (String item) => item,
+                                    onSelectionChanged: (p0) {
+                                      cubit.updateSelectedReasons(p0);
+                                    },
+                                    selectedTextStyle: GoogleFonts.nunitoSans(
+                                      color: const Color(0xff000000),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    textStyle: GoogleFonts.nunitoSans(
+                                      color: const Color(0xff000000),
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    initialSelection: state.selectedReason,
+                                    textFormFieldDecoration: InputDecoration(
+                                      suffixIcon: Icon(
+                                        state.isExpanded
+                                            ? Icons.arrow_drop_up
+                                            : Icons.arrow_drop_down,
+                                        color: const Color(0xff6E727A),
+                                      ),
+                                      label: Text(
+                                        'Reason for Contacting',
+                                        style: GoogleFonts.nunitoSans(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xff6E727A),
+                                        ),
+                                      ),
+                                      hintText: "Select reason",
+                                      hintStyle: GoogleFonts.nunitoSans(
+                                        color: const Color(0xff7D7D7D),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFC4C4C4)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFC4C4C4)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFFC4C4C4)),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 15.h),
+                              CustomTextFormWidget(
+                                controller: TextEditingController(),
+                                hintText: "Add Comments Here..",
+                                maxLines: 6,
+                              ),
+                              SizedBox(height: 15.h),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: Checkbox(
+                                      onChanged: (bool? value) {},
+                                      value: false,
+                                      side: WidgetStateBorderSide.resolveWith(
+                                          (states) {
+                                        if (states
+                                            .contains(WidgetState.selected)) {
+                                          return const BorderSide(
+                                              color: Color(0xff1960FF));
+                                        } else {
+                                          return const BorderSide(
+                                              color: Color(0xff1960FF));
+                                        }
+                                      }),
+                                      shape: RoundedRectangleBorder(
+                                        side: const BorderSide(
+                                            color: Colors.black),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(4.r),
+                                        ),
+                                      ),
+                                      fillColor:
+                                          WidgetStateProperty.all(Colors.white),
+                                      checkColor: const Color(0xff1960FF),
+                                      activeColor: const Color(0xff1960FF),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Expanded(
+                                    child: Text(
+                                        "I agree to receiving marketing and promotional materials",
+                                        style: GoogleFonts.nunitoSans(
+                                          fontSize: 16.sp,
+                                          height: 1.2.w,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xFF000000),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 30.h),
+                              CustomButtonWidget(
+                                width: 100.sw,
+                                text: "Submit",
+                                onTap: () {
+                                  // widget.admissionAndFeeBlocCubit
+                                  //     .submitButton();
+                                },
+                              ),
+                              SizedBox(height: 10.h),
+                              SizedBox(height: 30.h),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

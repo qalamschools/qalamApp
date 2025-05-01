@@ -6,7 +6,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
-import 'package:qalam_app/feature/admission_and_fee/bloc/cubit/admission_and_fee_bloc_cubit.dart';
+import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
 import 'package:qalam_app/feature/dashboard/home/home.dart';
 import 'package:qalam_app/feature/widgets/custom_bottom_navigation_bar.dart';
