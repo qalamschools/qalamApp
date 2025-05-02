@@ -25,6 +25,7 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SizedBox(
           width: 100.sw,

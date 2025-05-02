@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar(
       {super.key, required this.currentIndex, this.onTap});
-  final void Function(int index, String name)? onTap;
+  final void Function(int index)? onTap;
   final int currentIndex;
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -42,9 +42,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         Expanded(
           child: IconButton(
               padding: EdgeInsets.zero,
-              onPressed: widget.onTap != null
-                  ? () => widget.onTap!(index, label)
-                  : null,
+              onPressed:
+                  widget.onTap != null ? () => widget.onTap!(index) : null,
               icon: SvgPicture.asset(
                 iconPath,
                 width: 30.w,
