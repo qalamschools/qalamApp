@@ -16,61 +16,62 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 0.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildNavItem(0, "assets/icons/home.svg", 'Home'),
-          SizedBox(width: 20.w),
-          _buildNavItem(1, "assets/icons/calendar.svg", 'News & Media'),
-          SizedBox(width: 20.w),
-          _buildNavItem(2, "assets/icons/phone.svg", 'Call Us'),
-          SizedBox(width: 20.w),
-          _buildNavItem(3, "assets/icons/quick_pay.svg", 'Quick Pay'),
-          SizedBox(width: 20.w), //
-          _buildNavItem(4, "assets/icons/more.svg", 'More'),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildNavItem(0, "assets/icons/home.svg", 'Home'),
+        SizedBox(width: 10.w),
+        _buildNavItem(1, "assets/icons/calendar.svg", 'News & Media'),
+        SizedBox(width: 10.w),
+        _buildNavItem(2, "assets/icons/phone.svg", 'Call Us'),
+        SizedBox(width: 10.w),
+        _buildNavItem(3, "assets/icons/quick_pay.svg", 'Quick Pay'),
+        SizedBox(width: 10.w),
+        _buildNavItem(4, "assets/icons/more.svg", 'More'),
+      ],
     );
   }
 
   Widget _buildNavItem(int index, String iconPath, String label) {
     final isSelected = widget.currentIndex == index;
 
-    return GestureDetector(
-      onTap: widget.onTap != null ? () => widget.onTap!(index, label) : null,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            iconPath,
-            height: 24.h,
-            colorFilter: isSelected
-                ? const ColorFilter.mode(
-                    Color(0xFF1B5E20),
-                    BlendMode.srcIn,
-                  )
-                : const ColorFilter.mode(
-                    Colors.grey,
-                    BlendMode.srcIn,
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: widget.onTap != null
+                  ? () => widget.onTap!(index, label)
+                  : null,
+              icon: SvgPicture.asset(
+                iconPath,
+                width: 30.w,
+                colorFilter: isSelected
+                    ? const ColorFilter.mode(
+                        Color(0xFF1B5E20),
+                        BlendMode.srcIn,
+                      )
+                    : const ColorFilter.mode(
+                        Colors.grey,
+                        BlendMode.srcIn,
+                      ),
+                color: isSelected
+                    ? const Color(0xFF1B5E20)
+                    : const Color(0xff6A6A6E),
+              )),
+        ),
+        Text(
+          label,
+          style: GoogleFonts.nunito(
+            fontSize: 11.sp,
+            fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
             color:
                 isSelected ? const Color(0xFF1B5E20) : const Color(0xff6A6A6E),
           ),
-          SizedBox(height: 4.h),
-          Text(
-            label,
-            style: GoogleFonts.nunito(
-              fontSize: 11.sp,
-              fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
-              color: isSelected
-                  ? const Color(0xFF1B5E20)
-                  : const Color(0xff6A6A6E),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
