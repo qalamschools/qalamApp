@@ -146,12 +146,11 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  const Stack(
+                  Stack(
                     children: [
-                      // SvgPicture.asset(
-                      //     fit: BoxFit.cover,
-                      //     "assets/icons/curriculum_background_design.svg"),
-                      Column(
+                      SvgPicture.asset(
+                          fit: BoxFit.cover, "assets/icons/background.svg"),
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CurriculumSection(
@@ -190,10 +189,9 @@ class Home extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 50.h),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 0.h),
                     child: Container(
                       decoration: BoxDecoration(
                         color: const Color(0xFFFFF4F4),

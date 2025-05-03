@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/about_us/presentation/about_us_screen.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
@@ -119,9 +116,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     switch (index) {
       case 1:
+        currentIndex = 0;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NewAndMediaScreen()),
+          MaterialPageRoute(builder: (context) => NewAndMediaScreen()),
         );
         break;
       case 2:

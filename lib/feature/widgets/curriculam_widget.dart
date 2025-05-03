@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CurriculumSection extends StatelessWidget {
@@ -28,70 +26,59 @@ class CurriculumSection extends StatelessWidget {
           margin: EdgeInsets.zero,
           width: double.infinity,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 16, vertical: isLeft ? 20 : 20),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (isLeft) ...{
-                  Expanded(
-                      child: Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.asset(
-                                imagePath,
-                                fit: BoxFit.cover,
-                                width: 267.w,
-                              ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.contain,
+                              width: 267,
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 80.h, left: 40.w, right: 30.w),
-                            child: _buildNumberBadge(isLeft: isLeft),
                           ),
                         ],
                       ),
-                      _buildTextContent()
+                      _buildTextContent(isLeft: isLeft),
+                      const SizedBox(
+                        height: 30,
+                      ),
                     ],
-                  ))
+                  )
                 } else ...{
                   Expanded(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 27),
-                            // padding: EdgeInsets.only(
-                            //     top: 80.h, right: 20.w, left: 25.w),
-                            child: _buildNumberBadge(isLeft: isLeft),
-                          ),
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.asset(
-                                imagePath,
-                                fit: BoxFit.cover,
-                                //width: 220.w,
-                              ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              imagePath,
+                              fit: BoxFit.contain,
+                              width: 267,
                             ),
                           ),
                         ],
                       ),
-                      _buildTextContent()
+                      _buildTextContent(isLeft: isLeft),
+                      const SizedBox(
+                        height: 50,
+                      ),
                     ],
                   )),
                 },
@@ -103,58 +90,36 @@ class CurriculumSection extends StatelessWidget {
     );
   }
 
-  Widget _buildNumberBadge({required bool isLeft}) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        SvgPicture.asset(
-          isLeft
-              ? "assets/icons/red_shield.svg"
-              : "assets/icons/green_shield.svg",
-          height: 22.h,
-          fit: BoxFit.cover,
-        ),
-        Text(
-          number.toString(),
-          style: GoogleFonts.nunitoSans(
-            fontSize: 12.sp,
-            color: Colors.white,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTextContent() {
+  Widget _buildTextContent({required bool isLeft}) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SizedBox(height: 15.h),
+        const SizedBox(height: 20),
         SizedBox(
-          width: 267.w,
+          width: 267,
           child: Text(
             title,
             style: GoogleFonts.nunitoSans(
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
               color: const Color(0xFF1B5E20),
             ),
           ),
         ),
-        SizedBox(height: 15.h),
+        const SizedBox(height: 20),
         SizedBox(
-          width: 267.w,
+          width: 267,
           child: Text(
             description,
             style: GoogleFonts.nunitoSans(
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
               color: const Color(0xFF333333),
             ),
           ),
-        )
+        ),
       ],
     );
   }
