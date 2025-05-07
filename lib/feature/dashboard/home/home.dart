@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/widgets/curriculam_widget.dart';
@@ -20,7 +21,7 @@ class Home extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Image.asset(
-              "assets/images/background.png",
+              AppImage.dashboardBackground,
               fit: BoxFit.cover,
               width: double.infinity,
             ),
@@ -29,7 +30,7 @@ class Home extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Image.asset(
-                  "assets/images/logo.png",
+                  AppImage.appLogo,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -44,7 +45,7 @@ class Home extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset(
-                          "assets/icons/vertical_line.svg",
+                          AppImage.verticalLine,
                         ),
                         SizedBox(height: 30.h),
                         Text("Welcome to",
@@ -77,7 +78,7 @@ class Home extends StatelessWidget {
                         ),
                         SizedBox(height: 30.h),
                         SvgPicture.asset(
-                          "assets/icons/Arrow_down.svg",
+                          AppImage.arrowDown,
                         ),
                       ],
                     ),
@@ -122,7 +123,7 @@ class Home extends StatelessWidget {
                                     color: const Color(0xFFA91936))),
                             SizedBox(width: 8.h),
                             SvgPicture.asset(
-                              "assets/icons/forward_icon.svg",
+                              AppImage.forwardIcon,
                               width: 12.w,
                             ),
                           ],
@@ -148,8 +149,7 @@ class Home extends StatelessWidget {
                   SizedBox(height: 20.h),
                   Stack(
                     children: [
-                      SvgPicture.asset(
-                          fit: BoxFit.cover, "assets/icons/background.svg"),
+                      SvgPicture.asset(fit: BoxFit.cover, AppImage.lines),
                       const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -204,7 +204,7 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            "assets/images/logo_icon.png",
+                            AppImage.appIcon,
                             fit: BoxFit.contain,
                           ),
                           SizedBox(height: 15.h),
@@ -287,7 +287,7 @@ class Home extends StatelessWidget {
                           height: 92.h,
                           child: Center(
                             child: Image.asset(
-                              "assets/images/sqa.png",
+                              AppImage.sAQ,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -300,7 +300,7 @@ class Home extends StatelessWidget {
                           height: 92.h,
                           child: Center(
                             child: Image.asset(
-                              "assets/images/hsQuality.png",
+                              AppImage.hsQuality,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -313,7 +313,7 @@ class Home extends StatelessWidget {
                           height: 92.h,
                           child: Center(
                             child: Image.asset(
-                              "assets/images/play_learn.png",
+                              AppImage.playlearn,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -326,7 +326,7 @@ class Home extends StatelessWidget {
                           height: 92.h,
                           child: Center(
                             child: Image.asset(
-                              "assets/images/scis.png",
+                              AppImage.scisIcon,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -337,7 +337,7 @@ class Home extends StatelessWidget {
                   SizedBox(height: 30.h),
                   Center(
                     child: SvgPicture.asset(
-                      "assets/icons/horizontal_line.svg",
+                      AppImage.horizontalIcon,
                       fit: BoxFit.cover,
                     ),
                   ),
