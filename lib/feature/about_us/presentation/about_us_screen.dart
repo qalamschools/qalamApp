@@ -139,6 +139,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 30.h),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Center(
                           child: Text("Supported by",
@@ -151,9 +152,107 @@ class AboutUsScreen extends StatelessWidget {
                               )),
                         ),
                         SizedBox(height: 25.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 80.h,
+                              width: 80.w,
+                              decoration: const BoxDecoration(
+                                  color: Colors.amberAccent,
+                                  shape: BoxShape.circle),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Text(
+                              "Shoeb Sarguroh",
+                              style: GoogleFonts.playfairDisplay(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 6.h,
+                            ),
+                            Text(
+                              "Executive Head\n(pro-bono)",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 14.sp, fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 80.h,
+                                  width: 80.w,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.amberAccent,
+                                      shape: BoxShape.circle),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  "Kausar Khot",
+                                  style: GoogleFonts.playfairDisplay(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: 6.h,
+                                ),
+                                Text(
+                                  "Head of School",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.nunitoSans(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  height: 80.h,
+                                  width: 80.w,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.amberAccent,
+                                      shape: BoxShape.circle),
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  "May Geddes",
+                                  style: GoogleFonts.playfairDisplay(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: 6.h,
+                                ),
+                                Text(
+                                  "Quality Assurance\n Executive",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.nunitoSans(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
                       ],
                     ),
-                    SizedBox(height: 50.h),
+                    SizedBox(height: 30.h),
                     Center(
                       child: SvgPicture.asset(
                         "assets/icons/horizontal_line.svg",

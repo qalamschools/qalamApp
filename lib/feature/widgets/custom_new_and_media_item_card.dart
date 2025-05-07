@@ -1,157 +1,114 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/feature/new_and_media/cubit/new_and_media_cubit.dart';
+import 'package:qalam_app/feature/new_and_media/models/new_and_media_model.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class CustomNewAndMediaItemCard extends StatefulWidget {
-  const CustomNewAndMediaItemCard(
-      {super.key, this.title = "", this.videoUrl = ""});
+class CustomNewAndMediaItemCard extends StatelessWidget {
+  final NewAndMediaModel? newAndMediaModel;
 
-  final String videoUrl;
-  final String title;
-
-  @override
-  State<CustomNewAndMediaItemCard> createState() =>
-      _CustomNewAndMediaItemCardState();
-}
-
-class _CustomNewAndMediaItemCardState extends State<CustomNewAndMediaItemCard> {
-  late YoutubePlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? "",
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  const CustomNewAndMediaItemCard({super.key, required this.newAndMediaModel});
 
   @override
   Widget build(BuildContext context) {
-    // return Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     Text(widget.title,
-    //         style: GoogleFonts.playfairDisplay(
-    //           fontSize: 20.sp,
-    //           fontWeight: FontWeight.w700,
-    //           color: const Color(0xFF000000),
-    //         )),
-    //     SizedBox(
-    //       height: 12.h,
-    //     ),
-    //     SizedBox(
-    //         height: 221.h,
-    //         width: 100.sw,
-    //         child: Card(
-    //           shape: RoundedRectangleBorder(
-    //               borderRadius: BorderRadius.circular(16.r)),
-    //           elevation: 1,
-    //           shadowColor: Colors.white,
-    //           color: Colors.white,
-    //           surfaceTintColor: Colors.white,
-    //           child: ClipRRect(
-    //             borderRadius: BorderRadius.circular(12),
-    //             child: YoutubePlayer(
-    //               controller: _controller,
-    //               showVideoProgressIndicator: true,
-    //               progressIndicatorColor: Colors.blueAccent,
-    //             ),
-    //           ),
-    //         )),
-    //     SizedBox(
-    //       height: 12.h,
-    //     ),
-    //     Row(
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       children: [
-    //         Text("Watch on youtube",
-    //             style: GoogleFonts.inter(
-    //               fontSize: 16.sp,
-    //               fontWeight: FontWeight.w400,
-    //               color: const Color(0xFFA91936),
-    //             )),
-    //         SizedBox(
-    //           width: 12.h,
-    //         ),
-    //         SvgPicture.asset("assets/icons/forward_icon.svg")
-    //       ],
-    //     ),
-    //     SizedBox(
-    //       height: 20.h,
-    //     ),
-    //   ],
-    // );
+    return BlocBuilder<NewAndMediaCubit, NewAndMediaState>(
+      buildWhen: (prev, curr) =>
+          prev.playingVideoUrl != curr.playingVideoUrl ||
+          prev.model != curr.model,
+      builder: (context, state) {
+        final videoId =
+            YoutubePlayer.convertUrlToId(newAndMediaModel?.videoUrl ?? '');
+        final isPlaying = state.playingVideoUrl == newAndMediaModel?.videoUrl;
 
-    return YoutubePlayerBuilder(
-      player: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.blueAccent,
-      ),
-      builder: (context, player) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.title,
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              newAndMediaModel?.title ?? "",
               style: GoogleFonts.playfairDisplay(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
-                color: const Color(0xFF000000),
-              )),
-          SizedBox(height: 12.h),
-          SizedBox(
-            height: 221.h,
-            width: 100.sw,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              elevation: 1,
-              shadowColor: Colors.white,
-              color: Colors.white,
-              surfaceTintColor: Colors.white,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
-                child: player,
               ),
             ),
-          ),
-          SizedBox(height: 12.h),
-          GestureDetector(
-            onTap: () async {
-              final Uri url = Uri.parse(widget.videoUrl);
-              if (await canLaunchUrl(url)) {
-                await launchUrl(url, mode: LaunchMode.externalApplication);
-              }
-            },
-            child: Row(
-              children: [
-                Text("Watch on youtube",
+            SizedBox(height: 12.h),
+            SizedBox(
+              height: 221.h,
+              width: double.infinity,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                color: Colors.white,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.r),
+                  child: isPlaying && state.controller != null
+                      ? YoutubePlayerBuilder(
+                          player: YoutubePlayer(
+                            controller: state.controller!,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.red,
+                          ),
+                          builder: (context, player) => player,
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            context
+                                .read<NewAndMediaCubit>()
+                                .loadVideo(newAndMediaModel?.videoUrl ?? "");
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              if (videoId != null)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: CachedNetworkImageProvider(
+                                          'https://img.youtube.com/vi/$videoId/0.jpg'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              SvgPicture.asset("assets/icons/youtube_icon.svg"),
+                            ],
+                          ),
+                        ),
+                ),
+              ),
+            ),
+            SizedBox(height: 12.h),
+            GestureDetector(
+              onTap: () async {
+                final Uri url = Uri.parse(newAndMediaModel?.videoUrl ?? "");
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                }
+              },
+              child: Row(
+                children: [
+                  Text(
+                    "Watch on YouTube",
                     style: GoogleFonts.inter(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFFA91936),
-                    )),
-                SizedBox(width: 12.h),
-                SvgPicture.asset("assets/icons/forward_icon.svg"),
-              ],
+                    ),
+                  ),
+                  SizedBox(width: 12.h),
+                  SvgPicture.asset("assets/icons/forward_icon.svg"),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 20.h),
-        ],
-      ),
+            SizedBox(height: 20.h),
+          ],
+        );
+      },
     );
   }
 }

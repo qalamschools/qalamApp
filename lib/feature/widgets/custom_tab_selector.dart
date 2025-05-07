@@ -3,14 +3,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTabSelector extends StatefulWidget {
-  const CustomTabSelector({super.key});
+  final bool initialIsNewsSelected;
+  final ValueChanged<bool>? onTabChanged;
+
+  const CustomTabSelector({
+    super.key,
+    this.initialIsNewsSelected = true,
+    this.onTabChanged,
+  });
 
   @override
   _CustomTabSelectorState createState() => _CustomTabSelectorState();
 }
 
 class _CustomTabSelectorState extends State<CustomTabSelector> {
-  bool isNewsSelected = true;
+  late bool isNewsSelected;
+
+  @override
+  void initState() {
+    super.initState();
+    isNewsSelected = widget.initialIsNewsSelected;
+  }
+
+  void _onTabTap(bool selectNews) {
+    setState(() => isNewsSelected = selectNews);
+    widget.onTabChanged?.call(selectNews);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +44,12 @@ class _CustomTabSelectorState extends State<CustomTabSelector> {
           _buildTab(
             title: 'New & Media',
             selected: isNewsSelected,
-            onTap: () => setState(() => isNewsSelected = true),
+            onTap: () => _onTabTap(true),
           ),
           _buildTab(
             title: 'Events',
             selected: !isNewsSelected,
-            onTap: () => setState(() => isNewsSelected = false),
+            onTap: () => _onTabTap(false),
           ),
         ],
       ),
@@ -57,12 +75,12 @@ class _CustomTabSelectorState extends State<CustomTabSelector> {
           child: Text(
             title,
             style: GoogleFonts.nunitoSans(
-                fontSize: 16.sp,
-                height: 1,
-                fontWeight: FontWeight.w400,
-                color: selected
-                    ? const Color(0xFFFFFFFF)
-                    : const Color(0xff1F6947)),
+              fontSize: 16.sp,
+              height: 1,
+              fontWeight: FontWeight.w400,
+              color:
+                  selected ? const Color(0xFFFFFFFF) : const Color(0xff1F6947),
+            ),
           ),
         ),
       ),

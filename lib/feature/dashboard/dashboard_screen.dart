@@ -119,7 +119,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         currentIndex = 0;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NewAndMediaScreen()),
+          MaterialPageRoute(builder: (context) => const NewAndMediaScreen()),
         );
         break;
       case 2:
@@ -163,34 +163,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ));
                   },
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                            color: const Color(0xff185B1C).withOpacity(0.5)),
-                        gradient: const LinearGradient(
-                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                    height: 71,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 52,
-                          width: 52,
-                          decoration: BoxDecoration(
-                            color: const Color(0xff185B1C),
-                            border: Border.all(
-                                color: const Color(0xffE3F8EB), width: 1),
-                            borderRadius: BorderRadius.circular(12.r),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: Border.all(
+                              color: const Color(0xff185B1C).withOpacity(0.5)),
+                          gradient: const LinearGradient(
+                              colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                      //height: 71.h,
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 52,
+                            width: 52,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff185B1C),
+                              border: Border.all(
+                                  color: const Color(0xffE3F8EB), width: 1),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                  "assets/icons/coin-pound.svg"),
+                            ),
                           ),
-                          child: Center(
-                            child:
-                                SvgPicture.asset("assets/icons/coin-pound.svg"),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                          SizedBox(
+                              width: 10
+                                  .w), // use .w to stay consistent with screen util
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -198,28 +199,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 Text(
                                   "About Us",
                                   style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xff000000),
-                                      fontSize: 16.sp),
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
-                                const SizedBox(
-                                  height: 4,
+                                SizedBox(
+                                  height: 4.h,
                                 ),
                                 Text(
                                   "Get to know who we are and what we do.",
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xff666666),
-                                      fontSize: 14.sp),
-                                )
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
+                        ],
+                      )),
                 ),
                 SizedBox(
                   height: 10.h,
@@ -241,14 +242,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                   child: Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(
                             color: const Color(0xff185B1C).withOpacity(0.5)),
                         gradient: const LinearGradient(
                             colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                    height: 71,
+                    //height: 71,
                     child: Row(
                       children: [
                         Container(
@@ -265,32 +266,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 SvgPicture.asset("assets/icons/bank_note.svg"),
                           ),
                         ),
+                        SizedBox(width: 10.w),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Admissions & Fees",
-                                  style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xff000000),
-                                      fontSize: 16.sp),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  "Select courses and apply now.",
-                                  style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xff666666),
-                                      fontSize: 14.sp),
-                                )
-                              ],
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Admissions & Fees",
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                              Text(
+                                "Select courses and apply now.",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp),
+                              )
+                            ],
                           ),
                         )
                       ],
@@ -315,14 +315,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   },
                   child: Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(
                             color: const Color(0xff185B1C).withOpacity(0.5)),
                         gradient: const LinearGradient(
                             colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                    height: 71,
+                    //height: 71,
                     child: Row(
                       children: [
                         Container(
@@ -339,32 +339,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 "assets/icons/phone_incoming.svg"),
                           ),
                         ),
+                        SizedBox(width: 10.w),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Contact Us",
-                                  style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xff000000),
-                                      fontSize: 16.sp),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  "Reach out to us for any inquiries",
-                                  style: GoogleFonts.nunitoSans(
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xff666666),
-                                      fontSize: 14.sp),
-                                )
-                              ],
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Contact Us",
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                              Text(
+                                "Reach out to us for any inquiries",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp),
+                              )
+                            ],
                           ),
                         )
                       ],
@@ -387,7 +386,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               topLeft: Radius.circular(16.r), topRight: Radius.circular(16.r))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -396,21 +395,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.r,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
                           color: const Color(0xff185B1C).withOpacity(0.5)),
                       gradient: const LinearGradient(
                           colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                  height: 71,
+
+                  /// height: 71,
                   child: Row(
                     children: [
                       Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.r, vertical: 8.h),
                         height: 52,
                         width: 52,
                         decoration: BoxDecoration(
@@ -424,9 +425,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               SvgPicture.asset("assets/icons/coin-pound.svg"),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                      SizedBox(width: 10.w),
+                      Expanded(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -437,11 +439,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   color: const Color(0xff000000),
                                   fontSize: 16.sp),
                             ),
-                            const SizedBox(
-                              height: 4,
+                            SizedBox(
+                              height: 4.h,
                             ),
                             Text(
                               "For New Admissions",
+                              overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.nunitoSans(
                                   fontWeight: FontWeight.w400,
                                   color: const Color(0xff666666),
@@ -457,14 +460,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   height: 10.h,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 8.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
                           color: const Color(0xff185B1C).withOpacity(0.5)),
                       gradient: const LinearGradient(
                           colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                  height: 71,
+                  //height: 71,
                   child: Row(
                     children: [
                       Container(
@@ -480,9 +483,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: SvgPicture.asset("assets/icons/bank1.svg"),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                      SizedBox(width: 10.w),
+                      Expanded(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -493,11 +497,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   color: const Color(0xff000000),
                                   fontSize: 16.sp),
                             ),
-                            const SizedBox(
-                              height: 4,
+                            SizedBox(
+                              height: 4.h,
                             ),
                             Text(
                               "Uniforms, trips, stationery and Ancillary",
+                              overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.nunitoSans(
                                   fontWeight: FontWeight.w400,
                                   color: const Color(0xff666666),

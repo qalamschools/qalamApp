@@ -3,6 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qalam_app/feature/dashboard/home/home.dart';
+import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
 import 'package:qalam_app/feature/splash/presentation/splash_screen.dart';
 import 'package:qalam_app/firebase_options.dart';
 
@@ -79,6 +81,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.sizeOf(context).width);
     return ScreenUtilInit(
         designSize: const Size(393, 690),
         minTextAdapt: true,
@@ -88,7 +91,7 @@ class _MyAppState extends State<MyApp> {
         builder: (_, child) {
           return const MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: OnBoardingIntoScreen(),
           );
         });
   }
