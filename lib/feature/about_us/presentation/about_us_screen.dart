@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/feature/widgets/about_us_curriculam_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_scroll_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
@@ -32,13 +33,13 @@ class AboutUsScreen extends StatelessWidget {
               width: double.infinity,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 350),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
+              padding: EdgeInsets.only(top: 270.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Center(
                       child: Text("Who We Are",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.playfairDisplay(
@@ -48,8 +49,11 @@ class AboutUsScreen extends StatelessWidget {
                             color: const Color(0xFF226B3D),
                           )),
                     ),
-                    SizedBox(height: 25.h),
-                    Text(
+                  ),
+                  SizedBox(height: 25.h),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
                         "Qalam Academy is dedicated to delivering excellence in education across all stages, aiming to build a prosperous society in Scotland and beyond. Our approach integrates innovative methods within curriculum frameworks, guided by the teachings of the Quran and Prophetic traditions.",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.nunitoSans(
@@ -57,8 +61,42 @@ class AboutUsScreen extends StatelessWidget {
                             height: 1,
                             fontWeight: FontWeight.w400,
                             color: const Color(0xFF333333))),
-                    SizedBox(height: 50.h),
-                    Column(
+                  ),
+                  SizedBox(height: 50.h),
+                  Stack(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/icons/Lines_About_Us.svg",
+                        fit: BoxFit.cover,
+                      ),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AboutUsCurriculumSection(
+                            title: "Our Vision",
+                            description:
+                                "To establish a comprehensive educational pathway—from primary through to university—that fosters academic excellence and moral integrity, preparing students to contribute positively to society.​",
+                            isLeft: false,
+                          ),
+                          AboutUsCurriculumSection(
+                            title: "Our Mission",
+                            description:
+                                "We strive to provide top-tier resources and staff to ensure pupils achieve outstanding individual attainment, coupled with a strong sense of social responsibility and a passion to serve humanity.",
+                            isLeft: true,
+                          ),
+                          AboutUsCurriculumSection(
+                            title: "Our Ethos",
+                            description:
+                                "At Qalam Academy,respect and understanding of fellow mankind form the cornerstone of our community. We welcome children from all communities, irrespective of their faith, fostering an inclusive environment where pupils, staff, and parents are united in commitment to the school's policies and procedures. ​",
+                            isLeft: false,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Our Community",
@@ -130,137 +168,140 @@ class AboutUsScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(height: 50.h),
-                    Center(
-                      child: SvgPicture.asset(
-                        "assets/icons/horizontal_line.svg",
-                        fit: BoxFit.cover,
+                  ),
+                  SizedBox(height: 50.h),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/icons/horizontal_line.svg",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text("Supported by",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.playfairDisplay(
+                              fontSize: 36.sp,
+                              height: 1,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xFF226B3D),
+                            )),
                       ),
-                    ),
-                    SizedBox(height: 30.h),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text("Supported by",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: 36.sp,
-                                height: 1,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF226B3D),
-                              )),
-                        ),
-                        SizedBox(height: 25.h),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 80.h,
-                              width: 80.w,
-                              decoration: const BoxDecoration(
-                                  color: Colors.amberAccent,
-                                  shape: BoxShape.circle),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              "Shoeb Sarguroh",
-                              style: GoogleFonts.playfairDisplay(
-                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            Text(
-                              "Executive Head\n(pro-bono)",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.nunitoSans(
-                                  fontSize: 14.sp, fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 80.h,
-                                  width: 80.w,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.amberAccent,
-                                      shape: BoxShape.circle),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "Kausar Khot",
-                                  style: GoogleFonts.playfairDisplay(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 6.h,
-                                ),
-                                Text(
-                                  "Head of School",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  height: 80.h,
-                                  width: 80.w,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.amberAccent,
-                                      shape: BoxShape.circle),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  "May Geddes",
-                                  style: GoogleFonts.playfairDisplay(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 6.h,
-                                ),
-                                Text(
-                                  "Quality Assurance\n Executive",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 30.h),
-                    Center(
-                      child: SvgPicture.asset(
-                        "assets/icons/horizontal_line.svg",
-                        fit: BoxFit.cover,
+                      SizedBox(height: 25.h),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 80.h,
+                            width: 80.w,
+                            decoration: const BoxDecoration(
+                                color: Colors.amberAccent,
+                                shape: BoxShape.circle),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            "Shoeb Sarguroh",
+                            style: GoogleFonts.playfairDisplay(
+                                fontSize: 20.sp, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(
+                            height: 6.h,
+                          ),
+                          Text(
+                            "Executive Head\n(pro-bono)",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 14.sp, fontWeight: FontWeight.w400),
+                          ),
+                        ],
                       ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 80.h,
+                                width: 80.w,
+                                decoration: const BoxDecoration(
+                                    color: Colors.amberAccent,
+                                    shape: BoxShape.circle),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "Kausar Khot",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Text(
+                                "Head of School",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 80.h,
+                                width: 80.w,
+                                decoration: const BoxDecoration(
+                                    color: Colors.amberAccent,
+                                    shape: BoxShape.circle),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Text(
+                                "May Geddes",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Text(
+                                "Quality Assurance\n Executive",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 30.h),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/icons/horizontal_line.svg",
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(height: 20.h),
-                    SizedBox(
+                  ),
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SizedBox(
                       height: 358.h,
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -323,19 +364,19 @@ class AboutUsScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(height: 20.h),
-                    Center(
-                      child: CustomScrollBarWidget(
-                        controller: _controller,
-                        trackWidth: 80,
-                        trackHeight: 2.h,
-                      ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Center(
+                    child: CustomScrollBarWidget(
+                      controller: _controller,
+                      trackWidth: 80,
+                      trackHeight: 2.h,
                     ),
-                    SizedBox(height: 50.h),
-                    const SocialIconWidget(),
-                    SizedBox(height: 100.h),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 50.h),
+                  const SocialIconWidget(),
+                  SizedBox(height: 50.h),
+                ],
               ),
             ),
           ],
