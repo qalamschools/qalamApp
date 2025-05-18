@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
+import 'package:qalam_app/feature/widgets/app_version_widget.dart';
 import 'package:qalam_app/feature/widgets/curriculam_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
@@ -36,7 +40,7 @@ class Home extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 240),
+              padding: const EdgeInsets.only(top: 400),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,41 +48,27 @@ class Home extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          AppImage.verticalLine,
-                        ),
-                        SizedBox(height: 30.h),
-                        Text("Welcome to",
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 16.sp,
-                              color: Colors.black,
-                            )),
-                        SizedBox(height: 30.h),
                         Text(
-                          "AL \nQALAM",
+                          "Qalam Academy".toUpperCase(),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.playfairDisplay(
-                            fontSize: 84.sp,
+                            fontSize: 38.sp,
                             height: 1,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             color: const Color(0xFF185B31),
                           ),
                         ),
                         SizedBox(height: 30.h),
-                        SizedBox(
-                          width: 250.w,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 55.w),
                           child: Text(
                               "Develop effective Structured Literacy practices and build organizational capacity that improves student outcomes.",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.nunitoSans(
                                 fontSize: 16.sp,
-                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w400,
                                 color: Colors.black,
                               )),
-                        ),
-                        SizedBox(height: 30.h),
-                        SvgPicture.asset(
-                          AppImage.arrowDown,
                         ),
                       ],
                     ),
@@ -89,13 +79,6 @@ class Home extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("About Us",
-                            style: GoogleFonts.inter(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff333333),
-                            )),
-                        SizedBox(height: 10.h),
                         SizedBox(
                           child: Text("Transform Teaching \n& Learning Systems",
                               style: GoogleFonts.playfairDisplay(
@@ -208,7 +191,10 @@ class Home extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                           SizedBox(height: 15.h),
-                          Text("Start Your child’s Journey at".toUpperCase(),
+                          Text(
+                              "Start Your child’s Journey Now"
+                                  .toUpperCase()
+                                  .toUpperCase(),
                               textDirection: TextDirection.ltr,
                               textAlign: TextAlign.justify,
                               style: GoogleFonts.nunitoSans(
@@ -216,14 +202,13 @@ class Home extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color: const Color(0xFFA91936))),
                           SizedBox(height: 15.h),
-                          Text("£350/Month",
+                          Text("Qalam Academy",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.playfairDisplay(
-                                fontSize: 40.sp,
-                                height: 1,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xFF185B31),
-                              )),
+                                  fontSize: 32.sp,
+                                  height: 1,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF185B31))),
                           SizedBox(height: 30.h),
                           CustomButtonWidget(
                             onTap: () {
@@ -232,9 +217,17 @@ class Home extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         BlocProvider<ContactUsCubit>(
-                                      create: (context) => ContactUsCubit(),
+                                      create: (context) => ContactUsCubit(
+                                          RemoteConfigRepository(
+                                              RemoteConfigService(
+                                                  FirebaseRemoteConfig
+                                                      .instance))),
                                       child: ContactUsScreen(
-                                          contactUsCubit: ContactUsCubit()),
+                                          contactUsCubit: ContactUsCubit(
+                                              RemoteConfigRepository(
+                                                  RemoteConfigService(
+                                                      FirebaseRemoteConfig
+                                                          .instance)))),
                                     ),
                                   ));
                             },
@@ -243,95 +236,6 @@ class Home extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 15.h),
-                        Text("Our Partners",
-                            style: GoogleFonts.playfairDisplay(
-                                fontSize: 36.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFf226B3D))),
-                        SizedBox(height: 15.h),
-                        Text(
-                            "We collaborate with industry leaders who share our values and vision. Together, we create innovative solutions and drive meaningful impact. Meet the trusted partners powering our journey forward.",
-                            textDirection: TextDirection.ltr,
-                            textAlign: TextAlign.justify,
-                            style: GoogleFonts.nunitoSans(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF333333))),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 40.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 16 / 9,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.sAQ,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.hsQuality,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.playlearn,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.scisIcon,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                   SizedBox(height: 30.h),
@@ -343,6 +247,8 @@ class Home extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   const SocialIconWidget(),
+                  SizedBox(height: 30.h),
+                  const AppInfoWidget(),
                   SizedBox(height: 100.h),
                 ],
               ),

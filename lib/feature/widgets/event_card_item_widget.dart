@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
+import 'package:qalam_app/feature/widgets/calender_details_widget.dart';
 
 class CustomEventItemCard extends StatelessWidget {
   const CustomEventItemCard({super.key, required this.event});
@@ -40,7 +41,10 @@ class CustomEventItemCard extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 12.h),
+          CalenderDetailsWidget(
+            onTap: () {},
+          )
         ],
       ),
     );

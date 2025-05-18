@@ -21,9 +21,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       children: [
         _buildNavItem(0, "assets/icons/home.svg", 'Home'),
         SizedBox(width: 10.w),
-        _buildNavItem(1, "assets/icons/calendar.svg", 'News & Media'),
+        _buildNavItem(1, "assets/icons/calendar.svg", 'News & Events'),
         SizedBox(width: 10.w),
-        _buildNavItem(2, "assets/icons/phone.svg", 'Call Us'),
+        _buildNavItem(2, "assets/icons/admission_icon.svg", 'Admissions'),
         SizedBox(width: 10.w),
         _buildNavItem(3, "assets/icons/quick_pay.svg", 'Quick Pay'),
         SizedBox(width: 10.w),
@@ -46,7 +46,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   widget.onTap != null ? () => widget.onTap!(index) : null,
               icon: SvgPicture.asset(
                 iconPath,
-                width: 30.w,
+                width: 25.w,
                 colorFilter: isSelected
                     ? const ColorFilter.mode(
                         Color(0xFF1B5E20),

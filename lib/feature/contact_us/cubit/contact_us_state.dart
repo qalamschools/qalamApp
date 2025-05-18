@@ -7,21 +7,16 @@ sealed class ContactUsState extends Equatable {
 
   factory ContactUsState.initial() => const ContactUsDataState(
       isExpanded: false,
-      reasons: [
-        'Admissions - Al-Qalam Primary School',
-        'Admissions - Al-Qalam Secondary School',
-        'Flexible Learning NAT5/Highers',
-        'After-School Club',
-        'Al-Qalam Summer Camp 2025 (wk1&2 £175)',
-        'Al-Qalam Summer Camp 2025 (wk1)',
-        'Al-Qalam Summer Camp 2025 (wk2)',
-      ],
+      reasons: [],
       selectedReason: [],
       isChecked: false,
       hasError: false);
 
   factory ContactUsState.error(String message) =>
       ContactUsErrorState._(message);
+
+      factory ContactUsState.success(String message) =>
+      ContactUsSuccessState._(message);
 
   @override
   List<Object?> get props => [];
@@ -64,6 +59,15 @@ class ContactUsErrorState extends ContactUsState {
   final String message;
 
   const ContactUsErrorState._(this.message) : super._();
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class ContactUsSuccessState extends ContactUsState {
+  final String message;
+
+  const ContactUsSuccessState._(this.message) : super._();
 
   @override
   List<Object?> get props => [message];

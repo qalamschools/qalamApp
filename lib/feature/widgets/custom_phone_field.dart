@@ -5,9 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomPhoneField extends StatefulWidget {
   const CustomPhoneField(
-      {super.key, this.inputFormatters, this.isRequired = false});
+      {super.key,
+      this.inputFormatters,
+      this.isRequired = false,
+      required this.controller});
   final List<TextInputFormatter>? inputFormatters;
   final bool isRequired;
+  final TextEditingController controller;
   @override
   _CustomPhoneFieldState createState() => _CustomPhoneFieldState();
 }
@@ -52,6 +56,7 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       keyboardType: TextInputType.phone,
       style: GoogleFonts.nunitoSans(
         color: const Color(0xFF6E727A),

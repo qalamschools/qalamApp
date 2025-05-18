@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
@@ -19,6 +18,12 @@ class ContactUsScreen extends StatefulWidget {
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
+  void initState() {
+    context.read<ContactUsCubit>().fetchReasonForContactingDropdown();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<ContactUsCubit, ContactUsState>(
       bloc: widget.contactUsCubit,
@@ -34,6 +39,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             backgroundColor: const Color(0xFFA91936),
             duration: const Duration(seconds: 2),
           ));
+        }
+        if (state is ContactUsSuccessState) {
+          showSuccessDialog(message: state.message);
         }
       },
       child: Scaffold(
@@ -67,10 +75,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
-                              "assets/icons/vertical_line.svg",
-                            ),
-                            SizedBox(height: 15.h),
+                            SizedBox(height: 45.h),
                             Text("Contact Us",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.playfairDisplay(
@@ -88,16 +93,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                     height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
-                            SizedBox(height: 15.h),
-                            SvgPicture.asset(
-                              "assets/icons/Arrow_down.svg",
-                            ),
-                            SizedBox(height: 30.h),
+                            SizedBox(height: 45.h),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextFormWidget(
-                                  controller: TextEditingController(),
+                                  controller: widget.contactUsCubit.fullname,
                                   isRequired: true,
                                   hintText: "Enter full name here",
                                   labelText: "Full Name",
@@ -113,6 +114,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 ),
                                 SizedBox(height: 20.h),
                                 CustomPhoneField(
+                                  controller:
+                                      widget.contactUsCubit.mobileNumber,
                                   isRequired: true,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(10)
@@ -198,7 +201,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                   },
                                 ),
                                 CustomTextFormWidget(
-                                  controller: TextEditingController(),
+                                  controller: widget.contactUsCubit.comments,
                                   hintText: "Add Comments Here..",
                                   maxLines: 6,
                                 ),
@@ -286,6 +289,58 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void showSuccessDialog({required String message}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Image.asset(
+                      "assets/images/logo.png",
+                      fit: BoxFit.contain,
+                      height: 35,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 16.sp, fontWeight: FontWeight.w500),
+                    )
+                  ],
+                ),
+                Positioned(
+                  right: 0,
+                  child: IconButton(
+                      onPressed: () {
+                        widget.contactUsCubit.clearFields();
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close)),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,8 @@ import 'package:qalam_app/feature/about_us/presentation/about_us_screen.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 
 import 'package:qalam_app/feature/dashboard/home/home.dart';
@@ -47,17 +50,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
           statusBarIconBrightness: Brightness.dark,
           statusBarBrightness: Brightness.light,
         ),
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          bottomSheet: _buildBottomSheet(),
-          body: Stack(
-            children: [
-              const Home(),
-              if (_isQuickPayBottomSheetOpen || _isMoreBottomSheetOpen)
-                _buildBackdropOverlay(),
-            ],
+        child: PopScope(
+          canPop: false,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            bottomSheet: _buildBottomSheet(),
+            body: Stack(
+              children: [
+                const Home(),
+                if (_isQuickPayBottomSheetOpen || _isMoreBottomSheetOpen)
+                  _buildBackdropOverlay(),
+              ],
+            ),
+            bottomNavigationBar: _buildBottomNavigationBar(),
           ),
-          bottomNavigationBar: _buildBottomNavigationBar(),
         ));
   }
 
@@ -123,7 +129,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
         );
         break;
       case 2:
-        CommonUtils.openDialer(number: "+91722126941");
+        currentIndex = 0;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AdmissionAndFeeScreen(
+                    admissionAndFeeBlocCubit: AdmissionAndFeeBlocCubit(),
+                  )),
+        );
         break;
       case 3:
         _toggleBottomSheet();
@@ -171,7 +184,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               color: const Color(0xff185B1C).withOpacity(0.5)),
                           gradient: const LinearGradient(
                               colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                      //height: 71.h,
                       child: Row(
                         children: [
                           Container(
@@ -185,7 +197,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             child: Center(
                               child: SvgPicture.asset(
-                                  "assets/icons/coin-pound.svg"),
+                                "assets/icons/about_us_icon.svg",
+                                width: 18.h,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -249,7 +264,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: const Color(0xff185B1C).withOpacity(0.5)),
                         gradient: const LinearGradient(
                             colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                    //height: 71,
                     child: Row(
                       children: [
                         Container(
@@ -262,8 +276,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Center(
-                            child:
-                                SvgPicture.asset("assets/icons/bank_note.svg"),
+                            child: SvgPicture.asset(
+                              "assets/icons/bank_note.svg",
+                              width: 18.h,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         SizedBox(width: 10.w),
@@ -306,9 +323,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => BlocProvider<ContactUsCubit>(
-                            create: (context) => ContactUsCubit(),
+                            create: (context) => ContactUsCubit(
+                                RemoteConfigRepository(RemoteConfigService(
+                                    FirebaseRemoteConfig.instance))),
                             child: ContactUsScreen(
-                              contactUsCubit: ContactUsCubit(),
+                              contactUsCubit: ContactUsCubit(
+                                  RemoteConfigRepository(RemoteConfigService(
+                                      FirebaseRemoteConfig.instance))),
                             ),
                           ),
                         ));
@@ -322,7 +343,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             color: const Color(0xff185B1C).withOpacity(0.5)),
                         gradient: const LinearGradient(
                             colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                    //height: 71,
                     child: Row(
                       children: [
                         Container(
@@ -336,7 +356,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           child: Center(
                             child: SvgPicture.asset(
-                                "assets/icons/phone_incoming.svg"),
+                                width: 18.h,
+                                color: Colors.white,
+                                "assets/icons/contact_us_icon.svg"),
                           ),
                         ),
                         SizedBox(width: 10.w),
@@ -357,6 +379,72 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               Text(
                                 "Reach out to us for any inquiries",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    CommonUtils.openDialer(number: "+91722126941");
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/icons/phone.svg",
+                              width: 18.h,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Call Us",
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                              Text(
+                                "Call us for any inquiries",
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w400,

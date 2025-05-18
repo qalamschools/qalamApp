@@ -1,13 +1,19 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
+import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.dart';
+import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
+import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
-import 'package:qalam_app/feature/widgets/custom_phone_field.dart';
-import 'package:qalam_app/feature/widgets/custom_textformfield_widget.dart';
+import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
 class AdmissionAndFeeScreen extends StatefulWidget {
   const AdmissionAndFeeScreen(
@@ -19,6 +25,41 @@ class AdmissionAndFeeScreen extends StatefulWidget {
 }
 
 class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
+  final List<AdmissionItem> items = [
+    AdmissionItem(
+      title: 'Admission Overview',
+      content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+''',
+    ),
+    AdmissionItem(title: 'Open Mornings', content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+'''),
+    AdmissionItem(title: 'Primary School Assessment', content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+'''),
+    AdmissionItem(title: 'Secondary School Assessment', content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+'''),
+    AdmissionItem(title: 'Fees & Bursaries', content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+'''),
+    AdmissionItem(title: 'School Transport', content: '''
+Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+
+Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+'''),
+  ];
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,7 +108,7 @@ class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
                     width: double.infinity,
                   ),
                   Padding(
-                      padding: const EdgeInsets.only(top: 280),
+                      padding: EdgeInsets.only(top: 170.h),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -77,174 +118,124 @@ class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(
-                                      "assets/icons/vertical_line.svg",
-                                    ),
-                                    SizedBox(height: 15.h),
-                                    Text("only £350/Month",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.playfairDisplay(
-                                          fontSize: 40.sp,
-                                          height: 1,
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF185B31),
-                                        )),
-                                    SizedBox(height: 25.h),
                                     Text(
-                                        "Start Your child’s Journey at"
+                                        "Take the first step toward joining"
                                             .toUpperCase(),
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.nunitoSans(
-                                            fontSize: 16.sp,
+                                          fontSize: 16.sp,
+                                          height: 1,
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFFA91936),
+                                        )),
+                                    SizedBox(height: 18.h),
+                                    Text("Qalam Academy",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.playfairDisplay(
+                                            fontSize: 40.sp,
                                             height: 1,
+                                            fontWeight: FontWeight.w600,
+                                            color: const Color(0xFF185B31))),
+                                    SizedBox(height: 30.h),
+                                    Text(
+                                        "Explore our comprehensive admissions and fees information. Whether you're enrolling in Nursery, Primary, or Secondary school, our team is here to guide you through the process.",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.nunitoSans(
+                                            fontSize: 16.sp,
+                                            letterSpacing: 1,
+                                            height: 1.3,
                                             fontWeight: FontWeight.w400,
-                                            color: const Color(0xFFA91936))),
-                                    SizedBox(height: 15.h),
-                                    SvgPicture.asset(
-                                      "assets/icons/Arrow_down.svg",
+                                            color: const Color(0xFF333333))),
+                                    SizedBox(height: 50.h),
+                                    ListView(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      children: items
+                                          .map((item) =>
+                                              ExpandableTile(item: item))
+                                          .toList(),
                                     ),
                                     SizedBox(height: 40.h),
-                                    BlocBuilder<AdmissionAndFeeBlocCubit,
-                                        AdmissionAndFeeState>(
-                                      bloc: widget.admissionAndFeeBlocCubit,
-                                      builder: (context, state) {
-                                        return Column(
-                                          children: [
-                                            CustomTextFormWidget(
-                                              controller: widget
-                                                  .admissionAndFeeBlocCubit
-                                                  .fullname,
-                                              isRequired: true,
-                                              hintText: "Enter full name here",
-                                              labelText: "Full Name",
-                                              prefixPath:
-                                                  "assets/icons/person.svg",
-                                            ),
-                                            SizedBox(height: 16.h),
-                                            CustomTextFormWidget(
-                                              controller: widget
-                                                  .admissionAndFeeBlocCubit
-                                                  .email,
-                                              isRequired: true,
-                                              hintText: "Enter email here",
-                                              labelText: "Email",
-                                              prefixPath:
-                                                  "assets/icons/main.svg",
-                                            ),
-                                            SizedBox(height: 20.h),
-                                            CustomPhoneField(
-                                              isRequired: true,
-                                              inputFormatters: [
-                                                LengthLimitingTextInputFormatter(
-                                                    10)
-                                              ],
-                                            ),
-                                            SizedBox(height: 16.h),
-                                            CustomTextFormWidget(
-                                              controller: widget
-                                                  .admissionAndFeeBlocCubit
-                                                  .comments,
-                                              hintText: "Add Comments Here..",
-                                              maxLines: 6,
-                                            ),
-                                            SizedBox(height: 15.h),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 24,
-                                                  width: 24,
-                                                  child: BlocBuilder<
-                                                      AdmissionAndFeeBlocCubit,
-                                                      AdmissionAndFeeState>(
-                                                    bloc: widget
-                                                        .admissionAndFeeBlocCubit,
-                                                    builder: (context, state) {
-                                                      return Checkbox(
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          widget
-                                                              .admissionAndFeeBlocCubit
-                                                              .toggleCheckbox(
-                                                                  value ??
-                                                                      false);
-                                                        },
-                                                        value: state
-                                                                is AdmissionAndFeeCheckboxState
-                                                            ? state.isChecked
-                                                            : false,
-                                                        side:
-                                                            WidgetStateBorderSide
-                                                                .resolveWith(
-                                                                    (states) {
-                                                          if (states.contains(
-                                                              WidgetState
-                                                                  .selected)) {
-                                                            return const BorderSide(
-                                                                color: Color(
-                                                                    0xff1960FF));
-                                                          } else {
-                                                            return const BorderSide(
-                                                                color: Color(
-                                                                    0xff1960FF));
-                                                          }
-                                                        }),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          side:
-                                                              const BorderSide(
-                                                                  color: Colors
-                                                                      .black),
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                            Radius.circular(
-                                                                4.r),
-                                                          ),
-                                                        ),
-                                                        fillColor:
-                                                            WidgetStateProperty
-                                                                .all(Colors
-                                                                    .white),
-                                                        checkColor: const Color(
-                                                            0xff1960FF),
-                                                        activeColor:
-                                                            const Color(
-                                                                0xff1960FF),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                SizedBox(width: 10.w),
-                                                Expanded(
-                                                  child: Text(
-                                                      "I agree to receiving marketing and promotional materials",
-                                                      style: GoogleFonts
-                                                          .nunitoSans(
-                                                        fontSize: 16.sp,
-                                                        height: 1.2.w,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: const Color(
-                                                            0xFF000000),
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 30.h),
-                                            CustomButtonWidget(
-                                              width: 100.sw,
-                                              text: "Submit",
-                                              onTap: () {
-                                                widget.admissionAndFeeBlocCubit
-                                                    .submitButton();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFFFF4F4),
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                      ),
+                                      height: 280.h,
+                                      width: double.infinity,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            AppImage.appIcon,
+                                            fit: BoxFit.contain,
+                                          ),
+                                          SizedBox(height: 15.h),
+                                          Text(
+                                              "Start Your child’s Journey Now"
+                                                  .toUpperCase()
+                                                  .toUpperCase(),
+                                              textDirection: TextDirection.ltr,
+                                              textAlign: TextAlign.justify,
+                                              style: GoogleFonts.nunitoSans(
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      const Color(0xFFA91936))),
+                                          SizedBox(height: 15.h),
+                                          Text("Qalam Academy",
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  GoogleFonts.playfairDisplay(
+                                                      fontSize: 32.sp,
+                                                      height: 1,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: const Color(
+                                                          0xFF185B31))),
+                                          SizedBox(height: 30.h),
+                                          CustomButtonWidget(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider<
+                                                            ContactUsCubit>(
+                                                      create: (context) => ContactUsCubit(
+                                                          RemoteConfigRepository(
+                                                              RemoteConfigService(
+                                                                  FirebaseRemoteConfig
+                                                                      .instance))),
+                                                      child: ContactUsScreen(
+                                                          contactUsCubit: ContactUsCubit(
+                                                              RemoteConfigRepository(
+                                                                  RemoteConfigService(
+                                                                      FirebaseRemoteConfig
+                                                                          .instance)))),
+                                                    ),
+                                                  ));
+                                            },
+                                            width: 160.w,
+                                            text: "Contact Us",
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                    SizedBox(height: 10.h),
+                                    SizedBox(height: 30.h),
+                                    Center(
+                                      child: SvgPicture.asset(
+                                        AppImage.horizontalIcon,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(height: 30.h),
+                                    const SocialIconWidget(),
                                     SizedBox(height: 30.h),
                                   ]),
                             )),
@@ -254,5 +245,67 @@ class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
             ),
           ),
         ));
+  }
+}
+
+class ExpandableTile extends StatefulWidget {
+  final AdmissionItem item;
+
+  const ExpandableTile({super.key, required this.item});
+
+  @override
+  State<ExpandableTile> createState() => _ExpandableTileState();
+}
+
+class _ExpandableTileState extends State<ExpandableTile> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      child: Container(
+        decoration: BoxDecoration(
+          color: _isExpanded ? Colors.grey.shade200 : Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: ExpansionTile(
+          backgroundColor: Colors.grey.shade100,
+          minTileHeight: 20,
+          tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          childrenPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          initiallyExpanded: _isExpanded,
+          onExpansionChanged: (expanded) =>
+              setState(() => _isExpanded = expanded),
+          title: Text(
+            widget.item.title,
+            style: GoogleFonts.nunitoSans(
+              color: const Color(0xFF226B3D),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          dense: true,
+          trailing: Icon(
+            _isExpanded ? Icons.remove : Icons.add,
+            color: const Color(0xFF2F6831),
+          ),
+          shape: const RoundedRectangleBorder(),
+          collapsedBackgroundColor: Colors.grey.shade100,
+          children: widget.item.content != null
+              ? [
+                  Text(
+                    widget.item.content!,
+                    style: GoogleFonts.nunitoSans(
+                        fontSize: 12.sp, fontWeight: FontWeight.w400),
+                  ),
+                ]
+              : [],
+        ),
+      ),
+    );
   }
 }

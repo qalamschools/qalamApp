@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/utils/shared_preference.dart';
 import 'package:qalam_app/feature/dashboard/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 
@@ -15,11 +18,48 @@ class OnBoardingIntoScreen extends StatefulWidget {
 class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-
+  Timer? _autoScrollTimer;
   void _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
     });
+  }
+
+  void _startAutoScroll() {
+    _autoScrollTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (_currentPage < 2) {
+        _currentPage++;
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      } else {
+        _autoScrollTimer?.cancel();
+        _navigateToDashboardPage();
+      }
+    });
+  }
+
+  Future<void> _navigateToDashboardPage() async {
+    await SharedPrefsHelper().setOnboardingSeen(true);
+    if (!mounted) return; // Safety check
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const DashboardScreen()),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _autoScrollTimer?.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,8 +81,7 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 300.h,
-                      // color: Colors.amberAccent,
+                      height: 200.h,
                       child: PageView(
                         controller: _pageController,
                         onPageChanged: _onPageChanged,
@@ -51,22 +90,16 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
                             context,
                             imagePath: "assets/icons/onboarding1.svg",
                             title: "Transform the Way Students Learn",
-                            description:
-                                "Empower teachers with tools, training, and time. Boost literacy with our unique learning system",
                           ),
                           _buildPage(
                             context,
                             imagePath: "assets/icons/onboarding2.svg",
                             title: "Engaging and Effective Learning",
-                            description:
-                                "Interactive content designed to captivate young minds and enhance understanding.",
                           ),
                           _buildPage(
                             context,
                             imagePath: "assets/icons/onboarding3.svg",
                             title: "Track Progress Easily",
-                            description:
-                                "Monitor student improvement through intelligent dashboards and reports.",
                           ),
                         ],
                       ),
@@ -82,12 +115,7 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: CustomButtonWidget(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DashboardScreen(),
-                      ),
-                    );
+                    _navigateToDashboardPage();
                   },
                   text: "Explore Now",
                   showIcon: false,
@@ -120,7 +148,6 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
     BuildContext context, {
     required String imagePath,
     required String title,
-    required String description,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -142,15 +169,6 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
                         fontWeight: FontWeight.w700,
                         color: const Color(0xFf226B3D))),
                 SizedBox(height: 15.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: Text(description,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF333333))),
-                ),
               ],
             ),
           ),

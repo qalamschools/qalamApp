@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/widgets/about_us_curriculam_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_scroll_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
@@ -302,7 +303,7 @@ class AboutUsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: SizedBox(
-                      height: 358.h,
+                      height: 300.h,
                       child: ListView.builder(
                         shrinkWrap: true,
                         controller: _controller,
@@ -313,50 +314,47 @@ class AboutUsScreen extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: index == 0 ? 0 : 6),
                             child: Center(
-                              child: Card(
-                                elevation: 0,
-                                child: Container(
-                                  height: 358.h,
-                                  width: 361.w,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xffFFF4F4),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(16.r))),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 20),
-                                        child: SvgPicture.asset(
-                                            "assets/icons/quote_icon.svg"),
+                              child: Container(
+                                width: 361.w,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xffFFF4F4),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(16.r))),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24, vertical: 20),
+                                      child: SvgPicture.asset(
+                                          "assets/icons/quote_icon.svg"),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 24,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 20),
-                                        child: Text(
-                                            "I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.”",
-                                            style: GoogleFonts.nunitoSans(
-                                              fontSize: 16.sp,
+                                      child: Text(
+                                          "I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.”",
+                                          style: GoogleFonts.nunitoSans(
+                                            fontSize: 16.sp,
+                                            height: 1,
+                                            fontWeight: FontWeight.w400,
+                                            color: const Color(0xFF333333),
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 24, vertical: 20),
+                                      child: Text("~Former P7 Pupil​",
+                                          style: GoogleFonts.playfairDisplay(
+                                              fontSize: 20.sp,
                                               height: 1,
                                               fontWeight: FontWeight.w500,
-                                              color: const Color(0xFF333333),
-                                            )),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 20),
-                                        child: Text("~Former P7 Pupil​",
-                                            style: GoogleFonts.playfairDisplay(
-                                                fontSize: 20.sp,
-                                                height: 1,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    const Color(0xFF000000))),
-                                      ),
-                                    ],
-                                  ),
+                                              color: const Color(0xFF000000))),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -373,7 +371,104 @@ class AboutUsScreen extends StatelessWidget {
                       trackHeight: 2.h,
                     ),
                   ),
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 15.h),
+                        Text("Our Partners",
+                            style: GoogleFonts.playfairDisplay(
+                                fontSize: 36.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFf226B3D))),
+                        SizedBox(height: 15.h),
+                        Text(
+                            "We collaborate with industry leaders who share our values and vision. Together, we create innovative solutions and drive meaningful impact. Meet the trusted partners powering our journey forward.",
+                            textDirection: TextDirection.ltr,
+                            textAlign: TextAlign.justify,
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF333333))),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: GridView.count(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 16 / 9,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.sAQ,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.hsQuality,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.playlearn,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.scisIcon,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
+                  Center(
+                    child: SvgPicture.asset(
+                      AppImage.horizontalIcon,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
                   const SocialIconWidget(),
                   SizedBox(height: 50.h),
                 ],

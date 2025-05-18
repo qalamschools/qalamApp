@@ -3,9 +3,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qalam_app/feature/dashboard/home/home.dart';
+import 'package:qalam_app/core/utils/shared_preference.dart';
+import 'package:qalam_app/feature/dashboard/dashboard_screen.dart';
 import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
-import 'package:qalam_app/feature/splash/presentation/splash_screen.dart';
 import 'package:qalam_app/firebase_options.dart';
 
 @pragma('vm:entry-point')
@@ -15,15 +15,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefsHelper().init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // makes status bar transparent
-      statusBarIconBrightness:
-          Brightness.light, // use Brightness.light for white icons
-      statusBarBrightness: Brightness.dark, // for iOS
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
     ),
   );
   runApp(const MyApp());
@@ -62,13 +62,11 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // Subscribe to the topic 'general'
   Future<void> _subscribeToTopic() async {
     await FirebaseMessaging.instance.subscribeToTopic('general');
     print('Subscribed to topic: general');
   }
 
-  // Request notification permissions for iOS
   Future<void> _requestNotificationPermissions() async {
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
@@ -79,9 +77,12 @@ class _MyAppState extends State<MyApp> {
     print('🔐 Permission: ${settings.authorizationStatus}');
   }
 
+  Future<bool> _shouldShowOnboarding() async {
+    return !SharedPrefsHelper().getOnboardingSeen();
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.sizeOf(context).width);
     return ScreenUtilInit(
         designSize: const Size(393, 690),
         minTextAdapt: true,
@@ -89,9 +90,21 @@ class _MyAppState extends State<MyApp> {
         useInheritedMediaQuery: true,
         ensureScreenSize: true,
         builder: (_, child) {
-          return const MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: OnBoardingIntoScreen(),
+            home: FutureBuilder<bool>(
+              future: _shouldShowOnboarding(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Scaffold(
+                    body: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                return snapshot.data!
+                    ? const OnBoardingIntoScreen()
+                    : const DashboardScreen();
+              },
+            ),
           );
         });
   }
