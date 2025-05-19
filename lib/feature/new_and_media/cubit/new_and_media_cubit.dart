@@ -11,12 +11,8 @@ class NewAndMediaCubit extends Cubit<NewAndMediaState> {
   void loadVideo(String videoUrl) {
     final videoId = YoutubePlayer.convertUrlToId(videoUrl);
     if (videoId == null) return;
-
-    // Dispose previous controller
     state.controller?.pause();
     state.controller?.dispose();
-
-    // Create new controller
     final controller = YoutubePlayerController(
       initialVideoId: videoId,
       flags: const YoutubePlayerFlags(autoPlay: true, mute: false),

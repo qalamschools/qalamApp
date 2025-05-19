@@ -27,17 +27,19 @@ final class NewAndMediaInitial extends NewAndMediaState {
             model: model ??
                 [
                   NewAndMediaModel(
-                      title: "Lady Gaga, Bruno Mars - Die With A Smile",
-                      videoUrl: "https://youtu.be/tt9db--Dydo?t=4"),
+                      title:
+                          "Top 3 text editors for coding and programming - Coding Academy",
+                      videoUrl: "https://youtu.be/Twot1tWcmEw?t=115"),
                   NewAndMediaModel(
-                      title: "JAY SEAN - RIDE IT",
-                      videoUrl: "https://youtu.be/TBsKCT4rsPw"),
+                      title: "Learn JSON in 10 Minutes",
+                      videoUrl: "https://www.youtube.com/watch?v=iiADhChRriM"),
                   NewAndMediaModel(
-                      title: "Justin Timberlake - TKO",
-                      videoUrl: "https://youtu.be/FyXtoTLLcDk?t=1"),
+                      title: "Learn SQL In 60 Minutes",
+                      videoUrl: "https://www.youtube.com/watch?v=p3qvj9hO_Bo"),
                   NewAndMediaModel(
-                      title: "Anuv Jain - HUSN",
-                      videoUrl: "https://youtu.be/gJLVTKhTnog?t=1")
+                      title:
+                          "Do THIS instead of watching endless tutorials - how I’d learn SQL FAST still in 2025",
+                      videoUrl: "https://www.youtube.com/watch?v=ITwW825L4zg")
                 ]);
 
   @override
