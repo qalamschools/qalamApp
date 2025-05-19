@@ -12,7 +12,7 @@ class RemoteConfigService {
     ));
     await _remoteConfig.fetchAndActivate();
   }
-
+  
   String getString(String key) => _remoteConfig.getString(key);
   bool getBool(String key) => _remoteConfig.getBool(key);
   int getInt(String key) => _remoteConfig.getInt(key);

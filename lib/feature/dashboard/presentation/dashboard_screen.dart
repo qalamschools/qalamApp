@@ -1,20 +1,17 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/about_us/presentation/about_us_screen.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
-import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
-import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
+import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
 
-import 'package:qalam_app/feature/dashboard/home/home.dart';
+import 'package:qalam_app/feature/dashboard/presentation/home/home.dart';
 import 'package:qalam_app/feature/new_and_media/presentation/new_and_media_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_bottom_navigation_bar.dart';
 
@@ -30,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool _isQuickPayBottomSheetOpen = false;
   bool _isMoreBottomSheetOpen = false;
 
-  void _toggleBottomSheet() {
+  void _toggleQuickPayBottomSheet() {
     setState(() {
       _isQuickPayBottomSheetOpen = !_isQuickPayBottomSheetOpen;
     });
@@ -139,7 +136,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         );
         break;
       case 3:
-        _toggleBottomSheet();
+        _toggleQuickPayBottomSheet();
         break;
       case 4:
         _toggleMoreBottomSheet();
@@ -323,13 +320,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => BlocProvider<ContactUsCubit>(
-                            create: (context) => ContactUsCubit(
-                                RemoteConfigRepository(RemoteConfigService(
-                                    FirebaseRemoteConfig.instance))),
+                            create: (context) => ContactUsCubit(),
                             child: ContactUsScreen(
-                              contactUsCubit: ContactUsCubit(
-                                  RemoteConfigRepository(RemoteConfigService(
-                                      FirebaseRemoteConfig.instance))),
+                              contactUsCubit: ContactUsCubit(),
                             ),
                           ),
                         ));
@@ -397,7 +390,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    CommonUtils.openDialer(number: "+91722126941");
+                    context.read<DashboardCubit>().callUs();
                   },
                   child: Container(
                     padding:
@@ -485,121 +478,132 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                          color: const Color(0xff185B1C).withOpacity(0.5)),
-                      gradient: const LinearGradient(
-                          colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-
-                  /// height: 71,
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.r, vertical: 8.h),
-                        height: 52,
-                        width: 52,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff185B1C),
-                          border: Border.all(
-                              color: const Color(0xffE3F8EB), width: 1),
-                          borderRadius: BorderRadius.circular(12.r),
+                GestureDetector(
+                  onTap: () {
+                    context.read<DashboardCubit>().applicationFeeStripeLink();
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.r, vertical: 8.h),
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child:
+                                SvgPicture.asset("assets/icons/coin-pound.svg"),
+                          ),
                         ),
-                        child: Center(
-                          child:
-                              SvgPicture.asset("assets/icons/coin-pound.svg"),
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Pay £90 Application Fees",
-                              style: GoogleFonts.nunitoSans(
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff000000),
-                                  fontSize: 16.sp),
-                            ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Text(
-                              "For New Admissions",
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.nunitoSans(
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xff666666),
-                                  fontSize: 14.sp),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Pay £90 Application Fees",
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                              Text(
+                                "For New Admissions",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(
-                          color: const Color(0xff185B1C).withOpacity(0.5)),
-                      gradient: const LinearGradient(
-                          colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
-                  //height: 71,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 52,
-                        width: 52,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff185B1C),
-                          border: Border.all(
-                              color: const Color(0xffE3F8EB), width: 1),
-                          borderRadius: BorderRadius.circular(12.r),
+                GestureDetector(
+                  onTap: () {
+                    context
+                        .read<DashboardCubit>()
+                        .otherApplicationFeeStripeLink();
+                  },
+                  child: Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.r, vertical: 6.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                            color: const Color(0xff185B1C).withOpacity(0.5)),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xffE3F8EB), Color(0xffFFFFFF)])),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 52,
+                          width: 52,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff185B1C),
+                            border: Border.all(
+                                color: const Color(0xffE3F8EB), width: 1),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset("assets/icons/bank1.svg"),
+                          ),
                         ),
-                        child: Center(
-                          child: SvgPicture.asset("assets/icons/bank1.svg"),
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Other Payments",
-                              style: GoogleFonts.nunitoSans(
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff000000),
-                                  fontSize: 16.sp),
-                            ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Text(
-                              "Uniforms, trips, stationery and Ancillary",
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.nunitoSans(
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color(0xff666666),
-                                  fontSize: 14.sp),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Other Payments",
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff000000),
+                                    fontSize: 16.sp),
+                              ),
+                              SizedBox(
+                                height: 4.h,
+                              ),
+                              Text(
+                                "Uniforms, trips, stationery and Ancillary",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff666666),
+                                    fontSize: 14.sp),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

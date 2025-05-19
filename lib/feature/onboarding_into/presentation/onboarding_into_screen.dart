@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/utils/shared_preference.dart';
-import 'package:qalam_app/feature/dashboard/dashboard_screen.dart';
+import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 
 class OnBoardingIntoScreen extends StatefulWidget {

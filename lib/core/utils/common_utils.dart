@@ -2,9 +2,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 class CommonUtils {
   static Future<void> urlLauncher({required String url}) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      throw 'Could not launch $url';
+    final Uri uri;
+
+    if (url.startsWith("http") ||
+        url.startsWith("mailto:") ||
+        url.startsWith("tel:")) {
+      uri = Uri.parse(url);
+    } else if (RegExp(r'^\d{10,15}$').hasMatch(url)) {
+      // Likely a phone number for WhatsApp
+      uri = Uri.parse("https://wa.me/+44$url");
+    } else {
+      uri = Uri.parse("https://$url");
+    }
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $uri';
     }
   }
 

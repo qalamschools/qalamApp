@@ -1,4 +1,4 @@
-import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
+import 'package:qalam_app/core/commons/data/service/remote_config_service.dart';
 
 class RemoteConfigRepository {
   final RemoteConfigService _service;
@@ -9,8 +9,9 @@ class RemoteConfigRepository {
     await _service.initialize();
   }
 
-  String resonForContacting() =>
-      _service.getString('reason_for_contacting_dropdown');
+  String getString(String key) => _service.getString(key);
 
   String getJson(String key) => _service.getString(key);
+
+  int getInt(String key) => _service.getInt(key);
 }

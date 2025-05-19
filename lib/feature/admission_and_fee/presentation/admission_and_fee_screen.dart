@@ -1,4 +1,3 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,8 +8,6 @@ import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
-import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
-import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
@@ -207,17 +204,11 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                                     builder: (context) =>
                                                         BlocProvider<
                                                             ContactUsCubit>(
-                                                      create: (context) => ContactUsCubit(
-                                                          RemoteConfigRepository(
-                                                              RemoteConfigService(
-                                                                  FirebaseRemoteConfig
-                                                                      .instance))),
+                                                      create: (context) =>
+                                                          ContactUsCubit(),
                                                       child: ContactUsScreen(
-                                                          contactUsCubit: ContactUsCubit(
-                                                              RemoteConfigRepository(
-                                                                  RemoteConfigService(
-                                                                      FirebaseRemoteConfig
-                                                                          .instance)))),
+                                                          contactUsCubit:
+                                                              ContactUsCubit()),
                                                     ),
                                                   ));
                                             },

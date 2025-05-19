@@ -4,16 +4,17 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:qalam_app/core/constants/remote_config_constants.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
-import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
 
 part 'contact_us_state.dart';
 
 class ContactUsCubit extends Cubit<ContactUsState> {
-  final RemoteConfigRepository _remoteConfigRepository;
+  final _remoteConfigRepository = GetIt.I<RemoteConfigRepository>();
 
-  ContactUsCubit(this._remoteConfigRepository)
-      : super(ContactUsState.initial());
+  ContactUsCubit() : super(ContactUsState.initial());
 
   final TextEditingController email = TextEditingController();
   final TextEditingController fullname = TextEditingController();
@@ -27,9 +28,8 @@ class ContactUsCubit extends Cubit<ContactUsState> {
 
   Future<void> fetchReasonForContactingDropdown() async {
     try {
-      await _remoteConfigRepository.initializeRemoteConfig();
-      final jsonString =
-          _remoteConfigRepository.getJson('reason_for_contacting_dropdown');
+      final jsonString = _remoteConfigRepository
+          .getJson(RemoteConfigConstants.reasonForContactingDropDown);
       final decoded = json.decode(jsonString);
 
       final List<String> dropdownItems =
@@ -52,7 +52,6 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     email.clear();
     mobileNumber.clear();
     comments.clear();
-    
   }
 
   void updateSelectedReasons(List<String> updatedReasons) {

@@ -1,10 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
+import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/core/commons/data/service/remote_config_service.dart';
 import 'package:qalam_app/core/utils/shared_preference.dart';
-import 'package:qalam_app/feature/dashboard/dashboard_screen.dart';
+import 'package:qalam_app/feature/common/cubit/sociallinks_cubit.dart';
+import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
 import 'package:qalam_app/firebase_options.dart';
 
@@ -12,6 +19,8 @@ import 'package:qalam_app/firebase_options.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('🔙 [Background] Message: ${message.notification?.title}');
 }
+
+final getIt = GetIt.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +35,13 @@ void main() async {
       statusBarBrightness: Brightness.dark,
     ),
   );
-  runApp(const MyApp());
+  final service = RemoteConfigService(FirebaseRemoteConfig.instance);
+  final repo = RemoteConfigRepository(service);
+  await repo.initializeRemoteConfig();
+  getIt.registerSingleton<RemoteConfigRepository>(repo);
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => SocialLinksCubit()..loadSocialLinks()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -102,7 +117,10 @@ class _MyAppState extends State<MyApp> {
                 }
                 return snapshot.data!
                     ? const OnBoardingIntoScreen()
-                    : const DashboardScreen();
+                    : BlocProvider(
+                        create: (context) => DashboardCubit(),
+                        child: const DashboardScreen(),
+                      );
               },
             ),
           );

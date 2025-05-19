@@ -1,4 +1,3 @@
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,8 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
-import 'package:qalam_app/feature/contact_us/data/repository/remote_config_repo.dart';
-import 'package:qalam_app/feature/contact_us/data/service/remote_config_service.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/widgets/app_version_widget.dart';
 import 'package:qalam_app/feature/widgets/curriculam_widget.dart';
@@ -217,17 +214,9 @@ class Home extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         BlocProvider<ContactUsCubit>(
-                                      create: (context) => ContactUsCubit(
-                                          RemoteConfigRepository(
-                                              RemoteConfigService(
-                                                  FirebaseRemoteConfig
-                                                      .instance))),
+                                      create: (context) => ContactUsCubit(),
                                       child: ContactUsScreen(
-                                          contactUsCubit: ContactUsCubit(
-                                              RemoteConfigRepository(
-                                                  RemoteConfigService(
-                                                      FirebaseRemoteConfig
-                                                          .instance)))),
+                                          contactUsCubit: ContactUsCubit()),
                                     ),
                                   ));
                             },
