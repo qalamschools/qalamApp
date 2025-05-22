@@ -89,6 +89,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
+      width: double.infinity,
       decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
