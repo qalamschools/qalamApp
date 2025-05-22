@@ -45,6 +45,7 @@ class CustomEventItemCard extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           CalenderDetailsWidget(
+            event: event,
             onTap: () {
               context.read<EventsCubit>().addToCalendar(event);
             },

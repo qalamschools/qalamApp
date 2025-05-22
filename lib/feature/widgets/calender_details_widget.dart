@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
 
 class CalenderDetailsWidget extends StatelessWidget {
-  const CalenderDetailsWidget({super.key, required this.onTap});
+  const CalenderDetailsWidget(
+      {super.key, required this.onTap, required this.event});
 
   final VoidCallback onTap;
-
+  final EventModel event;
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('dd MMM yyyy hh:mm a').format(event.date);
+    String dayOfWeek = DateFormat('EEEE').format(event.date);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,7 +31,7 @@ class CalenderDetailsWidget extends StatelessWidget {
               width: 10.w,
             ),
             Text(
-              "April 28 - May 12",
+              formattedDate,
               style: GoogleFonts.nunitoSans(
                 fontWeight: FontWeight.w600,
                 fontSize: 14.sp,
@@ -50,7 +55,7 @@ class CalenderDetailsWidget extends StatelessWidget {
               width: 10.w,
             ),
             Text(
-              "Mon - Thu",
+              dayOfWeek,
               style: GoogleFonts.nunitoSans(
                 fontWeight: FontWeight.w600,
                 fontSize: 14.sp,
