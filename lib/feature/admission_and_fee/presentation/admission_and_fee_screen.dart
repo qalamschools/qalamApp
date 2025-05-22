@@ -90,10 +90,10 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                 centerTitle: true,
                 backgroundColor: Colors.white,
                 surfaceTintColor: Colors.white,
-                title: Image.asset(
-                  "assets/images/logo.png",
-                  fit: BoxFit.contain,
-                  height: 35,
+                title: SvgPicture.asset(
+                  "assets/icons/logo.svg",
+                  fit: BoxFit.cover,
+                  width: 100.w,
                 ),
               ),
               backgroundColor: Colors.white,

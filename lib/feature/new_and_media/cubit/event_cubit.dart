@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
@@ -20,5 +21,14 @@ class EventsCubit extends Cubit<EventsState> {
     } catch (e) {
       emit(state.copyWith(loading: false, error: e.toString()));
     }
+  }
+
+  void addToCalendar(EventModel eventModel) {
+    final Event event = Event(
+      title: eventModel.title,
+      startDate: DateTime.now().add(const Duration(hours: 1)),
+      endDate: DateTime.now().add(const Duration(hours: 2)),
+    );
+    Add2Calendar.addEvent2Cal(event);
   }
 }

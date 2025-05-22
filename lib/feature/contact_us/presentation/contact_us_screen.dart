@@ -1,7 +1,9 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
@@ -41,7 +43,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           ));
         }
         if (state is ContactUsSuccessState) {
-          showSuccessDialog(message: state.message);
+          showSuccessAwesomeDialog();
         }
       },
       child: Scaffold(
@@ -49,10 +51,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
-          title: Image.asset(
-            "assets/images/logo.png",
-            fit: BoxFit.contain,
-            height: 35,
+          title: SvgPicture.asset(
+            "assets/icons/logo.svg",
+            fit: BoxFit.cover,
+            width: 100.w,
           ),
         ),
         backgroundColor: Colors.white,
@@ -292,55 +294,29 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     );
   }
 
-  void showSuccessDialog({required String message}) {
-    showDialog(
+  void showSuccessAwesomeDialog() {
+    AwesomeDialog(
       context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.white,
-          surfaceTintColor: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Image.asset(
-                      "assets/images/logo.png",
-                      fit: BoxFit.contain,
-                      height: 35,
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      message,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 16.sp, fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  child: IconButton(
-                      onPressed: () {
-                        widget.contactUsCubit.clearFields();
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close)),
-                )
-              ],
-            ),
-          ),
-        );
+      dialogType: DialogType.success,
+      descTextStyle:
+          GoogleFonts.nunitoSans(fontWeight: FontWeight.w500, fontSize: 14.sp),
+      titleTextStyle:
+          GoogleFonts.nunitoSans(fontSize: 16.sp, fontWeight: FontWeight.bold),
+      buttonsTextStyle: GoogleFonts.nunitoSans(
+          color: Colors.white, fontSize: 14.sp, fontWeight: FontWeight.w500),
+      buttonsBorderRadius: const BorderRadius.all(
+        Radius.circular(2),
+      ),
+      animType: AnimType.rightSlide,
+      title: 'Success',
+      desc: 'Thanks for reaching out. We’ll be in touch soon.',
+      showCloseIcon: true,
+      btnOkOnPress: () {},
+      autoDismiss: false,
+      onDismissCallback: (type) {
+        widget.contactUsCubit.clearFields();
+        Navigator.of(context).pop(type);
       },
-    );
+    ).show();
   }
 }

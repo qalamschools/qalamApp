@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,9 +28,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset(
-          "assets/images/logo.png",
+        child: SvgPicture.asset(
+          "assets/icons/logo.svg",
           fit: BoxFit.cover,
+          height: 100.h,
         ),
       ),
     );

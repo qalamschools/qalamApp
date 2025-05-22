@@ -62,7 +62,7 @@ class CalenderDetailsWidget extends StatelessWidget {
           height: 10.h,
         ),
         GestureDetector(
-          onTap: () => onTap,
+          onTap: onTap,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,

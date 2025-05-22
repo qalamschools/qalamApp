@@ -29,12 +29,12 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Align(
-                alignment: Alignment.topCenter,
-                child: Image.asset(
-                  AppImage.appLogo,
-                  fit: BoxFit.contain,
-                ),
-              ),
+                  alignment: Alignment.topCenter,
+                  child: SvgPicture.asset(
+                    "assets/icons/logo.svg",
+                    fit: BoxFit.cover,
+                    height: 70.h,
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 400),

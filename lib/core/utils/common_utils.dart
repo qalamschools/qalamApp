@@ -22,6 +22,19 @@ class CommonUtils {
     }
   }
 
+  static Future<void> openMailApp({String? email}) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not open mail app.';
+    }
+  }
+
   static Future<void> openDialer({required String number}) async {
     String phoneNumber = "tel:$number";
     final Uri uri = Uri.parse(phoneNumber);

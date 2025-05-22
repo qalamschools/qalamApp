@@ -19,10 +19,10 @@ class AboutUsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
-        title: Image.asset(
-          "assets/images/logo.png",
-          fit: BoxFit.contain,
-          height: 35,
+        title: SvgPicture.asset(
+          "assets/icons/logo.svg",
+          fit: BoxFit.cover,
+          width: 100.w,
         ),
       ),
       body: SingleChildScrollView(

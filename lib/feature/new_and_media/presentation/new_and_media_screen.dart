@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:qalam_app/feature/new_and_media/cubit/new_and_media_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/cubit/tab_selector_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/presentation/events/events_view.dart';
@@ -22,10 +24,10 @@ class NewAndMediaScreen extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
-          title: Image.asset(
-            "assets/images/logo.png",
-            fit: BoxFit.contain,
-            height: 35,
+          title: SvgPicture.asset(
+            "assets/icons/logo.svg",
+            fit: BoxFit.cover,
+            width: 100.w,
           ),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(70),

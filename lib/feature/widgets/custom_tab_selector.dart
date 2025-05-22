@@ -42,7 +42,7 @@ class _CustomTabSelectorState extends State<CustomTabSelector> {
       child: Row(
         children: [
           _buildTab(
-            title: 'New & Media',
+            title: 'News',
             selected: isNewsSelected,
             onTap: () => _onTabTap(true),
           ),

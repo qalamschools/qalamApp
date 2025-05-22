@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/common/cubit/sociallinks_cubit.dart';
@@ -25,11 +24,12 @@ class SocialIconWidget extends StatelessWidget {
         final links = state.links;
 
         final icons = [
-          _SocialItem(AppImage.facebookIcon, links['facebook']),
-          _SocialItem(AppImage.whatsAppIcon, links['whatsapp']),
-          _SocialItem(AppImage.twitterIcon, links['twitter']),
-          _SocialItem(AppImage.mailIcon, links['email']),
-          _SocialItem(AppImage.youtubeIcon, links['youtube']),
+          _SocialItem(iconPath: AppImage.facebookIcon, url: links['facebook']),
+          _SocialItem(iconPath: AppImage.whatsAppIcon, url: links['whatsapp']),
+          _SocialItem(iconPath: AppImage.twitterIcon, url: links['twitter']),
+          _SocialItem(
+              iconPath: AppImage.mailIcon, url: "email", email: links["email"]),
+          _SocialItem(iconPath: AppImage.youtubeIcon, url: links['youtube']),
         ];
 
         return Center(
@@ -52,8 +52,9 @@ class SocialIconWidget extends StatelessWidget {
 class _SocialItem {
   final String iconPath;
   final String? url;
+  final String? email;
 
-  const _SocialItem(this.iconPath, this.url);
+  const _SocialItem({required this.iconPath, this.url, this.email});
 }
 
 class _SocialIcon extends StatelessWidget {
@@ -65,6 +66,10 @@ class _SocialIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        if (item.url == "email") {
+          CommonUtils.openMailApp(email: item.email);
+          return;
+        }
         if (item.url != null) {
           CommonUtils.urlLauncher(url: item.url ?? "");
         }

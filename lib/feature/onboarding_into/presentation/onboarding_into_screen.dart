@@ -75,7 +75,11 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(height: 20.h),
-              Image.asset("assets/images/logo.png", fit: BoxFit.cover),
+              SvgPicture.asset(
+                "assets/icons/logo.svg",
+                fit: BoxFit.cover,
+                height: 80.h,
+              ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/feature/new_and_media/cubit/event_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
 import 'package:qalam_app/feature/widgets/calender_details_widget.dart';
 
@@ -43,7 +45,9 @@ class CustomEventItemCard extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           CalenderDetailsWidget(
-            onTap: () {},
+            onTap: () {
+              context.read<EventsCubit>().addToCalendar(event);
+            },
           )
         ],
       ),

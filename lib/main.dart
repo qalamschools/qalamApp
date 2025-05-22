@@ -40,6 +40,7 @@ void main() async {
   await repo.initializeRemoteConfig();
   getIt.registerSingleton<RemoteConfigRepository>(repo);
   runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => DashboardCubit()),
     BlocProvider(create: (_) => SocialLinksCubit()..loadSocialLinks()),
   ], child: const MyApp()));
 }

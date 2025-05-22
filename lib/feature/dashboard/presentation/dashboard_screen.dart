@@ -101,7 +101,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         surfaceTintColor: Colors.white,
         color: Colors.white,
         shadowColor: Colors.white,
-        shape: const CircularNotchedRectangle(),
         child: CustomBottomNavigationBar(
           currentIndex: currentIndex,
           onTap: _onNavItemTapped,

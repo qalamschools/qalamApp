@@ -23,7 +23,9 @@ class EventsView extends StatelessWidget {
             itemCount: state.events.length,
             itemBuilder: (context, index) {
               final event = state.events[index];
-              return CustomEventItemCard(event: event);
+              return CustomEventItemCard(
+                event: event,
+              );
             },
           );
         },
