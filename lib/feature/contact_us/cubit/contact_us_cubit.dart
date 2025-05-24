@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qalam_app/core/constants/remote_config_constants.dart';
@@ -13,6 +11,8 @@ part 'contact_us_state.dart';
 
 class ContactUsCubit extends Cubit<ContactUsState> {
   final _remoteConfigRepository = GetIt.I<RemoteConfigRepository>();
+  final _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> get formKey => _formKey;
 
   ContactUsCubit() : super(ContactUsState.initial());
 
@@ -22,8 +22,9 @@ class ContactUsCubit extends Cubit<ContactUsState> {
   final TextEditingController comments = TextEditingController();
 
   void toggleDropdown(bool expanded) {
-    final current = state as ContactUsDataState;
-    emit(current.copyWith(isExpanded: expanded));
+    if (state is ContactUsDataState) {
+      emit((state as ContactUsDataState).copyWith(isExpanded: expanded));
+    }
   }
 
   Future<void> fetchReasonForContactingDropdown() async {
@@ -31,19 +32,21 @@ class ContactUsCubit extends Cubit<ContactUsState> {
       final jsonString = _remoteConfigRepository
           .getJson(RemoteConfigConstants.reasonForContactingDropDown);
       final decoded = json.decode(jsonString);
-
       final List<String> dropdownItems =
           List<String>.from(decoded['dropdown'] ?? []);
 
       emit(ContactUsDataState(
-          reasons: dropdownItems,
-          selectedReason: const [],
-          isExpanded: false,
-          isChecked: false,
-          hasError: false));
+        isSubmitted: false,
+        isConsentChecked: false,
+        reasons: dropdownItems,
+        selectedReason: const [],
+        isExpanded: false,
+        isChecked: false,
+        hasError: false,
+      ));
     } catch (e) {
       emit(ContactUsState.error(
-          "Failed to load contact dropdown: ${e.toString()}"));
+          "Failed to load contact dropdown: \${e.toString()}"));
     }
   }
 
@@ -52,29 +55,43 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     email.clear();
     mobileNumber.clear();
     comments.clear();
+
+    if (state is ContactUsDataState) {
+      emit((state as ContactUsDataState).copyWith(
+        isExpanded: false,
+        selectedReason: const [],
+        isChecked: false,
+        hasError: false,
+        isConsentChecked: false,
+        isSubmitted: false,
+      ));
+    }
   }
 
   void updateSelectedReasons(List<String> updatedReasons) {
     if (state is ContactUsDataState) {
-      final currentState = state as ContactUsDataState;
-      emit(currentState.copyWith(selectedReason: updatedReasons));
+      emit((state as ContactUsDataState)
+          .copyWith(selectedReason: updatedReasons));
     }
   }
 
-  void isChecked({bool? isChecked}) {
+  void isConsentChecked({required bool isConsentChecked}) {
     if (state is ContactUsDataState) {
-      final currentState = state as ContactUsDataState;
-      emit(currentState.copyWith(isChecked: isChecked));
+      emit((state as ContactUsDataState)
+          .copyWith(isConsentChecked: isConsentChecked));
     }
   }
 
   void submitButton() {
-    (bool, String) isValid = CommonUtils.validateEmail(email.text);
-    if (isValid.$1) {
-      emit(ContactUsState.success(
-          "Congratulation!!, You have successfully submitted you info with us."));
-    } else {
-      emit(ContactUsState.error(isValid.$2));
+    final isValid = CommonUtils.validateEmail(email.text);
+    if (isValid && state is ContactUsDataState) {
+      emit((state as ContactUsDataState).copyWith(isSubmitted: true));
+    }
+  }
+
+  void resetSubmission() {
+    if (state is ContactUsDataState) {
+      emit((state as ContactUsDataState).copyWith(isSubmitted: false));
     }
   }
 }

@@ -43,7 +43,7 @@ class CommonUtils {
     }
   }
 
-  static (bool, String) validateEmail(String email) {
+  static validateEmail(String email) {
     if (email.isEmpty) {
       return (false, "email is empty");
     }
@@ -51,6 +51,6 @@ class CommonUtils {
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
     );
 
-    return (emailRegex.hasMatch(email), "");
+    return (emailRegex.hasMatch(email));
   }
 }

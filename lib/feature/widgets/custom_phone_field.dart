@@ -8,10 +8,11 @@ class CustomPhoneField extends StatefulWidget {
       {super.key,
       this.inputFormatters,
       this.isRequired = false,
-      required this.controller});
+      required this.controller,this.validator});
   final List<TextInputFormatter>? inputFormatters;
   final bool isRequired;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
   @override
   _CustomPhoneFieldState createState() => _CustomPhoneFieldState();
 }
@@ -19,43 +20,10 @@ class CustomPhoneField extends StatefulWidget {
 class _CustomPhoneFieldState extends State<CustomPhoneField> {
   final String selectedCode = '+44';
   final String flagAsset = 'assets/images/flag.png';
-
-  // void _showCountryPicker() {
-  //   // For demo purposes; you can show a bottom sheet or dialog here
-  //   showModalBottomSheet(
-  //     context: context,
-  //     builder: (context) => ListView(
-  //       children: [
-  //         ListTile(
-  //           leading: Image.asset('assets/flags/gb.png', width: 32),
-  //           title: const Text("United Kingdom"),
-  //           onTap: () {
-  //             setState(() {
-  //               selectedCode = '+44';
-  //               flagAsset = 'assets/flags/gb.png';
-  //             });
-  //             Navigator.pop(context);
-  //           },
-  //         ),
-  //         ListTile(
-  //           leading: Image.asset('assets/flags/us.png', width: 32),
-  //           title: const Text("United States"),
-  //           onTap: () {
-  //             setState(() {
-  //               selectedCode = '+1';
-  //               flagAsset = 'assets/flags/us.png';
-  //             });
-  //             Navigator.pop(context);
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validator,
       controller: widget.controller,
       keyboardType: TextInputType.phone,
       style: GoogleFonts.nunitoSans(

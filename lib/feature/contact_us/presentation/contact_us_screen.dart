@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_drop_down_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_phone_field.dart';
@@ -21,7 +23,7 @@ class ContactUsScreen extends StatefulWidget {
 class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
   void initState() {
-    context.read<ContactUsCubit>().fetchReasonForContactingDropdown();
+    widget.contactUsCubit.fetchReasonForContactingDropdown();
     super.initState();
   }
 
@@ -42,13 +44,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             duration: const Duration(seconds: 2),
           ));
         }
-        if (state is ContactUsSuccessState) {
+        if (state is ContactUsDataState && state.isSubmitted) {
           showSuccessAwesomeDialog();
         }
       },
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
+          widget.contactUsCubit.toggleDropdown(false);
           FocusScope.of(context).unfocus();
         },
         child: Scaffold(
@@ -101,195 +104,247 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                       fontWeight: FontWeight.w400,
                                       color: const Color(0xFF333333))),
                               SizedBox(height: 45.h),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomTextFormWidget(
-                                    controller: widget.contactUsCubit.fullname,
-                                    isRequired: true,
-                                    hintText: "Enter full name here",
-                                    labelText: "Full Name",
-                                    prefixPath: "assets/icons/person.svg",
-                                  ),
-                                  SizedBox(height: 16.h),
-                                  CustomTextFormWidget(
-                                    controller: widget.contactUsCubit.email,
-                                    isRequired: true,
-                                    hintText: "Enter email here",
-                                    labelText: "Email",
-                                    prefixPath: "assets/icons/main.svg",
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  CustomPhoneField(
-                                    controller:
-                                        widget.contactUsCubit.mobileNumber,
-                                    isRequired: true,
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(10)
-                                    ],
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  BlocBuilder<ContactUsCubit, ContactUsState>(
-                                    builder: (context, state) {
-                                      if (state is! ContactUsDataState) {
-                                        return const SizedBox();
-                                      }
+                              Form(
+                                key: widget.contactUsCubit.formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomTextFormWidget(
+                                      controller:
+                                          widget.contactUsCubit.fullname,
+                                      isRequired: true,
+                                      hintText: "Enter full name here",
+                                      labelText: "Full Name",
+                                      prefixPath: "assets/icons/person.svg",
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return "Full Name is required";
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    SizedBox(height: 16.h),
+                                    CustomTextFormWidget(
+                                      controller: widget.contactUsCubit.email,
+                                      isRequired: true,
+                                      hintText: "Enter email here",
+                                      labelText: "Email",
+                                      prefixPath: "assets/icons/main.svg",
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return "Email is required";
+                                        }
+                                        if (!CommonUtils.validateEmail(
+                                            value.trim())) {
+                                          return "Enter a valid email";
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    SizedBox(height: 20.h),
+                                    CustomPhoneField(
+                                      controller:
+                                          widget.contactUsCubit.mobileNumber,
+                                      isRequired: true,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(10)
+                                      ],
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return "Mobile number is required";
+                                        }
+                                        if (value.length != 10) {
+                                          return "Enter a valid 10-digit number";
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    SizedBox(height: 15.h),
+                                    BlocBuilder<ContactUsCubit, ContactUsState>(
+                                      bloc: widget.contactUsCubit,
+                                      builder: (context, state) {
+                                        if (state is! ContactUsDataState) {
+                                          return const SizedBox();
+                                        }
 
-                                      final cubit =
-                                          context.read<ContactUsCubit>();
+                                        // final cubit =
+                                        //     context.read<ContactUsCubit>();
 
-                                      return CustomMultiSelectDropDown<String>(
-                                        onTap: cubit.toggleDropdown,
-                                        isExpanded: state.isExpanded,
-                                        hintTextStyle: GoogleFonts.nunitoSans(
-                                          color: const Color(0xFF7D7D7D),
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        items: state.reasons,
-                                        itemAsString: (String item) => item,
-                                        onSelectionChanged: (p0) {
-                                          cubit.updateSelectedReasons(p0);
-                                        },
-                                        selectedTextStyle:
-                                            GoogleFonts.nunitoSans(
-                                          color: const Color(0xff000000),
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        textStyle: GoogleFonts.nunitoSans(
-                                          color: const Color(0xff000000),
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        initialSelection: state.selectedReason,
-                                        textFormFieldDecoration:
-                                            InputDecoration(
-                                          suffixIcon: Icon(
-                                            state.isExpanded
-                                                ? Icons.arrow_drop_up
-                                                : Icons.arrow_drop_down,
-                                            color: const Color(0xff6E727A),
-                                          ),
-                                          label: Text(
-                                            'Reason for Contacting',
-                                            style: GoogleFonts.nunitoSans(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: const Color(0xff6E727A),
-                                            ),
-                                          ),
-                                          hintText: "Select reason",
-                                          hintStyle: GoogleFonts.nunitoSans(
-                                            color: const Color(0xff7D7D7D),
+                                        return CustomMultiSelectDropDown<
+                                            String>(
+                                          onTap: widget
+                                              .contactUsCubit.toggleDropdown,
+                                          isExpanded: state.isExpanded,
+                                          hintTextStyle: GoogleFonts.nunitoSans(
+                                            color: const Color(0xFF7D7D7D),
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.always,
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            borderSide: const BorderSide(
-                                                color: Color(0xFFC4C4C4)),
+                                          items: state.reasons,
+                                          itemAsString: (String item) => item,
+                                          onSelectionChanged: (p0) {
+                                            widget.contactUsCubit
+                                                .updateSelectedReasons(p0);
+                                          },
+                                          selectedTextStyle:
+                                              GoogleFonts.nunitoSans(
+                                            color: const Color(0xff000000),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
                                           ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            borderSide: const BorderSide(
-                                                color: Color(0xFFC4C4C4)),
+                                          textStyle: GoogleFonts.nunitoSans(
+                                            color: const Color(0xff000000),
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w400,
                                           ),
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                            borderSide: const BorderSide(
-                                                color: Color(0xFFC4C4C4)),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  CustomTextFormWidget(
-                                    controller: widget.contactUsCubit.comments,
-                                    hintText: "Add Comments Here..",
-                                    maxLines: 6,
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      BlocBuilder<ContactUsCubit,
-                                          ContactUsState>(
-                                        builder: (context, state) {
-                                          if (state is! ContactUsDataState) {
-                                            return const SizedBox();
-                                          }
-                                          return SizedBox(
-                                            height: 24,
-                                            width: 24,
-                                            child: Checkbox(
-                                              onChanged: (bool? value) {
-                                                context
-                                                    .read<ContactUsCubit>()
-                                                    .isChecked(
-                                                        isChecked:
-                                                            value ?? false);
-                                              },
-                                              value: state.isChecked,
-                                              side: WidgetStateBorderSide
-                                                  .resolveWith((states) {
-                                                if (states.contains(
-                                                    WidgetState.selected)) {
-                                                  return const BorderSide(
-                                                      color: Color(0xff1960FF));
-                                                } else {
-                                                  return const BorderSide(
-                                                      color: Color(0xff1960FF));
-                                                }
-                                              }),
-                                              shape: RoundedRectangleBorder(
-                                                side: const BorderSide(
-                                                    color: Colors.black),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(4.r),
-                                                ),
-                                              ),
-                                              fillColor:
-                                                  WidgetStateProperty.all(
-                                                      Colors.white),
-                                              checkColor:
-                                                  const Color(0xff1960FF),
-                                              activeColor:
-                                                  const Color(0xff1960FF),
+                                          initialSelection:
+                                              state.selectedReason,
+                                          textFormFieldDecoration:
+                                              InputDecoration(
+                                            suffixIcon: Icon(
+                                              state.isExpanded
+                                                  ? Icons.arrow_drop_up
+                                                  : Icons.arrow_drop_down,
+                                              color: const Color(0xff6E727A),
                                             ),
-                                          );
-                                        },
-                                      ),
-                                      SizedBox(width: 10.w),
-                                      Expanded(
-                                        child: Text(
-                                            "I agree to receiving marketing and promotional materials",
-                                            style: GoogleFonts.nunitoSans(
-                                              fontSize: 16.sp,
-                                              height: 1.2.w,
+                                            label: Text(
+                                              'Reason for Contacting',
+                                              style: GoogleFonts.nunitoSans(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: const Color(0xff6E727A),
+                                              ),
+                                            ),
+                                            hintText: "Select reason",
+                                            hintStyle: GoogleFonts.nunitoSans(
+                                              color: const Color(0xff7D7D7D),
+                                              fontSize: 14.sp,
                                               fontWeight: FontWeight.w400,
-                                              color: const Color(0xFF000000),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 30.h),
-                                  CustomButtonWidget(
-                                    width: 100.sw,
-                                    text: "Submit",
-                                    onTap: () {
-                                      widget.contactUsCubit.submitButton();
-                                    },
-                                  ),
-                                  SizedBox(height: 10.h),
-                                  SizedBox(height: 30.h),
-                                ],
+                                            ),
+                                            floatingLabelBehavior:
+                                                FloatingLabelBehavior.always,
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              borderSide: const BorderSide(
+                                                  color: Color(0xFFC4C4C4)),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              borderSide: const BorderSide(
+                                                  color: Color(0xFFC4C4C4)),
+                                            ),
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.r),
+                                              borderSide: const BorderSide(
+                                                  color: Color(0xFFC4C4C4)),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    CustomTextFormWidget(
+                                      controller:
+                                          widget.contactUsCubit.comments,
+                                      hintText: "Add Comments Here..",
+                                      maxLines: 6,
+                                    ),
+                                    SizedBox(height: 15.h),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        BlocBuilder<ContactUsCubit,
+                                            ContactUsState>(
+                                          bloc: widget.contactUsCubit,
+                                          buildWhen: (previous, current) =>
+                                              previous != current,
+                                          builder: (context, state) {
+                                            if (state is! ContactUsDataState) {
+                                              return const SizedBox();
+                                            }
+                                            return SizedBox(
+                                              height: 24,
+                                              width: 24,
+                                              child: Checkbox(
+                                                onChanged: (bool? value) {
+                                                  widget.contactUsCubit
+                                                      .isConsentChecked(
+                                                          isConsentChecked:
+                                                              value ?? false);
+                                                },
+                                                value: state.isConsentChecked,
+                                                side: WidgetStateBorderSide
+                                                    .resolveWith((states) {
+                                                  if (states.contains(
+                                                      WidgetState.selected)) {
+                                                    return const BorderSide(
+                                                        color:
+                                                            Color(0xff1960FF));
+                                                  } else {
+                                                    return const BorderSide(
+                                                        color:
+                                                            Color(0xff1960FF));
+                                                  }
+                                                }),
+                                                shape: RoundedRectangleBorder(
+                                                  side: const BorderSide(
+                                                      color: Colors.black),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(4.r),
+                                                  ),
+                                                ),
+                                                fillColor:
+                                                    WidgetStateProperty.all(
+                                                        Colors.white),
+                                                checkColor:
+                                                    const Color(0xff1960FF),
+                                                activeColor:
+                                                    const Color(0xff1960FF),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        SizedBox(width: 10.w),
+                                        Expanded(
+                                          child: Text(
+                                              "I agree to receiving marketing and promotional materials",
+                                              style: GoogleFonts.nunitoSans(
+                                                fontSize: 16.sp,
+                                                height: 1.2.w,
+                                                fontWeight: FontWeight.w400,
+                                                color: const Color(0xFF000000),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 30.h),
+                                    CustomButtonWidget(
+                                      width: 100.sw,
+                                      text: "Submit",
+                                      onTap: () {
+                                        final isValid = widget.contactUsCubit
+                                                .formKey.currentState
+                                                ?.validate() ??
+                                            false;
+                                        final isChecked = (widget.contactUsCubit
+                                                .state as ContactUsDataState)
+                                            .isConsentChecked;
+                                        if (isValid && isChecked) {
+                                          widget.contactUsCubit.submitButton();
+                                        }
+                                      },
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    SizedBox(height: 30.h),
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -328,6 +383,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       onDismissCallback: (type) {
         widget.contactUsCubit.clearFields();
         Navigator.of(context).pop(type);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DashboardScreen(),
+            ));
       },
     ).show();
   }

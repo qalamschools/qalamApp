@@ -11,7 +11,7 @@ class CustomTextFormWidget extends StatelessWidget {
       this.prefixPath,
       this.maxLines = 1,
       required this.controller,
-      this.isRequired = false});
+      this.isRequired = false,this.validator});
   final String? hintText;
   final String? labelText;
   final String? prefixPath;
@@ -19,10 +19,12 @@ class CustomTextFormWidget extends StatelessWidget {
   final int maxLength = 156;
   final TextEditingController controller;
   final bool isRequired;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       maxLines: maxLines,
       maxLength: maxLines > 1 ? maxLength : null,
       style: GoogleFonts.nunitoSans(
