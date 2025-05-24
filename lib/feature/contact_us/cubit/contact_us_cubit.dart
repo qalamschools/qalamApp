@@ -3,18 +3,21 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/core/constants/remote_config_constants.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
+import 'package:qalam_app/feature/contact_us/models/contact_us_form_model.dart';
 
 part 'contact_us_state.dart';
 
 class ContactUsCubit extends Cubit<ContactUsState> {
   final _remoteConfigRepository = GetIt.I<RemoteConfigRepository>();
+  final EmailRepository _repository;
   final _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
-  ContactUsCubit() : super(ContactUsState.initial());
+  ContactUsCubit(this._repository) : super(ContactUsState.initial());
 
   final TextEditingController email = TextEditingController();
   final TextEditingController fullname = TextEditingController();
@@ -36,6 +39,7 @@ class ContactUsCubit extends Cubit<ContactUsState> {
           List<String>.from(decoded['dropdown'] ?? []);
 
       emit(ContactUsDataState(
+        isLoading: false,
         isSubmitted: false,
         isConsentChecked: false,
         reasons: dropdownItems,
@@ -82,10 +86,33 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     }
   }
 
-  void submitButton() {
+  void submitButton() async {
     final isValid = CommonUtils.validateEmail(email.text);
+    final contactState = state as ContactUsDataState;
+    emit(contactState.copyWith(isLoading: true));
     if (isValid && state is ContactUsDataState) {
-      emit((state as ContactUsDataState).copyWith(isSubmitted: true));
+      final form = ContactUsFormModel(
+        fullName: fullname.text,
+        email: email.text,
+        mobile: mobileNumber.text,
+        reasons: contactState.selectedReason,
+        comments: comments.text,
+      );
+
+      try {
+        final result = await _repository.sendEmail(form,
+            subject: "Contact Us Form Submission");
+        if (result) {
+          emit(contactState.copyWith(isSubmitted: true, isLoading: false));
+          return;
+        } else {
+          emit(contactState.copyWith(isSubmitted: false, isLoading: false));
+          return;
+        }
+      } catch (e) {
+        emit(contactState.copyWith(isSubmitted: false, isLoading: false));
+        print("Form submission failed: $e");
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
@@ -214,9 +215,11 @@ class Home extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) =>
                                         BlocProvider<ContactUsCubit>(
-                                      create: (context) => ContactUsCubit(),
+                                      create: (context) =>
+                                          ContactUsCubit(EmailRepositoryImpl()),
                                       child: ContactUsScreen(
-                                          contactUsCubit: ContactUsCubit()),
+                                          contactUsCubit: ContactUsCubit(
+                                              EmailRepositoryImpl())),
                                     ),
                                   ));
                             },

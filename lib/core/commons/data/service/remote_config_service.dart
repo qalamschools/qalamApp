@@ -8,11 +8,11 @@ class RemoteConfigService {
   Future<void> initialize() async {
     await _remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(seconds: 10),
-      minimumFetchInterval: const Duration(minutes: 1),
+      minimumFetchInterval: const Duration(seconds: 30),
     ));
     await _remoteConfig.fetchAndActivate();
   }
-  
+
   String getString(String key) => _remoteConfig.getString(key);
   bool getBool(String key) => _remoteConfig.getBool(key);
   int getInt(String key) => _remoteConfig.getInt(key);

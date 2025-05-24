@@ -12,6 +12,7 @@ sealed class ContactUsState extends Equatable {
         isConsentChecked: false,
         hasError: false,
         isSubmitted: false,
+        isLoading: false
       );
 
   factory ContactUsState.error(String message) =>
@@ -33,6 +34,7 @@ class ContactUsDataState extends ContactUsState {
     required this.hasError,
     required this.isConsentChecked,
     required this.isSubmitted,
+    required this.isLoading,
   });
 
   final bool isExpanded;
@@ -42,6 +44,7 @@ class ContactUsDataState extends ContactUsState {
   final bool hasError;
   final bool isConsentChecked;
   final bool isSubmitted;
+  final bool isLoading;
 
   ContactUsDataState copyWith({
     bool? isExpanded,
@@ -51,8 +54,10 @@ class ContactUsDataState extends ContactUsState {
     bool? hasError,
     bool? isConsentChecked,
     bool? isSubmitted,
+    bool? isLoading,
   }) {
     return ContactUsDataState(
+      isLoading: isLoading ?? this.isLoading,
       isExpanded: isExpanded ?? this.isExpanded,
       reasons: reasons ?? this.reasons,
       selectedReason: selectedReason ?? this.selectedReason,
@@ -72,6 +77,7 @@ class ContactUsDataState extends ContactUsState {
         hasError,
         isConsentChecked,
         isSubmitted,
+        isLoading,
       ];
 }
 

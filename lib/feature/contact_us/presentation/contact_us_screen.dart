@@ -325,20 +325,34 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                       ],
                                     ),
                                     SizedBox(height: 30.h),
-                                    CustomButtonWidget(
-                                      width: 100.sw,
-                                      text: "Submit",
-                                      onTap: () {
-                                        final isValid = widget.contactUsCubit
-                                                .formKey.currentState
-                                                ?.validate() ??
-                                            false;
-                                        final isChecked = (widget.contactUsCubit
-                                                .state as ContactUsDataState)
-                                            .isConsentChecked;
-                                        if (isValid && isChecked) {
-                                          widget.contactUsCubit.submitButton();
-                                        }
+                                    BlocBuilder<ContactUsCubit, ContactUsState>(
+                                      bloc: widget.contactUsCubit,
+                                      buildWhen: (previous, current) =>
+                                          previous != current,
+                                      builder: (context, state) {
+                                        return CustomButtonWidget(
+                                          width: 100.sw,
+                                          text: "Submit",
+                                          isLoading: (widget.contactUsCubit
+                                                  .state as ContactUsDataState)
+                                              .isLoading,
+                                          onTap: () {
+                                            final isValid = widget
+                                                    .contactUsCubit
+                                                    .formKey
+                                                    .currentState
+                                                    ?.validate() ??
+                                                false;
+                                            final isChecked =
+                                                (widget.contactUsCubit.state
+                                                        as ContactUsDataState)
+                                                    .isConsentChecked;
+                                            if (isValid && isChecked) {
+                                              widget.contactUsCubit
+                                                  .submitButton();
+                                            }
+                                          },
+                                        );
                                       },
                                     ),
                                     SizedBox(height: 10.h),

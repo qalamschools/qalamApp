@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.dart';
@@ -205,10 +206,12 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                                         BlocProvider<
                                                             ContactUsCubit>(
                                                       create: (context) =>
-                                                          ContactUsCubit(),
+                                                          ContactUsCubit(
+                                                              EmailRepositoryImpl()),
                                                       child: ContactUsScreen(
                                                           contactUsCubit:
-                                                              ContactUsCubit()),
+                                                              ContactUsCubit(
+                                                                  EmailRepositoryImpl())),
                                                     ),
                                                   ));
                                             },

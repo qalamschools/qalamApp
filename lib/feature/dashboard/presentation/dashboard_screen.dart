@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/feature/about_us/presentation/about_us_screen.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
@@ -320,9 +321,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => BlocProvider<ContactUsCubit>(
-                            create: (context) => ContactUsCubit(),
+                            create: (context) =>
+                                ContactUsCubit(EmailRepositoryImpl()),
                             child: ContactUsScreen(
-                              contactUsCubit: ContactUsCubit(),
+                              contactUsCubit:
+                                  ContactUsCubit(EmailRepositoryImpl()),
                             ),
                           ),
                         ));
