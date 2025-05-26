@@ -53,4 +53,5 @@ class CommonUtils {
 
     return (emailRegex.hasMatch(email));
   }
+  
 }

@@ -10,6 +10,7 @@ import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
 import 'package:qalam_app/core/commons/data/service/remote_config_service.dart';
 import 'package:qalam_app/core/utils/shared_preference.dart';
 import 'package:qalam_app/feature/common/cubit/sociallinks_cubit.dart';
+import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
 import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
@@ -120,7 +121,9 @@ class _MyAppState extends State<MyApp> {
                     ? const OnBoardingIntoScreen()
                     : BlocProvider(
                         create: (context) => DashboardCubit(),
-                        child: const DashboardScreen(),
+                        child: DashboardScreen(
+                          bottomNavbarCubit: BottomNavbarCubit(),
+                        ),
                       );
               },
             ),

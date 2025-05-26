@@ -5,13 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
+import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
 import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_drop_down_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_phone_field.dart';
 import 'package:qalam_app/feature/widgets/custom_textformfield_widget.dart';
+import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key, required this.contactUsCubit});
@@ -355,7 +358,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                         );
                                       },
                                     ),
-                                    SizedBox(height: 10.h),
+                                    SizedBox(height: 30.h),
+                                    Center(
+                                      child: SvgPicture.asset(
+                                        AppImage.horizontalIcon,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(height: 30.h),
+                                    const SocialIconWidget(),
                                     SizedBox(height: 30.h),
                                   ],
                                 ),
@@ -400,7 +411,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const DashboardScreen(),
+              builder: (context) => DashboardScreen(
+                bottomNavbarCubit: BottomNavbarCubit(),
+              ),
             ));
       },
     ).show();

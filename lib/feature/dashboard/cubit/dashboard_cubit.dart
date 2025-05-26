@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
 import 'package:qalam_app/core/constants/remote_config_constants.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
+import 'package:qalam_app/feature/web_view_screen/presentation/webview_screen.dart';
 
 part 'dashboard_state.dart';
 
@@ -11,16 +13,24 @@ class DashboardCubit extends Cubit<DashboardState> {
   final _remoteConfigRepository = GetIt.I<RemoteConfigRepository>();
   DashboardCubit() : super(DashboardInitial());
 
-  void otherApplicationFeeStripeLink() async {
+  void otherApplicationFeeStripeLink(BuildContext context) async {
     final otherApplicationStripeUrl = _remoteConfigRepository
         .getString(RemoteConfigConstants.otherPaymentsStripeUrl);
-    CommonUtils.urlLauncher(url: otherApplicationStripeUrl);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WebViewScreen(
+        url: otherApplicationStripeUrl,
+      );
+    }));
   }
 
-  void applicationFeeStripeLink() async {
+  void applicationFeeStripeLink(BuildContext context) async {
     final applicationStripeUrl = _remoteConfigRepository
         .getString(RemoteConfigConstants.newAdmissionStripeUrl);
-    CommonUtils.urlLauncher(url: applicationStripeUrl);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WebViewScreen(
+        url: applicationStripeUrl,
+      );
+    }));
   }
 
   void callUs() {

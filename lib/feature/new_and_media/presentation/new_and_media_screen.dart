@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/new_and_media/cubit/new_and_media_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/cubit/tab_selector_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/presentation/events/events_view.dart';
 import 'package:qalam_app/feature/new_and_media/presentation/new_and_media/news_and_media_view.dart';
 import 'package:qalam_app/feature/widgets/custom_tab_selector.dart';
+import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
 class NewAndMediaScreen extends StatelessWidget {
   const NewAndMediaScreen({super.key});
@@ -47,14 +49,29 @@ class NewAndMediaScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: BlocBuilder<TabSelectorCubit, TabSelectorState>(
-          builder: (context, state) {
-            if (state.selectedTab == TabType.news) {
-              return const NewsAndMediaView();
-            } else {
-              return const EventsView();
-            }
-          },
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<TabSelectorCubit, TabSelectorState>(
+                builder: (context, state) {
+                  if (state.selectedTab == TabType.news) {
+                    return const NewsAndMediaView();
+                  } else {
+                    return const EventsView();
+                  }
+                },
+              ),
+            ),
+            Center(
+              child: SvgPicture.asset(
+                AppImage.horizontalIcon,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 30.h),
+            const SocialIconWidget(),
+            SizedBox(height: 30.h),
+          ],
         ),
       ),
     );

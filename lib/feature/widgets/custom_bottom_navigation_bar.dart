@@ -22,28 +22,42 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildNavItem(0, "assets/icons/home.svg", 'Home', screenWidth),
-        _buildNavItem(
-            1, "assets/icons/calendar.svg", 'News & Events', screenWidth),
-        _buildNavItem(
-            2, "assets/icons/admission_icon.svg", 'Admissions', screenWidth),
-        _buildNavItem(
-            3, "assets/icons/quick_pay.svg", 'Quick Pay', screenWidth),
-        _buildNavItem(4, "assets/icons/more.svg", 'More', screenWidth),
-      ],
-    );
+    return Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Color(0xffE3E3E3),
+              width: 1,
+            ),
+          ),
+        ),
+        child: BottomAppBar(
+            surfaceTintColor: Colors.white,
+            color: Colors.white,
+            shadowColor: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildNavItem(0, "assets/icons/home.svg", 'Home', screenWidth),
+                _buildNavItem(1, "assets/icons/calendar.svg", 'News & Events',
+                    screenWidth),
+                _buildNavItem(2, "assets/icons/admission_icon.svg",
+                    'Admissions', screenWidth),
+                _buildNavItem(
+                    3, "assets/icons/quick_pay.svg", 'Quick Pay', screenWidth),
+                _buildNavItem(4, "assets/icons/more.svg", 'More', screenWidth),
+              ],
+            )));
   }
 
   Widget _buildNavItem(
       int index, String iconPath, String label, double screenWidth) {
     final isSelected = widget.currentIndex == index;
 
-    double iconSize = screenWidth * 0.06; 
-    double fontSize = screenWidth * 0.03; 
+    double iconSize = screenWidth * 0.06;
+    double fontSize = screenWidth * 0.03;
 
     return GestureDetector(
       onTap: widget.onTap != null ? () => widget.onTap!(index) : null,
