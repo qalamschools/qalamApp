@@ -241,7 +241,7 @@ class Home extends StatelessWidget {
                   const SocialIconWidget(),
                   SizedBox(height: 30.h),
                   const AppInfoWidget(),
-                  SizedBox(height: 100.h),
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),
