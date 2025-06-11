@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomNewAndMediaItemCard extends StatelessWidget {
-  final NewAndMediaModel? newAndMediaModel;
+  final NewsModel? newAndMediaModel;
 
   const CustomNewAndMediaItemCard({super.key, required this.newAndMediaModel});
 
@@ -23,8 +23,8 @@ class CustomNewAndMediaItemCard extends StatelessWidget {
           prev.model != curr.model,
       builder: (context, state) {
         final videoId =
-            YoutubePlayer.convertUrlToId(newAndMediaModel?.videoUrl ?? '');
-        final isPlaying = state.playingVideoUrl == newAndMediaModel?.videoUrl;
+            YoutubePlayer.convertUrlToId(newAndMediaModel?.url ?? '');
+        final isPlaying = state.playingVideoUrl == newAndMediaModel?.url;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +60,7 @@ class CustomNewAndMediaItemCard extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<NewAndMediaCubit>()
-                                .loadVideo(newAndMediaModel?.videoUrl ?? "");
+                                .loadVideo(newAndMediaModel?.url ?? "");
                           },
                           child: Stack(
                             alignment: Alignment.center,
@@ -85,7 +85,7 @@ class CustomNewAndMediaItemCard extends StatelessWidget {
             SizedBox(height: 12.h),
             GestureDetector(
               onTap: () async {
-                final Uri url = Uri.parse(newAndMediaModel?.videoUrl ?? "");
+                final Uri url = Uri.parse(newAndMediaModel?.url ?? "");
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url, mode: LaunchMode.externalApplication);
                 }

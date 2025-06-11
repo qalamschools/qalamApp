@@ -1,78 +1,75 @@
 part of 'new_and_media_cubit.dart';
 
-abstract class NewAndMediaState extends Equatable {
+class NewAndMediaState {
   const NewAndMediaState({
     this.model,
     this.controller,
     this.playingVideoUrl,
+    this.error,
+    this.isLoading = false,
   });
 
-  final List<NewAndMediaModel>? model;
+  final List<NewsModel>? model;
   final YoutubePlayerController? controller;
   final String? playingVideoUrl;
+  final bool? isLoading;
+  final String? error;
 
   NewAndMediaState copyWith({
-    List<NewAndMediaModel>? model,
+    List<NewsModel>? model,
     YoutubePlayerController? controller,
     String? playingVideoUrl,
-  });
-
-  @override
-  List<Object?> get props => [model, controller, playingVideoUrl];
-}
-
-final class NewAndMediaInitial extends NewAndMediaState {
-  NewAndMediaInitial({List<NewAndMediaModel>? model})
-      : super(
-            model: model ??
-                [
-                  NewAndMediaModel(
-                      title:
-                          "Top 3 text editors for coding and programming - Coding Academy",
-                      videoUrl: "https://youtu.be/Twot1tWcmEw?t=115"),
-                  NewAndMediaModel(
-                      title: "Learn JSON in 10 Minutes",
-                      videoUrl: "https://www.youtube.com/watch?v=iiADhChRriM"),
-                  NewAndMediaModel(
-                      title: "Learn SQL In 60 Minutes",
-                      videoUrl: "https://www.youtube.com/watch?v=p3qvj9hO_Bo"),
-                  NewAndMediaModel(
-                      title:
-                          "Do THIS instead of watching endless tutorials - how I’d learn SQL FAST still in 2025",
-                      videoUrl: "https://www.youtube.com/watch?v=ITwW825L4zg")
-                ]);
-
-  @override
-  NewAndMediaState copyWith({
-    List<NewAndMediaModel>? model,
-    YoutubePlayerController? controller,
-    String? playingVideoUrl,
+    bool? isLoading,
+    String? error,
   }) {
-    return NewAndMediaInitial(model: model ?? this.model);
-  }
-}
-
-final class NewAndMediaPlaying extends NewAndMediaState {
-  const NewAndMediaPlaying({
-    List<NewAndMediaModel>? model,
-    required YoutubePlayerController controller,
-    required String playingVideoUrl,
-  }) : super(
-          model: model,
-          controller: controller,
-          playingVideoUrl: playingVideoUrl,
-        );
-
-  @override
-  NewAndMediaState copyWith({
-    List<NewAndMediaModel>? model,
-    YoutubePlayerController? controller,
-    String? playingVideoUrl,
-  }) {
-    return NewAndMediaPlaying(
+    return NewAndMediaState(
       model: model ?? this.model,
-      controller: controller ?? this.controller!,
-      playingVideoUrl: playingVideoUrl ?? this.playingVideoUrl!,
+      controller: controller ?? this.controller,
+      playingVideoUrl: playingVideoUrl ?? this.playingVideoUrl,
+      isLoading: isLoading ?? this.isLoading,
+      error: error ?? this.error,
     );
   }
 }
+
+// final class NewAndMediaInitial extends NewAndMediaState {
+//   const NewAndMediaInitial({List<NewsModel>? model}) : super();
+//
+//   @override
+//   NewAndMediaState copyWith({
+//     List<NewsModel>? model,
+//     YoutubePlayerController? controller,
+//     String? playingVideoUrl,
+//     bool? isLoading,
+//     String? error,
+//   }) {
+//     return NewAndMediaInitial(model: model ?? this.model);
+//   }
+// }
+//
+// final class NewAndMediaPlaying extends NewAndMediaState {
+//   const NewAndMediaPlaying({
+//     List<NewsModel>? model,
+//     required YoutubePlayerController controller,
+//     required String playingVideoUrl,
+//   }) : super(
+//           model: model,
+//           controller: controller,
+//           playingVideoUrl: playingVideoUrl,
+//         );
+//
+//   @override
+//   NewAndMediaState copyWith({
+//     List<NewsModel>? model,
+//     YoutubePlayerController? controller,
+//     String? playingVideoUrl,
+//     bool? isLoading,
+//     String? error,
+//   }) {
+//     return NewAndMediaPlaying(
+//       model: model ?? this.model,
+//       controller: controller ?? this.controller!,
+//       playingVideoUrl: playingVideoUrl ?? this.playingVideoUrl!,
+//     );
+//   }
+// }
