@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qalam_app/core/constants/enums.dart';
 import 'package:qalam_app/feature/new_and_media/cubit/new_and_media_cubit.dart';
 import 'package:qalam_app/feature/new_and_media/models/new_and_media_model.dart';
 
@@ -40,72 +41,94 @@ class CustomNewAndMediaItemCard extends StatelessWidget {
             SizedBox(
               height: 221.h,
               width: double.infinity,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.r),
-                ),
-                color: Colors.white,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: isPlaying && state.controller != null
-                      ? YoutubePlayerBuilder(
-                          player: YoutubePlayer(
-                            controller: state.controller!,
-                            showVideoProgressIndicator: true,
-                            progressIndicatorColor: Colors.red,
-                          ),
-                          builder: (context, player) => player,
-                        )
-                      : GestureDetector(
-                          onTap: () {
-                            context
-                                .read<NewAndMediaCubit>()
-                                .loadVideo(newAndMediaModel?.url ?? "");
-                          },
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              if (videoId != null)
-                                Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: CachedNetworkImageProvider(
-                                          'https://img.youtube.com/vi/$videoId/0.jpg'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+              child: newAndMediaModel?.type == NewsAndEventsType.video.name
+                  ? Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      color: Colors.white,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: isPlaying && state.controller != null
+                            ? YoutubePlayerBuilder(
+                                player: YoutubePlayer(
+                                  controller: state.controller!,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.red,
                                 ),
-                              SvgPicture.asset("assets/icons/youtube_icon.svg"),
-                            ],
-                          ),
-                        ),
-                ),
-              ),
+                                builder: (context, player) => player,
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<NewAndMediaCubit>()
+                                      .loadVideo(newAndMediaModel?.url ?? "");
+                                },
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    if (videoId != null)
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                                'https://img.youtube.com/vi/$videoId/0.jpg'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    SvgPicture.asset(
+                                        "assets/icons/youtube_icon.svg"),
+                                  ],
+                                ),
+                              ),
+                      ),
+                    )
+                  : Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      color: Colors.white,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.r),
+                          child: CachedNetworkImage(
+                            imageUrl: newAndMediaModel?.url ?? "",
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) => const Center(
+                              child: Icon(Icons.error),
+                            ),
+                          )),
+                    ),
             ),
             SizedBox(height: 12.h),
-            GestureDetector(
-              onTap: () async {
-                final Uri url = Uri.parse(newAndMediaModel?.url ?? "");
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url, mode: LaunchMode.externalApplication);
-                }
-              },
-              child: Row(
-                children: [
-                  Text(
-                    "Watch on YouTube",
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFFA91936),
+            if (newAndMediaModel?.type == NewsAndEventsType.video.name) ...{
+              GestureDetector(
+                onTap: () async {
+                  final Uri url = Uri.parse(newAndMediaModel?.url ?? "");
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      "Watch on YouTube",
+                      style: GoogleFonts.inter(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFFA91936),
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 12.h),
-                  SvgPicture.asset("assets/icons/forward_icon.svg"),
-                ],
+                    SizedBox(width: 12.h),
+                    SvgPicture.asset("assets/icons/forward_icon.svg"),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20.h),
+              SizedBox(height: 20.h),
+            }
           ],
         );
       },

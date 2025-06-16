@@ -161,7 +161,7 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Admissions & Fees",
+                                "Our Services",
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),

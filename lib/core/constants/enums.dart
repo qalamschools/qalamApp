@@ -1,0 +1,4 @@
+enum NewsAndEventsType {
+  video,
+  image,
+}
