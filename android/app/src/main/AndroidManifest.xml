@@ -10,7 +10,7 @@
 
     
     <application
-        android:label="Qalam App"
+        android:label="Qalam School"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
