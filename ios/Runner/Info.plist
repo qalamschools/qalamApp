@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Qalamapp</string>
+	<string>Qalam School</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -49,5 +49,7 @@
 	<array>
 		<string>tel</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs calendar access to add events to your calendar.</string>
 </dict>
 </plist>
