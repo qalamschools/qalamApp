@@ -202,6 +202,11 @@ class AboutUsScreen extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 color: Colors.amberAccent,
                                 shape: BoxShape.circle),
+                            child: Center(
+                              child: Image.asset(
+                                "assets/images/shoeb_sarguroh.png",
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 10.h,
@@ -222,9 +227,13 @@ class AboutUsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,6 +245,11 @@ class AboutUsScreen extends StatelessWidget {
                                 decoration: const BoxDecoration(
                                     color: Colors.amberAccent,
                                     shape: BoxShape.circle),
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/images/kausar_khot.png",
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 10.h,
@@ -259,6 +273,8 @@ class AboutUsScreen extends StatelessWidget {
                             ],
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
                                 height: 80.h,
@@ -266,6 +282,11 @@ class AboutUsScreen extends StatelessWidget {
                                 decoration: const BoxDecoration(
                                     color: Colors.amberAccent,
                                     shape: BoxShape.circle),
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/images/may_geddes.png",
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 height: 10.h,
