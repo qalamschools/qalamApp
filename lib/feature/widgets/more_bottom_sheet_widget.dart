@@ -10,6 +10,7 @@ import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_f
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
+import 'package:qalam_app/feature/our_services/presentation/our_services_screen.dart';
 
 class MoreBottomSheetWidget extends StatefulWidget {
   const MoreBottomSheetWidget({super.key});
@@ -119,7 +120,7 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                           builder: (context) =>
                               BlocProvider<AdmissionAndFeeBlocCubit>(
                             create: (context) => AdmissionAndFeeBlocCubit(),
-                            child: AdmissionAndFeeScreen(
+                            child: OurServicesScreen(
                               admissionAndFeeBlocCubit:
                                   AdmissionAndFeeBlocCubit(),
                             ),
