@@ -24,39 +24,18 @@ class OurServicesScreen extends StatefulWidget {
 
 class _OurServicesScreenState extends State<OurServicesScreen> {
   final List<AdmissionItem> items = [
-    AdmissionItem(
-      title: 'Admission Overview',
-      content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-''',
-    ),
-    AdmissionItem(title: 'Open Mornings', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'Primary School Assessment', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'Secondary School Assessment', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'Fees & Bursaries', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'School Transport', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
-
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
+    AdmissionItem(title: 'Nursery & Early Years', content: '''
+Rented out to an operator in return for long lease                                                             '''),
+    AdmissionItem(title: 'SQA Coaching Centre', content: '''
+Commercial tenant to be secured for a long lease to deliver private tuitions and out of school exam preparation'''),
+    AdmissionItem(title: 'Event Hall & Future Facilities', content: '''
+An event hire business objective forming a joint venture tenant on profit sharing basis'''),
+    AdmissionItem(title: 'Physiotherapy-Hydrotherapy', content: '''
+Swimming pool and adjoining area will be developed for physiotherapist and hydro therapist targeting elder and less abled patients and will be rented out to the operators running the show'''),
+    AdmissionItem(title: 'Community Centre', content: '''
+A hub to be set up for community engagement and capacity building leading to event hire business leads'''),
+    AdmissionItem(title: 'Document Storage Solutions Hub', content: '''
+Commercial tenants for a Business Documentation Storage: Secure, compliant document storage etc'''),
   ];
   @override
   Widget build(BuildContext context) {
@@ -120,7 +99,7 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text("Qalam Academy",
+                                        Text("Project Zahoor",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.playfairDisplay(
                                                 fontSize: 40.sp,
@@ -128,18 +107,7 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                                 fontWeight: FontWeight.w600,
                                                 color:
                                                     const Color(0xFF185B31))),
-                                        SizedBox(height: 30.h),
-                                        Text(
-                                            "Explore our comprehensive admissions and fees information. Whether you're enrolling in Nursery, Primary, or Secondary school, our team is here to guide you through the process.",
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.nunitoSans(
-                                                fontSize: 16.sp,
-                                                letterSpacing: 1,
-                                                height: 1.3,
-                                                fontWeight: FontWeight.w400,
-                                                color:
-                                                    const Color(0xFF333333))),
-                                        SizedBox(height: 50.h),
+                                        SizedBox(height: 80.h),
                                         ListView(
                                           physics:
                                               const NeverScrollableScrollPhysics(),
@@ -170,7 +138,7 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                               ),
                                               SizedBox(height: 15.h),
                                               Text(
-                                                  "Start Your child’s Journey Now"
+                                                  "Start Your Journey Now"
                                                       .toUpperCase()
                                                       .toUpperCase(),
                                                   textDirection:
@@ -183,17 +151,6 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                                       color: const Color(
                                                           0xFFA91936))),
                                               SizedBox(height: 15.h),
-                                              Text("Qalam Academy",
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts
-                                                      .playfairDisplay(
-                                                          fontSize: 32.sp,
-                                                          height: 1,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: const Color(
-                                                              0xFF185B31))),
-                                              SizedBox(height: 30.h),
                                               CustomButtonWidget(
                                                 onTap: () {
                                                   Navigator.push(
