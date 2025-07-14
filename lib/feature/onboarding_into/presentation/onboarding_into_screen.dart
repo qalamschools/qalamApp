@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/utils/shared_preference.dart';
 import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
+import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 
@@ -48,6 +49,7 @@ class _OnBoardingIntoScreenState extends State<OnBoardingIntoScreen> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
           builder: (_) => DashboardScreen(
+                dashboardCubit: DashboardCubit(),
                 bottomNavbarCubit: BottomNavbarCubit(),
               )),
     );

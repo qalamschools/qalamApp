@@ -9,6 +9,7 @@ import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
+import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_drop_down_widget.dart';
@@ -412,6 +413,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => DashboardScreen(
+                dashboardCubit: DashboardCubit(),
                 bottomNavbarCubit: BottomNavbarCubit(),
               ),
             ));

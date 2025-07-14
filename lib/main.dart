@@ -125,6 +125,7 @@ class _MyAppState extends State<MyApp> {
                     : BlocProvider(
                         create: (context) => DashboardCubit(),
                         child: DashboardScreen(
+                          dashboardCubit: DashboardCubit(),
                           bottomNavbarCubit: BottomNavbarCubit(),
                         ),
                       );

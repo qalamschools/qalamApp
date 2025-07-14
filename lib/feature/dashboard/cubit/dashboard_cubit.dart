@@ -6,6 +6,7 @@ import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
 import 'package:qalam_app/core/constants/remote_config_constants.dart';
 import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/web_view_screen/presentation/webview_screen.dart';
+import 'package:qalam_app/main.dart';
 
 part 'dashboard_state.dart';
 
@@ -37,5 +38,13 @@ class DashboardCubit extends Cubit<DashboardState> {
     final mobileNumber =
         _remoteConfigRepository.getString(RemoteConfigConstants.mobileNumber);
     CommonUtils.openDialer(number: "+44$mobileNumber");
+  }
+
+  Future<Map<String, dynamic>?> getAds() async {
+    final doc = await firestore.collection('ads').get();
+    if (doc.size > 0) {
+      return doc.docs.first.data() as Map<String, dynamic>?;
+    }
+    return null;
   }
 }
