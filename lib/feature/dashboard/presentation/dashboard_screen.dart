@@ -39,6 +39,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     final adData = await widget.dashboardCubit.getAds();
     if (adData != null && mounted) {
+      final imageUrl = adData['image_url'];
+      await precacheImage(CachedNetworkImageProvider(imageUrl),
+          context); 
       _isAdShown = true;
       showDialog(
         context: context,
@@ -47,6 +50,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
       );
     }
   }
+
+  // void _showAdDialogOncePerLaunch() async {
+  //   if (_isAdShown) return;
+
+  //   final adData = await widget.dashboardCubit.getAds();
+  //   if (adData != null && mounted) {
+  //     _isAdShown = true;
+  //     showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (_) => AdDialog(adData: adData),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
