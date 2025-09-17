@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/feature/about_us/presentation/about_us_screen.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
-import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
@@ -84,7 +83,7 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "About Us",
+                                  "Our School",
                                   style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),

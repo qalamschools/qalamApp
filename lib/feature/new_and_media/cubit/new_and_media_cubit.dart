@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:qalam_app/core/constants/firebase_strings.dart';
 import 'package:qalam_app/feature/new_and_media/models/new_and_media_model.dart';
 import 'package:qalam_app/main.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -39,7 +40,8 @@ class NewAndMediaCubit extends Cubit<NewAndMediaState> {
   Future<void> fetchNews() async {
     emit(state.copyWith(isLoading: true, error: null));
     try {
-      final snapshot = await firestore.collection('NEWS').get();
+      final snapshot =
+          await firestore.collection(FirebaseConstants.newsCollection).get();
       final events = snapshot.docs
           .map((doc) => NewsModel.fromMap(doc.id, doc.data()))
           .toList();

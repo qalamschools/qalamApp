@@ -1,5 +1,6 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:bloc/bloc.dart';
+import 'package:qalam_app/core/constants/firebase_strings.dart';
 import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
 import 'package:qalam_app/main.dart';
 
@@ -11,7 +12,8 @@ class EventsCubit extends Cubit<EventsState> {
   Future<void> fetchEvents() async {
     emit(state.copyWith(loading: true, error: null));
     try {
-      final snapshot = await firestore.collection('EVENTS').get();
+      final snapshot =
+          await firestore.collection(FirebaseConstants.eventCollection).get();
       final events = snapshot.docs
           .map((doc) => EventModel.fromMap(doc.id, doc.data()))
           .toList();

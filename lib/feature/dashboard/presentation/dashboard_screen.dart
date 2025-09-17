@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qalam_app/core/constants/firebase_strings.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/presentation/admission_and_fee_screen.dart';
 import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
@@ -28,42 +29,38 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool _isAdShown = false;
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showAdDialogOncePerLaunch();
     });
-    super.initState();
   }
 
   void _showAdDialogOncePerLaunch() async {
     if (_isAdShown) return;
 
     final adData = await widget.dashboardCubit.getAds();
+
     if (adData != null && mounted) {
-      final imageUrl = adData['image_url'];
-      await precacheImage(CachedNetworkImageProvider(imageUrl),
-          context); 
-      _isAdShown = true;
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => AdDialog(adData: adData),
-      );
+      final imageUrl = adData[FirebaseConstants.imageUrl];
+
+      if (imageUrl != null && imageUrl.isNotEmpty) {
+        // Precache the image
+        await precacheImage(
+          CachedNetworkImageProvider(imageUrl),
+          context,
+        );
+
+        if (mounted) {
+          _isAdShown = true;
+          showDialog(
+            context: context,
+            barrierDismissible: true, // Allow dismissing by tapping outside
+            builder: (_) => AdDialog(adData: adData),
+          );
+        }
+      }
     }
   }
-
-  // void _showAdDialogOncePerLaunch() async {
-  //   if (_isAdShown) return;
-
-  //   final adData = await widget.dashboardCubit.getAds();
-  //   if (adData != null && mounted) {
-  //     _isAdShown = true;
-  //     showDialog(
-  //       context: context,
-  //       barrierDismissible: false,
-  //       builder: (_) => AdDialog(adData: adData),
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
