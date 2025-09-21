@@ -43,21 +43,27 @@ class DashboardCubit extends Cubit<DashboardState> {
     CommonUtils.openDialer(number: "+44$mobileNumber");
   }
 
-  Future<Map<String, dynamic>?> getAds() async {
+  Future<List<Map<String, dynamic>>> getAllValidAds() async {
     try {
-      final doc =
+      final querySnapshot =
           await firestore.collection(FirebaseConstants.adsCollection).get();
-      if (doc.size > 0) {
-        final adData = doc.docs.first.data() as Map<String, dynamic>?;
 
+      if (querySnapshot.size == 0) return [];
+
+      final validAds = <Map<String, dynamic>>[];
+
+      for (final doc in querySnapshot.docs) {
+        final adData = doc.data() as Map<String, dynamic>?;
         if (adData != null && _isAdValidForCurrentDate(adData)) {
-          return adData;
+          adData['docId'] = doc.id;
+          validAds.add(adData);
         }
       }
-      return null;
+
+      return validAds;
     } catch (e) {
       print('Error fetching ads: $e');
-      return null;
+      return [];
     }
   }
 
@@ -66,17 +72,43 @@ class DashboardCubit extends Cubit<DashboardState> {
       final london = tz.getLocation('Europe/London');
       final currentUKTime = tz.TZDateTime.now(london);
 
-      final startDate = _parseFirebaseDate(adData[FirebaseConstants.startDate]);
-      final endDate = _parseFirebaseDate(adData[FirebaseConstants.endDate]);
+      final startDate = _parseFirebaseDate(adData['start_date']);
+      final endDate = _parseFirebaseDate(adData['end_date']);
 
       if (startDate == null || endDate == null) {
         return false;
       }
+
       final startDateUK = tz.TZDateTime.from(startDate, london);
       final endDateUK = tz.TZDateTime.from(endDate, london);
 
-      return currentUKTime.isAfter(startDateUK) &&
-          currentUKTime.isBefore(endDateUK);
+      final isWithinDateRange = currentUKTime
+              .isAfter(startDateUK.subtract(const Duration(seconds: 1))) &&
+          currentUKTime.isBefore(endDateUK.add(const Duration(seconds: 1)));
+
+      if (!isWithinDateRange) {
+        return false;
+      }
+
+      final startHour = adData['startHour'] as int?;
+      final endHour = adData['endHour'] as int?;
+
+      if (startHour != null && endHour != null) {
+        final currentHour = currentUKTime.hour;
+
+        bool isWithinTimeRange;
+        if (startHour <= endHour) {
+          isWithinTimeRange = currentHour >= startHour && currentHour < endHour;
+        } else {
+          isWithinTimeRange = currentHour >= startHour || currentHour < endHour;
+        }
+
+        if (!isWithinTimeRange) {
+          return false;
+        }
+      }
+
+      return true;
     } catch (e) {
       print('Error validating ad date: $e');
       return false;
@@ -91,15 +123,12 @@ class DashboardCubit extends Cubit<DashboardState> {
         return dateField.toDate();
       } else if (dateField is String) {
         return DateTime.parse(dateField);
-      }
-      // Handle already parsed DateTime
-      else if (dateField is DateTime) {
+      } else if (dateField is DateTime) {
         return dateField;
       }
     } catch (e) {
       print('Error parsing date: $e');
     }
-
     return null;
   }
 }

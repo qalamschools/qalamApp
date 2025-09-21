@@ -155,16 +155,18 @@ class CurriculumTimelineWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            section.imagePath,
-            fit: BoxFit.cover,
-            width: 267,
-            height: 267,
+        if (section.imagePath != null) ...{
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              section.imagePath ?? "",
+              fit: BoxFit.cover,
+              width: 267,
+              height: 267,
+            ),
           ),
-        ),
-        const SizedBox(height: 16),
+          const SizedBox(height: 16),
+        },
         Text(
           section.title,
           style: GoogleFonts.nunitoSans(
@@ -225,11 +227,11 @@ class CurriculumTimelineWidget extends StatelessWidget {
 class CurriculumSectionData {
   final String title;
   final String description;
-  final String imagePath;
+  String? imagePath;
 
   CurriculumSectionData({
     required this.title,
     required this.description,
-    required this.imagePath,
+    this.imagePath,
   });
 }

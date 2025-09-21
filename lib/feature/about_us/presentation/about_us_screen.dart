@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
 import 'package:qalam_app/feature/widgets/about_us_curriculam_widget.dart';
+import 'package:qalam_app/feature/widgets/curriculam_widget_new.dart';
 import 'package:qalam_app/feature/widgets/custom_scroll_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
@@ -34,65 +35,27 @@ class AboutUsScreen extends StatelessWidget {
               width: double.infinity,
             ),
             Padding(
-              padding: EdgeInsets.only(top: 270.h),
+              padding: EdgeInsets.only(top: 350.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Center(
-                      child: Text("Who We Are",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.playfairDisplay(
-                            fontSize: 36.sp,
-                            height: 1,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF226B3D),
-                          )),
-                    ),
-                  ),
-                  SizedBox(height: 25.h),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                        "Qalam Academy is dedicated to delivering excellence in education across all stages, aiming to build a prosperous society in Scotland and beyond. Our approach integrates innovative methods within curriculum frameworks, guided by the teachings of the Quran and Prophetic traditions.",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 16.sp,
-                            height: 1,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF333333))),
-                  ),
-                  SizedBox(height: 50.h),
-                  Stack(
-                    children: [
-                      SvgPicture.asset(
-                        "assets/icons/Lines_About_Us.svg",
-                        fit: BoxFit.cover,
+                  AboutUsCurriculumSection(
+                    sections: [
+                      CurriculumSectionData(
+                        title: 'Our Vision',
+                        description:
+                            "These are foundation years which is key to building basic literacy & numeracy skills. You child will achieve most of the literacy and numeracy outcomes needed to advance their experiences in upper primary. There are assessments at P2 and P4 level to monitor your child's progress and plan any additional support needed for your child. Lower Primary is a very exciting stage and we encourage parents to actively work with staff in building this foundation.",
                       ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AboutUsCurriculumSection(
-                            title: "Our Vision",
-                            description:
-                                "To establish a comprehensive educational pathway—from primary through to university—that fosters academic excellence and moral integrity, preparing students to contribute positively to society.​",
-                            isLeft: false,
-                          ),
-                          AboutUsCurriculumSection(
-                            title: "Our Mission",
-                            description:
-                                "We strive to provide top-tier resources and staff to ensure pupils achieve outstanding individual attainment, coupled with a strong sense of social responsibility and a passion to serve humanity.",
-                            isLeft: true,
-                          ),
-                          AboutUsCurriculumSection(
-                            title: "Our Ethos",
-                            description:
-                                "At Qalam Academy,respect and understanding of fellow mankind form the cornerstone of our community. We welcome children from all communities, irrespective of their faith, fostering an inclusive environment where pupils, staff, and parents are united in commitment to the school's policies and procedures. ​",
-                            isLeft: false,
-                          ),
-                        ],
-                      )
+                      CurriculumSectionData(
+                        title: 'Our Mission',
+                        description:
+                            "Qalam Academy aims to be synonymous with educational excellence at all levels within a safe and secure Islamic environment for all the communities it serves. We aim to provide the very best in resources and staff to ensure pupils achieve outstanding levels of individual attainment but have a strong sense of social responsibility together with a passion to serve humanity.",
+                      ),
+                      CurriculumSectionData(
+                        title: 'Our Ethos',
+                        description:
+                            "Our parents, staff and pupils bond with the sole ethos of respect and understanding of fellow mankind. The Islamic principles followed by the school is a perfect framework which makes the school special for the community. Al-Qalam accepts children from all communities irrespective of their faith. Pupils, Staff, Parents are all committed to schools policies and procedures.",
+                      ),
                     ],
                   ),
                   Padding(
@@ -108,6 +71,101 @@ class AboutUsScreen extends StatelessWidget {
                               color: const Color(0xFF226B3D),
                             )),
                         SizedBox(height: 30.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Aims & Values",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+Our Aim is to provide our students the best education delivered by experienced and passionate staff and build a community for the future. We thrive to serve our school community and support our pupils to achieve outstanding levels of individual achievement and work together with a strong sense of social responsibility for a peaceful and prosperous society. Our core values centre around being honest, being respectable, and becoming a responsible person who is trustworthy. 
+
+Leadership & Governance 
+
+The school has a distributed leadership & governance structure. This allows us to leverage from the experiences of professionals at various levels. 
+
+•	Executive Head provides the vision for the school and leads the curriculum development, attainment and assessment teams
+
+•	Quality Assurance Executive ensures the school delivery of education offer our pupils the stimulating experiences and maintains the standards from an excellent school
+
+•	Head of School (Operations & Qualification) is responsible for managing the day-to-day operations at the school, working with key members of staff and guiding them throughout the course of the academic year.
+
+                                ''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("History",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-detached property at Darnley Street in Pollokshields, Glasgow. Since then, the school has gone through several stages of development, increasing one class at a time each year, managing COVID disruption with swift arrangements (within 2weeks) for online learning on zoom and thereafter moving to a larger premises at Ben Nevis Road, Paisley. The school has continued its principle of ensuring high standards of education irrespective of the time, place and pupil rolls. This is evident from the pupils who attended Al-Qalam School since its inception.
+''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("History",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-detached property at Darnley Street in Pollokshields, Glasgow. Since then, the school has gone through several stages of development, increasing one class at a time each year, managing COVID disruption with swift arrangements (within 2weeks) for online learning on zoom and thereafter moving to a larger premises at Ben Nevis Road, Paisley. The school has continued its principle of ensuring high standards of education irrespective of the time, place and pupil rolls. This is evident from the pupils who attended Al-Qalam School since its inception.
+''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Vacancies",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+The school is always looking for talent who are passionate about teaching our young generations. Our staff make the school vibrant and maintains a nurturing atmosphere unique to the school. If you have the drive and can-do attitude, email us on schools@qalam-academy.org. Our School admin will reach out to you if there is any suitable vacancies that open in future.
+''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    height: 1,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -171,149 +229,6 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 50.h),
-                  Center(
-                    child: SvgPicture.asset(
-                      "assets/icons/horizontal_line.svg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(height: 30.h),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Text("Supported by",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.playfairDisplay(
-                              fontSize: 36.sp,
-                              height: 1,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF226B3D),
-                            )),
-                      ),
-                      SizedBox(height: 25.h),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 80.h,
-                            width: 80.w,
-                            decoration: const BoxDecoration(
-                                color: Colors.amberAccent,
-                                shape: BoxShape.circle),
-                            child: Center(
-                              child: Image.asset(
-                                "assets/images/shoeb_sarguroh.png",
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(
-                            "Shoeb Sarguroh",
-                            style: GoogleFonts.playfairDisplay(
-                                fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            height: 6.h,
-                          ),
-                          Text(
-                            "Executive Head\n(pro-bono)",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.nunitoSans(
-                                fontSize: 14.sp, fontWeight: FontWeight.w400),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12.h,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 80.h,
-                                width: 80.w,
-                                decoration: const BoxDecoration(
-                                    color: Colors.amberAccent,
-                                    shape: BoxShape.circle),
-                                child: Center(
-                                  child: Image.asset(
-                                    "assets/images/kausar_khot.png",
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "Kausar Khot",
-                                style: GoogleFonts.playfairDisplay(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 6.h,
-                              ),
-                              Text(
-                                "Head of School",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.nunitoSans(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 80.h,
-                                width: 80.w,
-                                decoration: const BoxDecoration(
-                                    color: Colors.amberAccent,
-                                    shape: BoxShape.circle),
-                                child: Center(
-                                  child: Image.asset(
-                                    "assets/images/may_geddes.png",
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              Text(
-                                "May Geddes",
-                                style: GoogleFonts.playfairDisplay(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 6.h,
-                              ),
-                              Text(
-                                "Quality Assurance\n Executive",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.nunitoSans(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 30.h),
                   Center(
                     child: SvgPicture.asset(
                       "assets/icons/horizontal_line.svg",

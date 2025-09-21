@@ -38,13 +38,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void _showAdDialogOncePerLaunch() async {
     if (_isAdShown) return;
 
-    final adData = await widget.dashboardCubit.getAds();
+    final validAds = await widget.dashboardCubit.getAllValidAds();
 
-    if (adData != null && mounted) {
+    if (validAds.isNotEmpty && mounted) {
+      final adData = validAds.first;
       final imageUrl = adData[FirebaseConstants.imageUrl];
 
       if (imageUrl != null && imageUrl.isNotEmpty) {
-        // Precache the image
         await precacheImage(
           CachedNetworkImageProvider(imageUrl),
           context,
@@ -54,7 +54,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           _isAdShown = true;
           showDialog(
             context: context,
-            barrierDismissible: true, // Allow dismissing by tapping outside
+            barrierDismissible: false,
             builder: (_) => AdDialog(adData: adData),
           );
         }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
+import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
@@ -24,18 +26,49 @@ class OurServicesScreen extends StatefulWidget {
 
 class _OurServicesScreenState extends State<OurServicesScreen> {
   final List<AdmissionItem> items = [
-    AdmissionItem(title: 'Nursery & Early Years', content: '''
-Rented out to an operator in return for long lease                                                             '''),
-    AdmissionItem(title: 'SQA Coaching Centre', content: '''
-Commercial tenant to be secured for a long lease to deliver private tuitions and out of school exam preparation'''),
-    AdmissionItem(title: 'Event Hall & Future Facilities', content: '''
-An event hire business objective forming a joint venture tenant on profit sharing basis'''),
-    AdmissionItem(title: 'Physiotherapy-Hydrotherapy', content: '''
-Swimming pool and adjoining area will be developed for physiotherapist and hydro therapist targeting elder and less abled patients and will be rented out to the operators running the show'''),
+    AdmissionItem(title: 'Flexible Learning', content: '''
+Our flexible learning is quite popular with students of high school. We offer tuitions to prepare your child for NAT5, GCSE, Highers or A-Level examination. There are no column restrictions and pupils can pick one or many subjects of their choices. 
+
+Contact HsQ Co-ordinator
+email: contactus@hsqualify.org 
+Call: 07507676295
+'''),
+    AdmissionItem(title: 'Event Hall', content: '''
+We have a community hall that can accommodate upto 75 guests. The hall is ideal for small events such as mehendi, birthday party, waleema dinner or even workshops and annual functions.
+
+Office Admin email: schools@qalam-academy.org
+Call: 07507676295
+'''),
     AdmissionItem(title: 'Community Centre', content: '''
-A hub to be set up for community engagement and capacity building leading to event hire business leads'''),
-    AdmissionItem(title: 'Document Storage Solutions Hub', content: '''
-Commercial tenants for a Business Documentation Storage: Secure, compliant document storage etc'''),
+It will offer prayer facilities and other community programmes. It is currently under renovation and will be available soon.
+If you are interested in operating the community centre, please contact us. 
+
+email: contactus@qalam-academy.org
+School Admin email: contactus@qalam-academy.org 
+Call: 07722126941
+
+'''),
+    AdmissionItem(title: 'Nursery', content: '''
+The school has two sizeable classrooms with separate entry. There is also a common reception and admin area. We would welcome any registered nursery or nursery manager who will be interested in operating the nursery.  
+
+School Admin email: contactus@qalam-academy.org
+Call: 07722126941
+
+'''),
+    AdmissionItem(title: 'Swimming Pool', content: '''
+The school has a sizeable swimming pool with separate entry. There is also a common reception and admin area. We would welcome any registered swimming institute who will be interested in this opportunity.  
+
+School Admin email: contactus@qalam-academy.org
+Call: 07722126941
+
+'''),
+    AdmissionItem(title: 'Barista', content: '''
+The school has a sizeable kitchen with separate entry. We would welcome interested companies or experienced barista who would like to operate from our kitchen.  
+
+School Admin email: contactus@qalam-academy.org
+Call: 07722126941
+
+'''),
   ];
   @override
   Widget build(BuildContext context) {
@@ -99,7 +132,7 @@ Commercial tenants for a Business Documentation Storage: Secure, compliant docum
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Text("Project Zahoor",
+                                        Text("Our Services",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.playfairDisplay(
                                                 fontSize: 40.sp,
@@ -137,9 +170,19 @@ Commercial tenants for a Business Documentation Storage: Secure, compliant docum
                                                 fit: BoxFit.contain,
                                               ),
                                               SizedBox(height: 15.h),
+                                              Text("Qalam Academy",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts
+                                                      .playfairDisplay(
+                                                          fontSize: 32.sp,
+                                                          height: 1,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: const Color(
+                                                              0xFF185B31))),
+                                              SizedBox(height: 15.h),
                                               Text(
-                                                  "Start Your Journey Now"
-                                                      .toUpperCase()
+                                                  "Interested in any of the services?"
                                                       .toUpperCase(),
                                                   textDirection:
                                                       TextDirection.ltr,
@@ -245,15 +288,85 @@ class _ExpandableTileState extends State<ExpandableTile> {
           collapsedBackgroundColor: Colors.grey.shade100,
           children: widget.item.content != null
               ? [
-                  Text(
-                    widget.item.content!,
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 12.sp, fontWeight: FontWeight.w400),
+                  ClickableText(
+                    text: widget.item.content!,
                   ),
                 ]
               : [],
         ),
       ),
     );
+  }
+}
+
+class ClickableText extends StatelessWidget {
+  final String text;
+
+  const ClickableText({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(color: Colors.black, fontSize: 14),
+        children: _buildSpans(text),
+      ),
+    );
+  }
+
+  List<TextSpan> _buildSpans(String text) {
+    final List<TextSpan> spans = [];
+    final RegExp exp = RegExp(
+      r'((?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{3,4}|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b)',
+      caseSensitive: false,
+    );
+
+    int start = 0;
+    final matches = exp.allMatches(text);
+
+    for (final match in matches) {
+      if (match.start > start) {
+        spans.add(TextSpan(text: text.substring(start, match.start)));
+      }
+
+      final matchText = match.group(0)!;
+      if (matchText.contains('@')) {
+        // Email
+        spans.add(
+          TextSpan(
+            text: matchText,
+            style: GoogleFonts.nunitoSans(
+                decoration: TextDecoration.underline,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                await CommonUtils.openMailApp();
+              },
+          ),
+        );
+      } else {
+        // Phone number
+        spans.add(
+          TextSpan(
+            text: matchText,
+            style: GoogleFonts.nunitoSans(
+                fontSize: 12.sp, fontWeight: FontWeight.w400),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () async {
+                CommonUtils.openDialer(number: matchText);
+              },
+          ),
+        );
+      }
+
+      start = match.end;
+    }
+
+    if (start < text.length) {
+      spans.add(TextSpan(text: text.substring(start)));
+    }
+
+    return spans;
   }
 }

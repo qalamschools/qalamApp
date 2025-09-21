@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/new_and_media/models/event_model.dart';
 
 class CalenderDetailsWidget extends StatelessWidget {
@@ -14,7 +15,6 @@ class CalenderDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('dd MMM yyyy hh:mm a').format(event.date);
-    String dayOfWeek = DateFormat('EEEE').format(event.date);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,26 +42,18 @@ class CalenderDetailsWidget extends StatelessWidget {
         SizedBox(
           height: 10.h,
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              height: 16.h,
-              width: 16.h,
-              "assets/icons/clockIcon.svg",
+        InkWell(
+          onTap: () {
+            CommonUtils.urlLauncher(url: event.link);
+          },
+          child: Text(
+            event.link,
+            style: GoogleFonts.nunitoSans(
+              decoration: TextDecoration.underline,
+              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
             ),
-            SizedBox(
-              width: 10.w,
-            ),
-            Text(
-              dayOfWeek,
-              style: GoogleFonts.nunitoSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 14.sp,
-              ),
-            )
-          ],
+          ),
         ),
         SizedBox(
           height: 10.h,

@@ -28,35 +28,70 @@ class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
     AdmissionItem(
       title: 'Admission Overview',
       content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+Although our main entry points are P1,P2,P5, P7 and S1, if you are hoping to join at a stage out with the main entry points, please contact school administrator before applying to check we have spaces available. 
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+Our admissions usually take place in December and May. However, we do take pupils mid-term subject to availability of place in the requested level.
+
+Primary School:
+Our intake for lower primary (P1-P4) and upper primary (P5-P7) include pupils from different nursery and pre-school.
+We encourage parents to apply early as this will give school sufficient time to plan the academic year based on demand.
+
+Primary 7 is a key stage for pupils. At this level they are preparing for a new journey into secondary school. Pupils joining the school at this level will be sit our mandatory assessments before admission. This will help school prepare them for the standards required for transition into Al-Qalam secondary school.
+
+Secondary School:
+The main entry point for secondary is S1.
+Broad General Education taught in our Secondary (S1 & S2) provides students with a foundation needed for their qualification years. Our Primary School are joined by students from a range of other schools and home-schooled pupils.
+
+Flexible Learning:
+Students graduate from Al-Qalam Secondary school into Flexible Learning from the HsQ team. Students are focussed on preparing for subjects of their choices. There are no column restrictions.  Students can select from one to eight subjects for their Nat5 (or GCSE) exams and from one to six subjects for their Highers (or A-levels).
+This is a popular 30 wk intensive course in which is focused on preparing students for Qualifications based on their choices of subjects.  Parents are encouraged to register their children early due to high demand.
+
+Admissions Process:
+Parents must either email or call us to book a visit or request a link to complete the application form. 
+
+Our school admin will then reach out to guide you through the process until your child's first day at school. From completing the application form to the induction day, school administrator will be available to answer any queries you may have.
+
+School Admin:
+Contact Form: https://bit.ly/contactsch
+Email: schools@qalam-academy.org 
+Phone: 01412372237l6 / 07722 126941 
+Address: Ben Nevis Road, PA2 7BU 
+
 ''',
     ),
     AdmissionItem(title: 'Open Mornings', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+Our Open Mornings for Primary are held on the last Saturday of October and for Secondary is held on the last Saturday of November. 
+Open Mornings for Flexible Learning (NAT5/ Highers) is held on the last Saturday of January. Parents are welcome with their children for a school tour by our students and meet our leadership team.
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+The school does accept request for school visits on other days during the academic year.  However, they are arranged by appointment only. 
+
+For more information contact the school administrator 
+
+School Admin:
+Contact Form: https://bit.ly/contactsch
+Email: schools@qalam-academy.org 
+Phone: 01412372237l6 / 07722 126941 
+Address: Ben Nevis Road, PA2 7BU 
 '''),
-    AdmissionItem(title: 'Primary School Assessment', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+    AdmissionItem(title: 'School Assessment', content: '''
+Qalam Academy has a very vibrant Learning atmosphere for students from all background. We would always be looking for pupils who aspire to succeed and are well supported by their parents and guardians.
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+Your child will appear for a formal assessment test that reflects our standards and expectations at the level at which they are seeking admissions. Entrance exams will give us better understanding of each child and assess their potential.
 '''),
-    AdmissionItem(title: 'Secondary School Assessment', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+    AdmissionItem(title: 'School Fees', content: '''
+Qalam Academy is a fully independent private school. The school has maintained reasonably low term fees with significant bursaries and discounts. We offer up to 50% bursaries and discounts. Bursaries & discounts may vary from time to time and is subject to availability of funds from our sponsors. Parents are encouraged to apply early. Our admissions are generally open from last week of October, although, we do accept student's mid-term if there are places available at their level.
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'Fees & Bursaries', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+School term is from September - June.
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
-'''),
-    AdmissionItem(title: 'School Transport', content: '''
-Learn about our comprehensive admission process, including eligibility criteria, key dates, and necessary documentation for enrollment. While we accept applications for entry to any stage if we have spaces available, our main entry points are P1, P4, P7 and S1. If you are hoping to join at a stage outwith the main entry points, please speak to our Admissions Registrar before applying to check we have spaces available.
+Term Fee Payment Options
 
-Rest assured that suitably small class sizes are very much a part of our offering right the way through from Nursery to S6. Get insights into what sets our institution apart and how we nurture student growth from the start.
+•	Full payment in advance. Additional 5% discount is applied provided payment is received by the end of current academic year (existing students) or at the time of admission (new admissions) 
+
+•	Standing Order monthly payments either in 12, 10 or 6 instalments. 
+
+School term fees do not include any SQA exam fees, uniforms, stationaries, trips or any subsistence.
+
+The school has a personal accident cover for all pupils and staff. The cost of the insurance is covered in the fees.
 '''),
   ];
   @override
@@ -218,7 +253,6 @@ Rest assured that suitably small class sizes are very much a part of our offerin
                                                               ContactUsCubit(
                                                                   EmailRepositoryImpl()),
                                                           child: ContactUsScreen(
-                                                              
                                                               contactUsCubit:
                                                                   ContactUsCubit(
                                                                       EmailRepositoryImpl())),
