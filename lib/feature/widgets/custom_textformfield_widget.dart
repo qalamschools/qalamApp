@@ -11,7 +11,8 @@ class CustomTextFormWidget extends StatelessWidget {
       this.prefixPath,
       this.maxLines = 1,
       required this.controller,
-      this.isRequired = false,this.validator});
+      this.isRequired = false,
+      this.validator});
   final String? hintText;
   final String? labelText;
   final String? prefixPath;
@@ -76,15 +77,18 @@ class CustomTextFormWidget extends StatelessWidget {
             : null,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
       ),
     );

@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
           clipBehavior: Clip.none,
           children: [
             Image.asset(
-              AppImage.dashboardBackground,
+              AppImage.landingBg,
               fit: BoxFit.cover,
               width: double.infinity,
             ),
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                   )),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 400),
+              padding: EdgeInsets.only(top: 400.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

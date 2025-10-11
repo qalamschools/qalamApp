@@ -74,7 +74,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             child: Stack(
               children: [
                 Image.asset(
-                  "assets/images/image_background.png",
+                  AppImage.contactUs,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -89,7 +89,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(height: 45.h),
+                              SizedBox(height: 100.h),
                               Text("Contact Us",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.playfairDisplay(

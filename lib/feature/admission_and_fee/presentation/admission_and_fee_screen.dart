@@ -11,6 +11,7 @@ import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
+import 'package:qalam_app/feature/widgets/clickable_text_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
@@ -24,10 +25,11 @@ class AdmissionAndFeeScreen extends StatefulWidget {
 }
 
 class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
-  final List<AdmissionItem> items = [
-    AdmissionItem(
-      title: 'Admission Overview',
-      content: '''
+  List<AdmissionItem> _getItems(String contactFormLink) {
+    return [
+      AdmissionItem(
+        title: 'Admission Overview',
+        content: '''
 Although our main entry points are P1,P2,P5, P7 and S1, if you are hoping to join at a stage out with the main entry points, please contact school administrator before applying to check we have spaces available. 
 
 Our admissions usually take place in December and May. However, we do take pupils mid-term subject to availability of place in the requested level.
@@ -52,14 +54,14 @@ Parents must either email or call us to book a visit or request a link to comple
 Our school admin will then reach out to guide you through the process until your child's first day at school. From completing the application form to the induction day, school administrator will be available to answer any queries you may have.
 
 School Admin:
-Contact Form: https://bit.ly/contactsch
+Contact Form: $contactFormLink
 Email: schools@qalam-academy.org 
-Phone: 01412372237l6 / 07722 126941 
+Phone: 01412372237 / 07722 126941 
 Address: Ben Nevis Road, PA2 7BU 
 
 ''',
-    ),
-    AdmissionItem(title: 'Open Mornings', content: '''
+      ),
+      AdmissionItem(title: 'Open Mornings', content: '''
 Our Open Mornings for Primary are held on the last Saturday of October and for Secondary is held on the last Saturday of November. 
 Open Mornings for Flexible Learning (NAT5/ Highers) is held on the last Saturday of January. Parents are welcome with their children for a school tour by our students and meet our leadership team.
 
@@ -68,17 +70,17 @@ The school does accept request for school visits on other days during the academ
 For more information contact the school administrator 
 
 School Admin:
-Contact Form: https://bit.ly/contactsch
+Contact Form: $contactFormLink
 Email: schools@qalam-academy.org 
-Phone: 01412372237l6 / 07722 126941 
+Phone: 01412372237 / 07722 126941 
 Address: Ben Nevis Road, PA2 7BU 
 '''),
-    AdmissionItem(title: 'School Assessment', content: '''
+      AdmissionItem(title: 'School Assessment', content: '''
 Qalam Academy has a very vibrant Learning atmosphere for students from all background. We would always be looking for pupils who aspire to succeed and are well supported by their parents and guardians.
 
 Your child will appear for a formal assessment test that reflects our standards and expectations at the level at which they are seeking admissions. Entrance exams will give us better understanding of each child and assess their potential.
 '''),
-    AdmissionItem(title: 'School Fees', content: '''
+      AdmissionItem(title: 'School Fees', content: '''
 Qalam Academy is a fully independent private school. The school has maintained reasonably low term fees with significant bursaries and discounts. We offer up to 50% bursaries and discounts. Bursaries & discounts may vary from time to time and is subject to availability of funds from our sponsors. Parents are encouraged to apply early. Our admissions are generally open from last week of October, although, we do accept student's mid-term if there are places available at their level.
 
 School term is from September - June.
@@ -93,7 +95,9 @@ School term fees do not include any SQA exam fees, uniforms, stationaries, trips
 
 The school has a personal accident cover for all pupils and staff. The cost of the insurance is covered in the fees.
 '''),
-  ];
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -191,7 +195,9 @@ The school has a personal accident cover for all pupils and staff. The cost of t
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
-                                          children: items
+                                          children: _getItems(widget
+                                                  .admissionAndFeeBlocCubit
+                                                  .getContactFormLink())
                                               .map((item) =>
                                                   ExpandableTile(item: item))
                                               .toList(),
@@ -335,10 +341,12 @@ class _ExpandableTileState extends State<ExpandableTile> {
           collapsedBackgroundColor: Colors.grey.shade100,
           children: widget.item.content != null
               ? [
-                  Text(
-                    widget.item.content!,
+                  ClickableText(
+                    text: widget.item.content!,
                     style: GoogleFonts.nunitoSans(
-                        fontSize: 12.sp, fontWeight: FontWeight.w400),
+                        color: Colors.black,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400),
                   ),
                 ]
               : [],

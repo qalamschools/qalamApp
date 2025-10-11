@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,12 +6,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qalam_app/core/commons/data/repository/email_repository.dart';
 import 'package:qalam_app/core/constants/app_image.dart';
-import 'package:qalam_app/core/utils/common_utils.dart';
 import 'package:qalam_app/feature/admission_and_fee/cubit/admission_and_fee_bloc_cubit.dart';
 import 'package:qalam_app/feature/admission_and_fee/models/admission_item_model.dart';
 import 'package:qalam_app/feature/contact_us/cubit/contact_us_cubit.dart';
 import 'package:qalam_app/feature/contact_us/presentation/contact_us_screen.dart';
 import 'package:qalam_app/feature/dashboard/cubit/bottom_navbar_cubit.dart';
+import 'package:qalam_app/feature/widgets/clickable_text_widget.dart';
 import 'package:qalam_app/feature/widgets/custom_button_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
@@ -43,7 +42,6 @@ Call: 07507676295
 It will offer prayer facilities and other community programmes. It is currently under renovation and will be available soon.
 If you are interested in operating the community centre, please contact us. 
 
-email: contactus@qalam-academy.org
 School Admin email: contactus@qalam-academy.org 
 Call: 07722126941
 
@@ -296,77 +294,5 @@ class _ExpandableTileState extends State<ExpandableTile> {
         ),
       ),
     );
-  }
-}
-
-class ClickableText extends StatelessWidget {
-  final String text;
-
-  const ClickableText({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        style: const TextStyle(color: Colors.black, fontSize: 14),
-        children: _buildSpans(text),
-      ),
-    );
-  }
-
-  List<TextSpan> _buildSpans(String text) {
-    final List<TextSpan> spans = [];
-    final RegExp exp = RegExp(
-      r'((?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{3,4}|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b)',
-      caseSensitive: false,
-    );
-
-    int start = 0;
-    final matches = exp.allMatches(text);
-
-    for (final match in matches) {
-      if (match.start > start) {
-        spans.add(TextSpan(text: text.substring(start, match.start)));
-      }
-
-      final matchText = match.group(0)!;
-      if (matchText.contains('@')) {
-        // Email
-        spans.add(
-          TextSpan(
-            text: matchText,
-            style: GoogleFonts.nunitoSans(
-                decoration: TextDecoration.underline,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () async {
-                await CommonUtils.openMailApp();
-              },
-          ),
-        );
-      } else {
-        // Phone number
-        spans.add(
-          TextSpan(
-            text: matchText,
-            style: GoogleFonts.nunitoSans(
-                fontSize: 12.sp, fontWeight: FontWeight.w400),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () async {
-                CommonUtils.openDialer(number: matchText);
-              },
-          ),
-        );
-      }
-
-      start = match.end;
-    }
-
-    if (start < text.length) {
-      spans.add(TextSpan(text: text.substring(start)));
-    }
-
-    return spans;
   }
 }

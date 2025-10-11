@@ -30,7 +30,7 @@ class AboutUsScreen extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              "assets/images/about_us_background.png",
+              AppImage.ourSchool,
               fit: BoxFit.cover,
               width: double.infinity,
             ),
@@ -95,27 +95,6 @@ The school has a distributed leadership & governance structure. This allows us t
 •	Head of School (Operations & Qualification) is responsible for managing the day-to-day operations at the school, working with key members of staff and guiding them throughout the course of the academic year.
 
                                 ''',
-                                style: GoogleFonts.nunitoSans(
-                                    fontSize: 16.sp,
-                                    height: 1,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF333333))),
-                          ],
-                        ),
-                        SizedBox(height: 20.h),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("History",
-                                style: GoogleFonts.playfairDisplay(
-                                    fontSize: 24.sp,
-                                    height: 1,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF000000))),
-                            SizedBox(height: 20.h),
-                            Text('''
-Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-detached property at Darnley Street in Pollokshields, Glasgow. Since then, the school has gone through several stages of development, increasing one class at a time each year, managing COVID disruption with swift arrangements (within 2weeks) for online learning on zoom and thereafter moving to a larger premises at Ben Nevis Road, Paisley. The school has continued its principle of ensuring high standards of education irrespective of the time, place and pupil rolls. This is evident from the pupils who attended Al-Qalam School since its inception.
-''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
                                     height: 1,

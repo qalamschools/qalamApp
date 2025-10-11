@@ -33,28 +33,45 @@ class CalenderDetailsWidget extends StatelessWidget {
             Text(
               formattedDate,
               style: GoogleFonts.nunitoSans(
-                fontWeight: FontWeight.w600,
-                fontSize: 14.sp,
-              ),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  color: const Color(0xff1F6947)),
             )
           ],
         ),
         SizedBox(
           height: 10.h,
         ),
-        InkWell(
-          onTap: () {
-            CommonUtils.urlLauncher(url: event.link);
-          },
-          child: Text(
-            event.link,
-            style: GoogleFonts.nunitoSans(
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w600,
-              fontSize: 14.sp,
-            ),
-          ),
-        ),
+        (event.link.isNotEmpty)
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.link_rounded,
+                    size: 18.h,
+                    color: const Color(0xff1F6947),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        CommonUtils.urlLauncher(url: event.link);
+                      },
+                      child: Text(
+                        "Click here to register the link",
+                        style: GoogleFonts.nunitoSans(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14.sp,
+                            color: const Color(0xff1F6947)),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : const SizedBox(),
         SizedBox(
           height: 10.h,
         ),

@@ -8,7 +8,8 @@ class CustomPhoneField extends StatefulWidget {
       {super.key,
       this.inputFormatters,
       this.isRequired = false,
-      required this.controller,this.validator});
+      required this.controller,
+      this.validator});
   final List<TextInputFormatter>? inputFormatters;
   final bool isRequired;
   final TextEditingController controller;
@@ -66,15 +67,18 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
         contentPadding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: Color(0xFFC4C4C4)),
+          borderSide:
+              const BorderSide(color: Color.fromARGB(255, 139, 139, 139)),
         ),
         prefix: GestureDetector(
           onTap: () {},

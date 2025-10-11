@@ -19,4 +19,7 @@ class AppImage {
   static String twitterIcon = "assets/icons/x.svg";
   static String mailIcon = "assets/icons/gmail.svg";
   static String youtubeIcon = "assets/icons/youtube.svg";
+  static String landingBg = "assets/images/landing_page_bg.png";
+  static String ourSchool = "assets/images/our_school_bg.png";
+  static String contactUs = "assets/images/contact_us_bg.png";
 }

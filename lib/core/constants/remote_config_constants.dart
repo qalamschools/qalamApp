@@ -10,4 +10,5 @@ class RemoteConfigConstants {
   static const String mobileNumber = "call_us_mobile_number";
   static const String newAdmissionStripeUrl =
       "application_fee_for_new_admission_stripe_url";
+  static const String contactFormLink = "contact_form_link";
 }
