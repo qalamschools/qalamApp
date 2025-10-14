@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.alaqalamschools.qalamapp"
-    compileSdk = 35  // Changed from 34 to 35
+    compileSdk = 35  
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -42,7 +42,7 @@ android {
         applicationId = "com.alaqalamschools.qalamapp"
         minSdk = 26
         targetSdk = 35  
-        versionCode = 6019
+        versionCode = 8019
         versionName = "1.1.1"
         resourceConfigurations += listOf("en", "ar")
     }
