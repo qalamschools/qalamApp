@@ -5,6 +5,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qalam_app/core/commons/data/repository/remote_config_repo.dart';
@@ -16,6 +17,10 @@ import 'package:qalam_app/feature/dashboard/cubit/dashboard_cubit.dart';
 import 'package:qalam_app/feature/dashboard/presentation/dashboard_screen.dart';
 import 'package:qalam_app/feature/onboarding_into/presentation/onboarding_into_screen.dart';
 import 'package:qalam_app/firebase_options.dart';
+import 'package:timezone/data/latest.dart' as tz;
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -28,6 +33,7 @@ final firestore = FirebaseFirestore.instance;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   await SharedPrefsHelper().init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -71,9 +77,49 @@ class _MyAppState extends State<MyApp> {
     // Handle background messages
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+    // Enhanced initialization for both platforms
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
     // Handle foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('📩 [Foreground] ${message.notification?.title}');
+      RemoteNotification? notification = message.notification;
+      if (notification != null &&
+          notification.title != null &&
+          notification.body != null) {
+        await flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          const NotificationDetails(
+            android: AndroidNotificationDetails(
+              'general_channel',
+              'General Notifications',
+              channelDescription: 'General notifications from Qalam Academy',
+              importance: Importance.high,
+              priority: Priority.high,
+              icon: '@mipmap/ic_launcher',
+            ),
+            iOS: DarwinNotificationDetails(),
+          ),
+        );
+      }
     });
 
     // When the app is opened from a background state
@@ -83,8 +129,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _subscribeToTopic() async {
+    // Get FCM token for debugging
+    String? token = await FirebaseMessaging.instance.getToken();
+    print('🎯 FCM Token: $token');
+
     await FirebaseMessaging.instance.subscribeToTopic('general');
-    print('Subscribed to topic: general');
+    print('✅ Subscribed to topic: general');
   }
 
   Future<void> _requestNotificationPermissions() async {
@@ -93,8 +143,21 @@ class _MyAppState extends State<MyApp> {
       alert: true,
       badge: true,
       sound: true,
+      provisional: false,
+      criticalAlert: false,
+      announcement: false,
     );
-    print('🔐 Permission: ${settings.authorizationStatus}');
+
+    print('🔐 Permission Status: ${settings.authorizationStatus}');
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('✅ User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('⚠️ User granted provisional permission');
+    } else {
+      print('❌ User declined or has not accepted permission');
+    }
   }
 
   Future<bool> _shouldShowOnboarding() async {
