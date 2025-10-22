@@ -42,7 +42,7 @@ android {
         applicationId = "com.alaqalamschools.qalamapp"
         minSdk = 26
         targetSdk = 35  
-        versionCode = 8020
+        versionCode = 8021
         versionName = "1.1.2"
         resourceConfigurations += listOf("en", "ar")
     }
