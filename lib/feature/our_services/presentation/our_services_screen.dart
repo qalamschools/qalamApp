@@ -273,7 +273,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
             widget.item.title,
             style: GoogleFonts.nunitoSans(
               color: const Color(0xFF226B3D),
-              fontSize: 14.sp,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -290,7 +290,7 @@ class _ExpandableTileState extends State<ExpandableTile> {
                     text: widget.item.content!,
                     style: GoogleFonts.nunitoSans(
                         color: Colors.black,
-                        fontSize: 13.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w400),
                   ),
                 ]
