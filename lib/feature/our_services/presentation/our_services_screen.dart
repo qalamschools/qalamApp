@@ -288,6 +288,10 @@ class _ExpandableTileState extends State<ExpandableTile> {
               ? [
                   ClickableText(
                     text: widget.item.content!,
+                    style: GoogleFonts.nunitoSans(
+                        color: Colors.black,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w400),
                   ),
                 ]
               : [],
