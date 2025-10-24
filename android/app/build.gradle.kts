@@ -16,35 +16,30 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.alaqalamschools.qalamapp"
-    compileSdk = 35  
-    ndkVersion = "27.0.12077973"
+    compileSdk = 36
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
         isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    splits {
-        abi {
-            isEnable = true
-            reset()
-            include("arm64-v8a", "armeabi-v7a")
-            isUniversalApk = false
-        }
+        jvmTarget = "11"
     }
 
     defaultConfig {
         applicationId = "com.alaqalamschools.qalamapp"
         minSdk = 26
-        targetSdk = 35  
+        targetSdk = 36  
         versionCode = 8021
         versionName = "1.1.2"
         resourceConfigurations += listOf("en", "ar")
+
+        ndk {
+            // ✅ Safe — does not cause ABI conflicts
+            debugSymbolLevel = "NONE"
+        }
     }
 
     signingConfigs {
@@ -67,10 +62,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            
-            ndk {
-                debugSymbolLevel = "NONE"
-            }
         }
     }
 
