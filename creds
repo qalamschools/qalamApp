@@ -1,0 +1,14 @@
+local properties
+
+sdk.dir=/Users/yashprajapati/Library/Android/sdk
+flutter.sdk=/Users/yashprajapati/Flutter/flutter
+flutter.buildMode=release
+flutter.versionName=1.1.0
+flutter.versionCode=4015
+
+key properties
+
+storePassword=qalamapp@2025
+keyPassword=qalamapp@2025
+keyAlias=my-key-alias
+storeFile=/Users/yashprajapati/MyProjects/flutterprojects/qalamApp/android/qalam-app-key.jks
