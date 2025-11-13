@@ -94,7 +94,7 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                   height: 4.h,
                                 ),
                                 Text(
-                                  "Get to know who we are and what we do.",
+                                  "Get to know who we are and what we do",
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w400,
@@ -171,7 +171,7 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                 height: 4.h,
                               ),
                               Text(
-                                "Select courses and apply now.",
+                                "Select courses and apply now",
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w400,

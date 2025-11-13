@@ -30,23 +30,23 @@ class _AdmissionAndFeeScreenState extends State<AdmissionAndFeeScreen> {
       AdmissionItem(
         title: 'Admission Overview',
         content: '''
-Although our main entry points are P1,P2,P5, P7 and S1, if you are hoping to join at a stage out with the main entry points, please contact school administrator before applying to check we have spaces available. 
+Although our main entry points are P1,P2,P5, P7 and S1, if you are hoping to enrol your child at a stage out with the main entry points, please contact school administrator before applying to check we have spaces available. 
 
 Our admissions usually take place in December and May. However, we do take pupils mid-term subject to availability of place in the requested level.
 
 Primary School:
-Our intake for lower primary (P1-P4) and upper primary (P5-P7) include pupils from different nursery and pre-school.
+Our intake for lower primary (P1-P4) and upper primary (P5-P7) include pupils from various nursery and primary schools.
 We encourage parents to apply early as this will give school sufficient time to plan the academic year based on demand.
 
-Primary 7 is a key stage for pupils. At this level they are preparing for a new journey into secondary school. Pupils joining the school at this level will be sit our mandatory assessments before admission. This will help school prepare them for the standards required for transition into Al-Qalam secondary school.
+Primary 7 is a key stage for pupils. At this level they are preparing for a new journey into secondary school. Pupils joining the school at this level will sit our mandatory assessments before admission. This will help school prepare them for the standards required for transition into Al-Qalam secondary school.
 
 Secondary School:
-The main entry point for secondary is S1.
-Broad General Education taught in our Secondary (S1 & S2) provides students with a foundation needed for their qualification years. Our Primary School are joined by students from a range of other schools and home-schooled pupils.
+The main entry point for secondary is S1. However, we do accept placing request in S2 subject to availability.
+Broad General Education taught in our secondary (S1 & S2) school provides the foundation needed for qualification years. Our secondary school intake is from a range of mainstream schools. S1 admissions have also seen demand from parents who have home-schooled their children in primary education. We usually assess pupils before accepting their placing requests for secondary school.
 
 Flexible Learning:
-Students graduate from Al-Qalam Secondary school into Flexible Learning from the HsQ team. Students are focussed on preparing for subjects of their choices. There are no column restrictions.  Students can select from one to eight subjects for their Nat5 (or GCSE) exams and from one to six subjects for their Highers (or A-levels).
-This is a popular 30 wk intensive course in which is focused on preparing students for Qualifications based on their choices of subjects.  Parents are encouraged to register their children early due to high demand.
+Students graduate from Al-Qalam Secondary school into flexible learning offered by hsqualify.org. Students are focussed on preparing for subjects of their choices. There are no column restrictions.  Students can select up to eight subjects for their Nat5 (or GCSE) exams and up to six subjects for their Highers (or A-levels) exams.
+This is a popular 30-week intensive course which is focused on preparing students for qualifications based on their choices of subjects.  Parents are encouraged to register their children early due to high demand.
 
 Admissions Process:
 Parents must either email or call us to book a visit or request a link to complete the application form. 
@@ -62,12 +62,12 @@ Address: Ben Nevis Road, PA2 7BU
 ''',
       ),
       AdmissionItem(title: 'Open Mornings', content: '''
-Our Open Mornings for Primary are held on the last Saturday of October and for Secondary is held on the last Saturday of November. 
-Open Mornings for Flexible Learning (NAT5/ Highers) is held on the last Saturday of January. Parents are welcome with their children for a school tour by our students and meet our leadership team.
+Primary school open morning is held on the last Saturday of October and for secondary school & flexible learning is held on the last Saturday of November. 
+Parents are welcome with their children for a school tour by our students and meet our leadership team.
 
 The school does accept request for school visits on other days during the academic year.  However, they are arranged by appointment only. 
 
-For more information contact the school administrator 
+For more information contact the school administrator .
 
 School Admin:
 Contact Form: $contactFormLink
@@ -76,12 +76,12 @@ Phone: 01412372237 / 07722 126941
 Address: Ben Nevis Road, PA2 7BU 
 '''),
       AdmissionItem(title: 'School Assessment', content: '''
-Qalam Academy has a very vibrant Learning atmosphere for students from all background. We would always be looking for pupils who aspire to succeed and are well supported by their parents and guardians.
+Qalam Academy has a vibrant learning atmosphere and welcomes pupils from all backgrounds. We would always be looking for pupils who aspire to succeed and are well supported by their parents and guardians.
 
 Your child will appear for a formal assessment test that reflects our standards and expectations at the level at which they are seeking admissions. Entrance exams will give us better understanding of each child and assess their potential.
 '''),
       AdmissionItem(title: 'School Fees', content: '''
-Qalam Academy is a fully independent private school. The school has maintained reasonably low term fees with significant bursaries and discounts. We offer up to 50% bursaries and discounts. Bursaries & discounts may vary from time to time and is subject to availability of funds from our sponsors. Parents are encouraged to apply early. Our admissions are generally open from last week of October, although, we do accept student's mid-term if there are places available at their level.
+Qalam Academy is a fully independent private school. The school has maintained reasonably low term fees with significant bursaries and discounts. We offer up to 50% bursaries and discounts which may vary from time to time and is subject to availability of funds. Parents are encouraged to apply early. Our admissions are generally open from last week of October, although, we do accept student's mid-term if there are places available at their level.
 
 School term is from September - June.
 
@@ -91,9 +91,9 @@ Term Fee Payment Options
 
 •	Standing Order monthly payments either in 12, 10 or 6 instalments. 
 
-School term fees do not include any SQA exam fees, uniforms, stationaries, trips or any subsistence.
+School term fees do not include SQA exam fees, uniforms, stationaries, trips or any other ancillary costs.
 
-The school has a personal accident cover for all pupils and staff. The cost of the insurance is covered in the fees.
+The school has a personal accident cover for all pupils and staff. The cost of insurance is covered in the fees.
 '''),
     ];
   }
@@ -181,7 +181,7 @@ The school has a personal accident cover for all pupils and staff. The cost of t
                                                     const Color(0xFF185B31))),
                                         SizedBox(height: 30.h),
                                         Text(
-                                            "Explore our comprehensive admissions and fees information. Whether you're enrolling in Nursery, Primary, or Secondary school, our team is here to guide you through the process.",
+                                            "Explore our comprehensive admissions and fees information. Whether you are enrolling your child in our mainstream school or the flexible learning course, our team will be pleased to guide you through the process.",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 16.sp,

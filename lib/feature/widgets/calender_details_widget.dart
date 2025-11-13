@@ -61,7 +61,7 @@ class CalenderDetailsWidget extends StatelessWidget {
                         CommonUtils.urlLauncher(url: event.link);
                       },
                       child: Text(
-                        "Click here to register the link",
+                        "Click to Register",
                         style: GoogleFonts.nunitoSans(
                             fontWeight: FontWeight.w600,
                             fontSize: 14.sp,
@@ -90,7 +90,7 @@ class CalenderDetailsWidget extends StatelessWidget {
                 width: 10.w,
               ),
               Text(
-                "Add to Calender",
+                "Add to Calendar",
                 style: GoogleFonts.nunitoSans(
                     fontWeight: FontWeight.w600,
                     fontSize: 14.sp,

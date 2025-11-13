@@ -114,6 +114,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomTextFormWidget(
+                                      textStyle: GoogleFonts.nunitoSans(
+                                        color: const Color.fromARGB(
+                                            255, 71, 71, 71),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       controller:
                                           widget.contactUsCubit.fullname,
                                       isRequired: true,
@@ -130,6 +136,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                     ),
                                     SizedBox(height: 16.h),
                                     CustomTextFormWidget(
+                                      textStyle: GoogleFonts.nunitoSans(
+                                        color: const Color.fromARGB(
+                                            255, 71, 71, 71),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       controller: widget.contactUsCubit.email,
                                       isRequired: true,
                                       hintText: "Enter email here",
@@ -149,6 +161,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                     ),
                                     SizedBox(height: 20.h),
                                     CustomPhoneField(
+                                      textStyle: GoogleFonts.nunitoSans(
+                                        color: const Color.fromARGB(
+                                            255, 71, 71, 71),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       controller:
                                           widget.contactUsCubit.mobileNumber,
                                       isRequired: true,
@@ -253,6 +271,12 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                       },
                                     ),
                                     CustomTextFormWidget(
+                                      textStyle: GoogleFonts.nunitoSans(
+                                        color: const Color.fromARGB(
+                                            255, 71, 71, 71),
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                       controller:
                                           widget.contactUsCubit.comments,
                                       hintText: "Add Comments Here..",
@@ -347,11 +371,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                                     .currentState
                                                     ?.validate() ??
                                                 false;
-                                            final isChecked =
-                                                (widget.contactUsCubit.state
-                                                        as ContactUsDataState)
-                                                    .isConsentChecked;
-                                            if (isValid && isChecked) {
+                                            // final isChecked =
+                                            //     (widget.contactUsCubit.state
+                                            //             as ContactUsDataState)
+                                            //         .isConsentChecked;
+                                            if (isValid) {
                                               widget.contactUsCubit
                                                   .submitButton();
                                             }

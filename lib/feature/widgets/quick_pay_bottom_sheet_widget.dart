@@ -69,7 +69,7 @@ class QuickPayBottomSheetWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Pay £90 Application Fees",
+                                "Pay Fees",
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),
@@ -79,7 +79,7 @@ class QuickPayBottomSheetWidget extends StatelessWidget {
                                 height: 4.h,
                               ),
                               Text(
-                                "For New Admissions",
+                                "Application Fee, School Tuition Fee",
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w400,
@@ -144,7 +144,7 @@ class QuickPayBottomSheetWidget extends StatelessWidget {
                                 height: 4.h,
                               ),
                               Text(
-                                "Uniforms, trips, stationery and Ancillary",
+                                "Uniforms, Trips, Stationery And Ancillary",
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w400,

@@ -12,7 +12,8 @@ class CustomTextFormWidget extends StatelessWidget {
       this.maxLines = 1,
       required this.controller,
       this.isRequired = false,
-      this.validator});
+      this.validator,
+      this.textStyle});
   final String? hintText;
   final String? labelText;
   final String? prefixPath;
@@ -21,6 +22,7 @@ class CustomTextFormWidget extends StatelessWidget {
   final TextEditingController controller;
   final bool isRequired;
   final String? Function(String?)? validator;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,12 @@ class CustomTextFormWidget extends StatelessWidget {
       validator: validator,
       maxLines: maxLines,
       maxLength: maxLines > 1 ? maxLength : null,
-      style: GoogleFonts.nunitoSans(
-        color: const Color(0xFF7D7D7D),
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w400,
-      ),
+      style: textStyle ??
+          GoogleFonts.nunitoSans(
+            color: const Color(0xFF7D7D7D),
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w400,
+          ),
       controller: controller,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,

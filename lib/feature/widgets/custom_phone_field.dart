@@ -9,11 +9,13 @@ class CustomPhoneField extends StatefulWidget {
       this.inputFormatters,
       this.isRequired = false,
       required this.controller,
-      this.validator});
+      this.validator,
+      this.textStyle});
   final List<TextInputFormatter>? inputFormatters;
   final bool isRequired;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final TextStyle? textStyle;
   @override
   _CustomPhoneFieldState createState() => _CustomPhoneFieldState();
 }
@@ -27,12 +29,13 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
       validator: widget.validator,
       controller: widget.controller,
       keyboardType: TextInputType.phone,
-      style: GoogleFonts.nunitoSans(
-        color: const Color(0xFF6E727A),
-        fontSize: 14.sp,
-        letterSpacing: 0.25,
-        fontWeight: FontWeight.w400,
-      ),
+      style: widget.textStyle ??
+          GoogleFonts.nunitoSans(
+            color: const Color(0xFF6E727A),
+            fontSize: 14.sp,
+            letterSpacing: 0.25,
+            fontWeight: FontWeight.w400,
+          ),
       inputFormatters: widget.inputFormatters ?? [],
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -44,20 +44,21 @@ class AboutUsScreen extends StatelessWidget {
                       CurriculumSectionData(
                         title: 'Our Vision',
                         description:
-                            "These are foundation years which is key to building basic literacy & numeracy skills. You child will achieve most of the literacy and numeracy outcomes needed to advance their experiences in upper primary. There are assessments at P2 and P4 level to monitor your child's progress and plan any additional support needed for your child. Lower Primary is a very exciting stage and we encourage parents to actively work with staff in building this foundation.",
+                            "Qalam Academy has the vision to be synonymous with educational excellence at all stages within a safe and secure Islamic environment.",
                       ),
                       CurriculumSectionData(
                         title: 'Our Mission',
                         description:
-                            "Qalam Academy aims to be synonymous with educational excellence at all levels within a safe and secure Islamic environment for all the communities it serves. We aim to provide the very best in resources and staff to ensure pupils achieve outstanding levels of individual attainment but have a strong sense of social responsibility together with a passion to serve humanity.",
+                            "Our mission is to deliver high standard of education across all stages, through innovative methods applied to curriculum frameworks with guidance from the teachings of the Qur'an and Prophetic traditions.",
                       ),
                       CurriculumSectionData(
                         title: 'Our Ethos',
                         description:
-                            "Our parents, staff and pupils bond with the sole ethos of respect and understanding of fellow mankind. The Islamic principles followed by the school is a perfect framework which makes the school special for the community. Al-Qalam accepts children from all communities irrespective of their faith. Pupils, Staff, Parents are all committed to schools policies and procedures.",
+                            "Our parents, staff and pupils' bond with the sole ethos of respect and understanding of other citizens. Our school ethos centres around valuing humanity and other creations of Almighty Allah (The Beneficent The Merciful), exploring the world of possibilities, building a better future and striving to contribute towards a prosperous society with qualities of perseverance, kindness, inclusion, cooperation, respect and compassion.",
                       ),
                     ],
                   ),
+                  SizedBox(height: 20.h),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -66,18 +67,16 @@ class AboutUsScreen extends StatelessWidget {
                         Text("Our Community",
                             style: GoogleFonts.playfairDisplay(
                               fontSize: 36.sp,
-                              height: 1,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF226B3D),
                             )),
-                        SizedBox(height: 30.h),
+                        SizedBox(height: 20.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Aims & Values",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -97,19 +96,17 @@ The school has a distributed leadership & governance structure. This allows us t
                                 ''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 10.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("History",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -118,7 +115,6 @@ Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-de
 ''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
@@ -130,7 +126,6 @@ Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-de
                             Text("Vacancies",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -139,19 +134,17 @@ The school is always looking for talent who are passionate about teaching our yo
 ''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 10.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("Pupils",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -159,7 +152,6 @@ The school is always looking for talent who are passionate about teaching our yo
                                 "Our students are smart, confident, and full of life, thriving in an environment that nurtures their academic and personal growth",
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
@@ -171,7 +163,6 @@ The school is always looking for talent who are passionate about teaching our yo
                             Text("Staff",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -179,7 +170,6 @@ The school is always looking for talent who are passionate about teaching our yo
                                 "Our passionate, experienced, and enthusiastic educators are dedicated to delivering high-quality education and fostering a supportive learning environment.",
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
@@ -191,7 +181,6 @@ The school is always looking for talent who are passionate about teaching our yo
                             Text("Parents",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
@@ -199,7 +188,6 @@ The school is always looking for talent who are passionate about teaching our yo
                                 "Committed, involved, and supportive, our parents play a vital role in the educational journey, collaborating closely with staff to ensure the best outcomes for their children. ​",
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
-                                    height: 1,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
@@ -287,96 +275,6 @@ The school is always looking for talent who are passionate about teaching our yo
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 15.h),
-                        Text("Our Partners",
-                            style: GoogleFonts.playfairDisplay(
-                                fontSize: 36.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFf226B3D))),
-                        SizedBox(height: 15.h),
-                        Text(
-                            "We collaborate with industry leaders who share our values and vision. Together, we create innovative solutions and drive meaningful impact. Meet the trusted partners powering our journey forward.",
-                            textDirection: TextDirection.ltr,
-                            textAlign: TextAlign.justify,
-                            style: GoogleFonts.nunitoSans(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF333333))),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 16 / 9,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.sAQ,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.hsQuality,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.playlearn,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
-                              borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
-                          child: Center(
-                            child: Image.asset(
-                              AppImage.scisIcon,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30.h),
                   Center(
                     child: SvgPicture.asset(
                       AppImage.horizontalIcon,

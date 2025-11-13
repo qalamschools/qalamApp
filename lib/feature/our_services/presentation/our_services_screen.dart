@@ -26,46 +26,33 @@ class OurServicesScreen extends StatefulWidget {
 class _OurServicesScreenState extends State<OurServicesScreen> {
   final List<AdmissionItem> items = [
     AdmissionItem(title: 'Flexible Learning', content: '''
-Our flexible learning is quite popular with students of high school. We offer tuitions to prepare your child for NAT5, GCSE, Highers or A-Level examination. There are no column restrictions and pupils can pick one or many subjects of their choices. 
+Our flexible learning course is popular with students of high school. We offer tuition-based class to prepare your child for NAT5, GCSE, Highers or A-Level examinations. There are no column restrictions and pupils can pick one or many subjects of their choices.
 
 Contact HsQ Co-ordinator
 email: contactus@hsqualify.org 
 Call: 07507676295
 '''),
-    AdmissionItem(title: 'Event Hall', content: '''
+    AdmissionItem(title: 'Event Hall Lets', content: '''
 We have a community hall that can accommodate upto 75 guests. The hall is ideal for small events such as mehendi, birthday party, waleema dinner or even workshops and annual functions.
 
 Office Admin email: schools@qalam-academy.org
 Call: 07507676295
 '''),
     AdmissionItem(title: 'Community Centre', content: '''
-It will offer prayer facilities and other community programmes. It is currently under renovation and will be available soon.
-If you are interested in operating the community centre, please contact us. 
+The community centre offers prayer facilities and other community programmes. It is currently under renovation and will be available soon.
 
 School Admin email: contactus@qalam-academy.org 
 Call: 07722126941
 
 '''),
     AdmissionItem(title: 'Nursery', content: '''
-The school has two sizeable classrooms with separate entry. There is also a common reception and admin area. We would welcome any registered nursery or nursery manager who will be interested in operating the nursery.  
-
-School Admin email: contactus@qalam-academy.org
-Call: 07722126941
-
+*** coming soon ***
 '''),
     AdmissionItem(title: 'Swimming Pool', content: '''
-The school has a sizeable swimming pool with separate entry. There is also a common reception and admin area. We would welcome any registered swimming institute who will be interested in this opportunity.  
-
-School Admin email: contactus@qalam-academy.org
-Call: 07722126941
-
+*** coming soon ***
 '''),
     AdmissionItem(title: 'Barista', content: '''
-The school has a sizeable kitchen with separate entry. We would welcome interested companies or experienced barista who would like to operate from our kitchen.  
-
-School Admin email: contactus@qalam-academy.org
-Call: 07722126941
-
+*** coming soon ***
 '''),
   ];
   @override

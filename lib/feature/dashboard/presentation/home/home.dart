@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 55.w),
                           child: Text(
-                              "Delivering Quality Education using a unique methodology to offer stimulating learning experiences through a broad curriculum.",
+                              "Delivering quality education using a unique methodology to offer stimulating learning experiences through a broad curriculum.",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.nunitoSans(
                                 fontSize: 16.sp,
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
                                 color: const Color(0xFf226B3D))),
                         SizedBox(height: 20.h),
                         Text(
-                            "Al-Qalam school delivers the Scottish Curriculum for Excellence (CfE) experiences and outcomes using our unique experiences-based Context Oriented Learning (ecoLearn). The methodology allows teachers to deliver these experiences that will align with most of the CfE codes across the Literacy, Numeracy, Social Studies & Science topics. Assessments are held at various stages throughout their learning & development from P1 until S2 in Al-Qalam School and thereafter in Flexible Learning.",
+                            "Al-Qalam school delivers the Scottish Curriculum for Excellence (CfE) experiences and outcomes using our unique experiences-based Context Oriented Learning (ecoLearn). The methodology allows teachers to deliver these experiences that will align with most of the CfE codes across the Literacy, Numeracy, Social Studies & Science topics. Assessments are held at various stages throughout their learning & development from P1 until S2 in Al-Qalam School. Students continue their learning journey through our flexible learning courses that prepare them for qualifications exams by Scottish and English education authorities.",
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.start,
                             style: GoogleFonts.nunitoSans(
@@ -105,26 +105,26 @@ class _HomeState extends State<Home> {
                       CurriculumSectionData(
                         title: 'Lower Primary (P1-4 / Reception-Yr3)',
                         description:
-                            "These are foundation years which is key to building basic literacy & numeracy skills. You child will achieve most of the literacy and numeracy outcomes needed to advance their experiences in upper primary. There are assessments at P2 and P4 level to monitor your child's progress and plan any additional support needed for your child. Lower Primary is a very exciting stage and we encourage parents to actively work with staff in building this foundation.",
+                            "These are foundation years which is key to building basic literacy & numeracy skills. Your child will achieve most of the literacy and numeracy outcomes needed to advance their experiences in upper primary. There are assessments at P2 and P4 level to monitor your child's progress and plan any additional support needed for your child. Lower Primary is a very exciting stage and we encourage parents to actively work with staff in building this foundation.",
                         imagePath: 'assets/images/lower_primary.jpg',
                       ),
                       CurriculumSectionData(
                         title: 'Upper Primary (P5-P7 / Yr4 - Yr6)',
                         description:
-                            "The stages in Upper Primary helps your child in preparing for the transition into secondary. Our methodology plays an important role in contextualising experiences and delivers better outcomes. Your child will advance their literacy, numery skills. Various learning experiences will improve their communication skills and ability to grasp new concepts in their learning journey. There are assessments at P5 and P7 level to ensure your child is prepared for the major transition into Secondary School.",
+                            "The stages in Upper Primary helps your child in preparing for their transition into secondary. Our methodology plays an important role in contextualising experiences and delivers better outcomes. Your child will advance their literacy, numery skills. Various learning experiences will improve their communication skills and ability to explore new concepts in their learning journey. There are assessments at P5 and P7 level to ensure your child is prepared for the major transition into secondary school.",
                         imagePath: 'assets/images/upper_primary.jpg',
                       ),
                       CurriculumSectionData(
                         title: 'Secondary School (S1-S2 / Yr 7- Yr 8)',
                         description:
-                            "These two years of high school cover broad general education. They prepare the foundations of qualification subjects such as English, Maths, Science, Computing Science, Business Management. Our school aims to prepare our children for the world of work which is led by the technological changes. A variety of subjects are available at this stage. Staff will provide support to students in achieving their potential and also identify their strengths in subjects of their choices.",
+                            "These two years of high school cover broad general education. They prepare the foundations of qualification subjects such as English, Maths, Science, Computing Science, Social Studies, Modern Languages and Business Management. We aim to prepare students for the world of work which is driven by technology. A variety of subjects are available at this stage. Staff will provide support to students in achieving their potential and also identify their strengths in subjects of their choices.",
                         imagePath: 'assets/images/secondary_school.jpg',
                       ),
                       CurriculumSectionData(
                         title:
                             'Flexible Learning - hsqualify.org (NAT5, GCSE, Highers, A-Levels)',
                         description:
-                            "Pupils graduating from Al-Qalam School (P1-S2) will then transition into our flexible learning course. These courses allow flexibility for your child. They select the subjects of their choices from one to up to eight (NAT5/GSCE) and upto 6 (Highers/ A-Levels). Flexible Learning approach is focussed on preparing your child for examinations. Students will attend lessons only for the subjects they have selected to appear for formal Examinations.",
+                            "Pupils graduating from Al-Qalam School (P1-S2) will transition into our flexible learning course that allow flexibility for your child to select subject of their choices. Up to eight NAT5/GSCE and up to 6 Highers/ A-Levels subjects are offered. Flexible Learning approach is focussed on preparing your child for examinations. Students will attend lessons only for the subjects they have selected to appear for formal examinations.",
                         imagePath: 'assets/images/flexible_learning.jpg',
                       ),
                     ],

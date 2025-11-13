@@ -62,7 +62,7 @@ class AboutUsCurriculumSection extends StatelessWidget {
                 Expanded(
                   child: Container(
                     constraints: const BoxConstraints(
-                      minHeight: 500,
+                      minHeight: 400,
                     ),
                     padding: const EdgeInsets.only(
                       top: 20,
@@ -92,7 +92,7 @@ class AboutUsCurriculumSection extends StatelessWidget {
                 Expanded(
                   child: Container(
                     constraints: const BoxConstraints(
-                      minHeight: 500,
+                      minHeight: 400,
                     ),
                     padding: const EdgeInsets.only(
                       top: 20,
