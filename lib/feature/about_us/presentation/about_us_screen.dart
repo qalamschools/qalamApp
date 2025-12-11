@@ -8,8 +8,30 @@ import 'package:qalam_app/feature/widgets/curriculam_widget_new.dart';
 import 'package:qalam_app/feature/widgets/custom_scroll_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
+class CrousalSlider{
+  String text;
+  String author;
+
+  CrousalSlider({required this.text, required this.author});
+}
+
+
 class AboutUsScreen extends StatelessWidget {
   AboutUsScreen({super.key});
+
+
+  final List<CrousalSlider> crousalSlider = [
+    CrousalSlider(
+      text: "This is my third fantastic year at Qalam Academy, I started in S1, I feel as though I am reaching my full potential. All of my teachers have helped me accompolish this. I get to read my salaah everyday which is another benefit. I came to this school so that I am in a safe Islamic environment.",
+      author: "A Houston (Flexible Learning Student - S3)"
+    ),
+    CrousalSlider(
+      text: "Big Positive - The Teachers! My experience in Al-Qalam is amazing. This school has a safe environment where you feel includedAcademically the school has tremendous ways of teaching. I feel that Al-Qalam has improved my learning.",
+      author: "R Mohammed (Al-Qalam Student - S1 )"
+    ),
+    CrousalSlider(text: 'I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.', author: "~Former P7 Pupil​"),
+    CrousalSlider(text: 'Al Qalam has turned my sons life around by giving him the full support he needs that was not being fulfilled in main stream school there understanding patience and caring nature to the children is so valuable if it wasn\'t for this amazing school I would be very lost in the main stream school system as other private schools are extremly expensive compared to al qalam and must add these other private schools do not  care for the children like there own as al qalam school does', author: 'A Cardini (Al-Qalam Parent - S1)')
+  ];
 
   final ScrollController _controller = ScrollController();
   @override
@@ -64,43 +86,13 @@ class AboutUsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Our Community",
+                        Text("About Us",
                             style: GoogleFonts.playfairDisplay(
                               fontSize: 36.sp,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF226B3D),
                             )),
-                        SizedBox(height: 20.h),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Aims & Values",
-                                style: GoogleFonts.playfairDisplay(
-                                    fontSize: 24.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xFF000000))),
-                            SizedBox(height: 20.h),
-                            Text('''
-Our Aim is to provide our students the best education delivered by experienced and passionate staff and build a community for the future. We thrive to serve our school community and support our pupils to achieve outstanding levels of individual achievement and work together with a strong sense of social responsibility for a peaceful and prosperous society. Our core values centre around being honest, being respectable, and becoming a responsible person who is trustworthy. 
-
-Leadership & Governance 
-
-The school has a distributed leadership & governance structure. This allows us to leverage from the experiences of professionals at various levels. 
-
-•	Executive Head provides the vision for the school and leads the curriculum development, attainment and assessment teams
-
-•	Quality Assurance Executive ensures the school delivery of education offer our pupils the stimulating experiences and maintains the standards from an excellent school
-
-•	Head of School (Operations & Qualification) is responsible for managing the day-to-day operations at the school, working with key members of staff and guiding them throughout the course of the academic year.
-
-                                ''',
-                                style: GoogleFonts.nunitoSans(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xFF333333))),
-                          ],
-                        ),
-                        SizedBox(height: 10.h),
+                       SizedBox(height: 20.h),          
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -120,17 +112,18 @@ Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-de
                           ],
                         ),
                         SizedBox(height: 20.h),
+                       
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Vacancies",
+                            Text("Aims",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
                             Text('''
-The school is always looking for talent who are passionate about teaching our young generations. Our staff make the school vibrant and maintains a nurturing atmosphere unique to the school. If you have the drive and can-do attitude, email us on schools@qalam-academy.org. Our School admin will reach out to you if there is any suitable vacancies that open in future.
+To provide the highest standard of education to enable children and young people to achieve their full potential, in a secure and caring Islamic environment, delivered by experienced and passionate staff with a drive to build a community for the future. We thrive to serve our school community and support our pupils to achieve outstanding levels of individual achievement and work together with a strong sense of social responsibility for a peaceful and prosperous society.
 ''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
@@ -138,18 +131,61 @@ The school is always looking for talent who are passionate about teaching our yo
                                     color: const Color(0xFF333333))),
                           ],
                         ),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 20.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Pupils",
+                            Text("Values",
                                 style: GoogleFonts.playfairDisplay(
                                     fontSize: 24.sp,
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
-                            Text(
-                                "Our students are smart, confident, and full of life, thriving in an environment that nurtures their academic and personal growth",
+                            Text('''
+Our core values are based on being honest, respectable, ambitious, resilient, kind, faithful and becoming a responsible person who is trustworthy.
+''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Leadership",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+The school promotes a distributed leadership and governance structure to leverage from the experiences of professionals at various levels. 
+Executive Head provides the vision for the school and leads the curriculum development, attainment and assessment teams
+Quality Assurance Executive ensures the school's delivery of education offer our pupils stimulating experiences and strives to maintain the standards expected from an excellent school
+Head of School (Operations & Qualification) is responsible for managing the day-to-day operations at the school, working with members of staff and their continous development, engaging with parents and third sector throughout the academic year.
+''',
+                                style: GoogleFonts.nunitoSans(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xFF333333))),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Governance",
+                                style: GoogleFonts.playfairDisplay(
+                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xFF000000))),
+                            SizedBox(height: 20.h),
+                            Text('''
+School governance is provided by our leadership team that ensures the school has a clear vision, high educational standards, and sound financial management. The head of school is accountable for the school's performance and day-to-day operations while the executive oversee the budget.
+
+''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
@@ -166,8 +202,10 @@ The school is always looking for talent who are passionate about teaching our yo
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
-                            Text(
-                                "Our passionate, experienced, and enthusiastic educators are dedicated to delivering high-quality education and fostering a supportive learning environment.",
+                            Text('''
+Our staff make the school vibrant, maintaining a nurturing atmosphere. The school is always looking for talent who are passionate about teaching. If you have the drive and can-do attitude, contact the school to enquire of any suitable opportunities for you.
+
+''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
@@ -184,14 +222,17 @@ The school is always looking for talent who are passionate about teaching our yo
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xFF000000))),
                             SizedBox(height: 20.h),
-                            Text(
-                                "Committed, involved, and supportive, our parents play a vital role in the educational journey, collaborating closely with staff to ensure the best outcomes for their children. ​",
+                            Text('''
+Our parents play a crucial role throughout their child's learning experiences at Al-Qalam School by collaborating with our teachers and supporting them to achieve the best outcome for their child.
+''',
                                 style: GoogleFonts.nunitoSans(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF333333))),
                           ],
-                        )
+                        ),
+                      
+                       
                       ],
                     ),
                   ),
@@ -211,7 +252,7 @@ The school is always looking for talent who are passionate about teaching our yo
                         shrinkWrap: true,
                         controller: _controller,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 3,
+                        itemCount: crousalSlider.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -225,6 +266,7 @@ The school is always looking for talent who are passionate about teaching our yo
                                         Radius.circular(16.r))),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -239,7 +281,7 @@ The school is always looking for talent who are passionate about teaching our yo
                                         horizontal: 24,
                                       ),
                                       child: Text(
-                                          "I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.”",
+                                          crousalSlider[index].text,
                                           style: GoogleFonts.nunitoSans(
                                             fontSize: 16.sp,
                                             height: 1,
@@ -249,8 +291,8 @@ The school is always looking for talent who are passionate about teaching our yo
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 24, vertical: 20),
-                                      child: Text("~Former P7 Pupil​",
+                                          horizontal: 24, vertical: 22),
+                                      child: Text(crousalSlider[index].author,
                                           style: GoogleFonts.playfairDisplay(
                                               fontSize: 20.sp,
                                               height: 1,
@@ -266,15 +308,107 @@ The school is always looking for talent who are passionate about teaching our yo
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h),
-                  Center(
+                  SizedBox(height: 12.h),
+                  Center(child: Text("All testimonials have been adjusted for mobile interface",style: TextStyle(color: Colors.black,fontStyle: FontStyle.italic, fontSize: 12.sp),)),
+SizedBox(height: 12.h),             
+ Center(
                     child: CustomScrollBarWidget(
                       controller: _controller,
                       trackWidth: 80,
                       trackHeight: 2.h,
                     ),
                   ),
+                   Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 15.h),
+                        Text("Our Partners",
+                            style: GoogleFonts.playfairDisplay(
+                                fontSize: 36.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFf226B3D))),
+                        SizedBox(height: 15.h),
+                        Text(
+                            "We collaborate with industry leaders who share our values and vision. Together, we create innovative solutions and drive meaningful impact. Meet the trusted partners powering our journey forward.",
+                            textDirection: TextDirection.ltr,
+                            textAlign: TextAlign.justify,
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF333333))),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 20.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: GridView.count(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 16 / 9,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.sAQ,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.hsQuality,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.playlearn,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFF4F4),
+                              borderRadius: BorderRadius.circular(16.r)),
+                          width: 173.w,
+                          height: 92.h,
+                          child: Center(
+                            child: Image.asset(
+                              AppImage.scisIcon,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
+                
                   Center(
                     child: SvgPicture.asset(
                       AppImage.horizontalIcon,

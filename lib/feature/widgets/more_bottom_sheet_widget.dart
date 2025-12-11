@@ -87,21 +87,9 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                   style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),
-                                    fontSize: 16.sp,
+                                    fontSize: 18.sp,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 4.h,
-                                ),
-                                Text(
-                                  "Get to know who we are and what we do",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.nunitoSans(
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff666666),
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
+                                ),         
                               ],
                             ),
                           ),
@@ -165,19 +153,8 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),
-                                    fontSize: 16.sp),
-                              ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              Text(
-                                "Select courses and apply now",
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunitoSans(
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff666666),
-                                    fontSize: 14.sp),
-                              )
+                                    fontSize: 18.sp),
+                              ),      
                             ],
                           ),
                         )
@@ -241,19 +218,8 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),
-                                    fontSize: 16.sp),
+                                    fontSize: 18.sp),
                               ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              Text(
-                                "Reach out to us for any inquiries",
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunitoSans(
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff666666),
-                                    fontSize: 14.sp),
-                              )
                             ],
                           ),
                         )
@@ -307,19 +273,8 @@ class _MoreBottomSheetWidgetState extends State<MoreBottomSheetWidget> {
                                 style: GoogleFonts.nunitoSans(
                                     fontWeight: FontWeight.w500,
                                     color: const Color(0xff000000),
-                                    fontSize: 16.sp),
+                                    fontSize: 18.sp),
                               ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              Text(
-                                "Call us for any inquiries",
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.nunitoSans(
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff666666),
-                                    fontSize: 14.sp),
-                              )
                             ],
                           ),
                         )

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -71,7 +73,8 @@ class DashboardCubit extends Cubit<DashboardState> {
     try {
       final london = tz.getLocation('Europe/London');
       final currentUKTime = tz.TZDateTime.now(london);
-
+      log("${currentUKTime}");
+      log("${currentUKTime.hour}");
       final startDate = _parseFirebaseDate(adData['start_date']);
       final endDate = _parseFirebaseDate(adData['end_date']);
 
@@ -94,8 +97,8 @@ class DashboardCubit extends Cubit<DashboardState> {
       final endHour = adData['endHour'] as int?;
 
       if (startHour != null && endHour != null) {
-        final currentHour = currentUKTime.hour;
-
+        const currentHour = 06;
+        
         bool isWithinTimeRange;
         if (startHour <= endHour) {
           isWithinTimeRange = currentHour >= startHour && currentHour < endHour;
