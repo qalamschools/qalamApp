@@ -8,29 +8,33 @@ import 'package:qalam_app/feature/widgets/curriculam_widget_new.dart';
 import 'package:qalam_app/feature/widgets/custom_scroll_widget.dart';
 import 'package:qalam_app/feature/widgets/social_icon_widget.dart';
 
-class CrousalSlider{
+class CrousalSlider {
   String text;
   String author;
 
   CrousalSlider({required this.text, required this.author});
 }
 
-
 class AboutUsScreen extends StatelessWidget {
   AboutUsScreen({super.key});
 
-
   final List<CrousalSlider> crousalSlider = [
     CrousalSlider(
-      text: "This is my third fantastic year at Qalam Academy, I started in S1, I feel as though I am reaching my full potential. All of my teachers have helped me accompolish this. I get to read my salaah everyday which is another benefit. I came to this school so that I am in a safe Islamic environment.",
-      author: "A Houston (Flexible Learning Student - S3)"
-    ),
+        text:
+            "This is my third fantastic year at Qalam Academy, I started in S1, I feel as though I am reaching my full potential. All of my teachers have helped me accompolish this. I get to read my salaah everyday which is another benefit. I came to this school so that I am in a safe Islamic environment.",
+        author: "A Houston (Flexible Learning Student - S3)"),
     CrousalSlider(
-      text: "Big Positive - The Teachers! My experience in Al-Qalam is amazing. This school has a safe environment where you feel includedAcademically the school has tremendous ways of teaching. I feel that Al-Qalam has improved my learning.",
-      author: "R Mohammed (Al-Qalam Student - S1 )"
-    ),
-    CrousalSlider(text: 'I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.', author: "~Former P7 Pupil​"),
-    CrousalSlider(text: 'Al Qalam has turned my sons life around by giving him the full support he needs that was not being fulfilled in main stream school there understanding patience and caring nature to the children is so valuable if it wasn\'t for this amazing school I would be very lost in the main stream school system as other private schools are extremly expensive compared to al qalam and must add these other private schools do not  care for the children like there own as al qalam school does', author: 'A Cardini (Al-Qalam Parent - S1)')
+        text:
+            "Big Positive - The Teachers! My experience in Al-Qalam is amazing. This school has a safe environment where you feel includedAcademically the school has tremendous ways of teaching. I feel that Al-Qalam has improved my learning.",
+        author: "R Mohammed (Al-Qalam Student - S1 )"),
+    CrousalSlider(
+        text:
+            'I attended Al-Qalam Primary School for seven years and it was an experience that I am sure anyone at any other school don’t know what they’re missing out on. There wasn’t a single moment when I wanted to swap a day in Al-Qalam for a day at another school. Al-Qalam is unique and I wish I could have another seven-year experience there.',
+        author: "~Former P7 Pupil​"),
+    CrousalSlider(
+        text:
+            'Al Qalam has turned my sons life around by giving him the full support he needs that was not being fulfilled in main stream school there understanding patience and caring nature to the children is so valuable if it wasn\'t for this amazing school I would be very lost in the main stream school system as other private schools are extremly expensive compared to al qalam and must add these other private schools do not  care for the children like there own as al qalam school does',
+        author: 'A Cardini (Al-Qalam Parent - S1)')
   ];
 
   final ScrollController _controller = ScrollController();
@@ -92,7 +96,7 @@ class AboutUsScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF226B3D),
                             )),
-                       SizedBox(height: 20.h),          
+                        SizedBox(height: 20.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -112,7 +116,6 @@ Al-Qalam School was found in October 2010 with only Primary 1 class in a semi-de
                           ],
                         ),
                         SizedBox(height: 20.h),
-                       
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -231,8 +234,6 @@ Our parents play a crucial role throughout their child's learning experiences at
                                     color: const Color(0xFF333333))),
                           ],
                         ),
-                      
-                       
                       ],
                     ),
                   ),
@@ -266,7 +267,6 @@ Our parents play a crucial role throughout their child's learning experiences at
                                         Radius.circular(16.r))),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -280,8 +280,7 @@ Our parents play a crucial role throughout their child's learning experiences at
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 24,
                                       ),
-                                      child: Text(
-                                          crousalSlider[index].text,
+                                      child: Text(crousalSlider[index].text,
                                           style: GoogleFonts.nunitoSans(
                                             fontSize: 16.sp,
                                             height: 1,
@@ -309,16 +308,23 @@ Our parents play a crucial role throughout their child's learning experiences at
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  Center(child: Text("All testimonials have been adjusted for mobile interface",style: TextStyle(color: Colors.black,fontStyle: FontStyle.italic, fontSize: 12.sp),)),
-SizedBox(height: 12.h),             
- Center(
+                  Center(
+                      child: Text(
+                    "All testimonials have been adjusted for mobile interface",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 12.sp),
+                  )),
+                  SizedBox(height: 12.h),
+                  Center(
                     child: CustomScrollBarWidget(
                       controller: _controller,
                       trackWidth: 80,
                       trackHeight: 2.h,
                     ),
                   ),
-                   Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -354,10 +360,7 @@ SizedBox(height: 12.h),
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
                               borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
                           child: Center(
                             child: Image.asset(
                               AppImage.sAQ,
@@ -367,10 +370,7 @@ SizedBox(height: 12.h),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
                               borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
                           child: Center(
                             child: Image.asset(
                               AppImage.hsQuality,
@@ -380,10 +380,7 @@ SizedBox(height: 12.h),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
                               borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
                           child: Center(
                             child: Image.asset(
                               AppImage.playlearn,
@@ -393,10 +390,7 @@ SizedBox(height: 12.h),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: const Color(0xffFFF4F4),
                               borderRadius: BorderRadius.circular(16.r)),
-                          width: 173.w,
-                          height: 92.h,
                           child: Center(
                             child: Image.asset(
                               AppImage.scisIcon,
@@ -408,7 +402,6 @@ SizedBox(height: 12.h),
                     ),
                   ),
                   SizedBox(height: 30.h),
-                
                   Center(
                     child: SvgPicture.asset(
                       AppImage.horizontalIcon,

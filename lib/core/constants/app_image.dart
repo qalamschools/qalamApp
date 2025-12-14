@@ -9,7 +9,7 @@ class AppImage {
 
   static String sAQ = "assets/images/sqa.png";
   static String hsQuality = "assets/images/hsQuality.png";
-  static String playlearn = "assets/images/play_learn.png";
+  static String playlearn = "assets/images/play&learn.png";
   static String scisIcon = "assets/images/scis.png";
 
   static String horizontalIcon = "assets/icons/horizontal_line.svg";
