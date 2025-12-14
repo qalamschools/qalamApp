@@ -32,8 +32,8 @@ android {
         applicationId = "com.alaqalamschools.qalamapp"
         minSdk = 26
         targetSdk = 36  
-        versionCode = 8021
-        versionName = "1.1.2"
+        versionCode = 8022
+        versionName = "1.1.3"
         resourceConfigurations += listOf("en", "ar")
 
         ndk {
